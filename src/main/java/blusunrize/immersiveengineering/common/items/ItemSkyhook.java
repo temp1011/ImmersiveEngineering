@@ -28,7 +28,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -72,7 +71,7 @@ public class ItemSkyhook extends ItemUpgradeableTool implements ITool
 		return multimap;
 	}*/
 
-	public static HashMap<String, EntitySkylineHook> existingHooks = new HashMap<String, EntitySkylineHook>();
+	public static HashMap<String, EntitySkylineHook> existingHooks = new HashMap<>();
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
@@ -90,9 +89,9 @@ public class ItemSkyhook extends ItemUpgradeableTool implements ITool
 		{
 			SkylineHelper.spawnHook(player, connector, line);
 			player.setActiveHand(hand);
-			return new ActionResult(EnumActionResult.SUCCESS, stack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
-		return new ActionResult(EnumActionResult.PASS, stack);
+		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
 
 	public float getSkylineSpeed(ItemStack stack)

@@ -74,7 +74,7 @@ public class EnergyHelper
 			return stack.getCapability(CapabilityEnergy.ENERGY, null).extractEnergy(energy, simulate);
 		return 0;
 	}
-	static HashMap<Item,Boolean> reverseInsertion = new HashMap<Item,Boolean>();
+	static HashMap<Item,Boolean> reverseInsertion = new HashMap<>();
 	public static int forceExtractFlux(ItemStack stack, int energy, boolean simulate)
 	{
 		if(stack.isEmpty())

@@ -18,7 +18,7 @@ public class GuiButtonState extends GuiButtonIE
 {
 	public boolean state;
 	protected final int offsetDir;
-	public int[] textOffset = {0,0};
+	public int[] textOffset;
 	public GuiButtonState(int buttonId, int x, int y, int w, int h, String name, boolean state, String texture, int u, int v, int offsetDir)
 	{
 		super(buttonId, x, y, w,h, name, texture, u,v);

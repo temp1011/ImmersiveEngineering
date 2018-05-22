@@ -22,8 +22,8 @@ import org.lwjgl.opengl.GL11;
 public class GuiRevolver extends GuiIEContainerBase
 {
 	private int[] bullets = new int[2];
-	private boolean otherRevolver = false;
-	private int offset = 0;
+	private boolean otherRevolver;
+	private int offset;
 
 	public GuiRevolver(InventoryPlayer inventoryPlayer, World world, EntityEquipmentSlot slot, ItemStack revolver)
 	{
@@ -53,7 +53,7 @@ public class GuiRevolver extends GuiIEContainerBase
 		for(int hand=0; hand<(otherRevolver?2:1); hand++)
 		{
 			int side = !otherRevolver?0: (hand==0)==(ImmersiveEngineering.proxy.getClientPlayer().getPrimaryHand()==EnumHandSide.RIGHT)?1:0;
-			this.drawTexturedModalRect(guiLeft+off+00, guiTop+1, 00, 51, 74, 74);
+			this.drawTexturedModalRect(guiLeft + off, guiTop+1, 0, 51, 74, 74);
 			if(bullets[side] >= 18)
 				this.drawTexturedModalRect(guiLeft+off+47, guiTop+1, 74, 51, 103, 74);
 			else if(bullets[side] > 8)

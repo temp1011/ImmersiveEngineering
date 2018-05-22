@@ -118,7 +118,7 @@ public class IEFluid extends Fluid
 		@Override
 		public DataParameter<Optional<FluidStack>> createKey(int id)
 		{
-			return new DataParameter(id, this);
+			return new DataParameter<>(id, this);
 		}
 
 		@Override

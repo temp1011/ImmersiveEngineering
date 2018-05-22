@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class MetalPressUnpackingRecipe extends MetalPressRecipe
 {
 	private final int baseEnergy;
-	private HashMap<ComparableItemStack, PackedDelegate> cache = new HashMap();
+	private HashMap<ComparableItemStack, PackedDelegate> cache = new HashMap<>();
 
 	public MetalPressUnpackingRecipe(ComparableItemStack mold, int energy)
 	{

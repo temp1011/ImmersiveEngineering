@@ -66,7 +66,7 @@ public class SmartLightingQuad extends BakedQuad
 	public void pipe(IVertexConsumer consumer)
 	{
 		IBlockAccess world = null;
-		BlockInfo info = null;
+		BlockInfo info;
 		if (consumer instanceof VertexLighterFlat)
 		{
 			try

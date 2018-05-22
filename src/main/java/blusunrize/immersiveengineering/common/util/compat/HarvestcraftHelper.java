@@ -58,9 +58,9 @@ public class HarvestcraftHelper extends IECompatModule
 		}
 	}
 
-	static HashMap<String, Item> seeds = new HashMap<String, Item>();
-	static HashMap<String, Item> foods = new HashMap<String, Item>();
-	static HashMap<String, Block> crops = new HashMap<String, Block>();
+	static HashMap<String, Item> seeds = new HashMap<>();
+	static HashMap<String, Item> foods = new HashMap<>();
+	static HashMap<String, Block> crops = new HashMap<>();
 	@Override
 	public void postInit()
 	{

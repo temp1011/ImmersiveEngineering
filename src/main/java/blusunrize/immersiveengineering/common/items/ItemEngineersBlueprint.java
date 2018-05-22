@@ -60,8 +60,9 @@ public class ItemEngineersBlueprint extends ItemUpgradeableTool
 				list.add(I18n.format(Lib.DESC_INFO + "blueprint.creates1"));
 				BlueprintCraftingRecipe[] recipes = BlueprintCraftingRecipe.findRecipes(key);
 				if(recipes.length > 0)
-					for(int i = 0; i < recipes.length; i++)
-						list.add(" " + recipes[i].output.getDisplayName());
+					for (BlueprintCraftingRecipe recipe : recipes) {
+						list.add(" " + recipe.output.getDisplayName());
+					}
 			} else
 				list.add(I18n.format(Lib.DESC_INFO + "blueprint.creates0"));
 		}
@@ -90,7 +91,7 @@ public class ItemEngineersBlueprint extends ItemUpgradeableTool
 	public Slot[] getWorkbenchSlots(Container container, ItemStack stack)
 	{
 		IItemHandler inv = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-		LinkedHashSet<Slot> slots = new LinkedHashSet<Slot>();
+		LinkedHashSet<Slot> slots = new LinkedHashSet<>();
 
 		slots.add(new IESlot.BlueprintInput(container, inv, 0, 74, 21, stack));
 		slots.add(new IESlot.BlueprintInput(container, inv, 1, 92, 21, stack));

@@ -102,8 +102,8 @@ public class TileEntityLightningrod extends TileEntityMultiblockPart<TileEntityL
 			}
 		}
 
-		ArrayList<BlockPos> openList = new ArrayList();
-		ArrayList<BlockPos> closedList = new ArrayList();
+		ArrayList<BlockPos> openList = new ArrayList<>();
+		ArrayList<BlockPos> closedList = new ArrayList<>();
 		openList.add(getPos().add(0,height,0));
 		while(!openList.isEmpty() && closedList.size()<256)
 		{

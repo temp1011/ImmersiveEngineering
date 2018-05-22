@@ -144,7 +144,7 @@ public class TileEntityModWorkbench extends TileEntityIEBase implements IIEInven
 	public void placeDummies(BlockPos pos, IBlockState state, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		EnumFacing dummyDir = facing.getAxis()==Axis.X?(hitZ<.5?EnumFacing.NORTH:EnumFacing.SOUTH):(hitX<.5?EnumFacing.WEST:EnumFacing.EAST);
-		boolean mirror = false;
+		boolean mirror;
 		BlockPos dummyPos = pos.offset(dummyDir);
 		if(!world.getBlockState(dummyPos).getBlock().isReplaceable(world, dummyPos))
 		{

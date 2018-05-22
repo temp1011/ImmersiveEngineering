@@ -120,13 +120,13 @@ public class BlockMetalDecoration1 extends IELadderBlock<BlockTypes_MetalDecorat
 		if(meta==STEEL_FENCE.getMeta() || meta==BlockTypes_MetalDecoration1.ALUMINUM_FENCE.getMeta())
 		{
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, BlockFence.PILLAR_AABB);
-			if(state.getValue(BlockFence.NORTH).booleanValue())
+			if(state.getValue(BlockFence.NORTH))
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, BlockFence.NORTH_AABB);
-			if(state.getValue(BlockFence.EAST).booleanValue())
+			if(state.getValue(BlockFence.EAST))
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, BlockFence.EAST_AABB);
-			if(state.getValue(BlockFence.SOUTH).booleanValue())
+			if(state.getValue(BlockFence.SOUTH))
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, BlockFence.SOUTH_AABB);
-			if(state.getValue(BlockFence.WEST).booleanValue())
+			if(state.getValue(BlockFence.WEST))
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, BlockFence.WEST_AABB);
 		}
 		else

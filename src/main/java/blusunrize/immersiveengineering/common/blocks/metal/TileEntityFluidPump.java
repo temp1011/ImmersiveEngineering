@@ -60,9 +60,9 @@ public class TileEntityFluidPump extends TileEntityIEBase implements ITickable, 
 
 	boolean checkingArea = false;
 	Fluid searchFluid = null;
-	ArrayList<BlockPos> openList = new ArrayList<BlockPos>();
-	ArrayList<BlockPos> closedList = new ArrayList<BlockPos>();
-	ArrayList<BlockPos> checked = new ArrayList<BlockPos>();
+	ArrayList<BlockPos> openList = new ArrayList<>();
+	ArrayList<BlockPos> closedList = new ArrayList<>();
+	ArrayList<BlockPos> checked = new ArrayList<>();
 
 	@Override
 	public void update()
@@ -155,7 +155,7 @@ public class TileEntityFluidPump extends TileEntityIEBase implements ITickable, 
 	}
 	public void checkAreaTick()
 	{
-		BlockPos next = null;
+		BlockPos next;
 		final int closedListMax = 2048;
 		int timeout = 0;
 		while(timeout<64 && closedList.size()<closedListMax && !openList.isEmpty())
@@ -200,7 +200,7 @@ public class TileEntityFluidPump extends TileEntityIEBase implements ITickable, 
 		int accelPower = IEConfig.Machines.pump_consumption_accelerate;
 		final int fluidForSort = canAccept;
 		int sum = 0;
-		HashMap<DirectionalFluidOutput,Integer> sorting = new HashMap<DirectionalFluidOutput,Integer>();
+		HashMap<DirectionalFluidOutput,Integer> sorting = new HashMap<>();
 		for(EnumFacing f : EnumFacing.values())
 			if(sideConfig[f.ordinal()]==1)
 			{

@@ -94,7 +94,7 @@ public class TileEntityExcavator extends TileEntityMultiblockMetal<TileEntityExc
 
 			if(center instanceof TileEntityBucketWheel)
 			{
-				float rot = 0;
+				float rot;
 				int target = -1;
 				TileEntityBucketWheel wheel = ((TileEntityBucketWheel) center);
 				EnumFacing fRot = this.facing.rotateYCCW();
@@ -269,7 +269,7 @@ public class TileEntityExcavator extends TileEntityMultiblockMetal<TileEntityExc
 				block.onBlockDestroyedByPlayer( world, pos, blockstate);
 				if(block.canSilkHarvest(world, pos, blockstate, fakePlayer))
 				{
-					ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+					ArrayList<ItemStack> items = new ArrayList<>();
 					Item bitem = Item.getItemFromBlock(block);
 					if(bitem== Items.AIR)
 						return ItemStack.EMPTY;
@@ -343,13 +343,13 @@ public class TileEntityExcavator extends TileEntityMultiblockMetal<TileEntityExc
 
 		if(pos==5||pos==23||pos==41)
 		{
-			List list = Lists.newArrayList(new AxisAlignedBB(fw==EnumFacing.WEST?.5f:0,0,fw==EnumFacing.NORTH?.5f:0, fw==EnumFacing.EAST?.5f:1,1,fw==EnumFacing.SOUTH?.5f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
+			List<AxisAlignedBB> list = Lists.newArrayList(new AxisAlignedBB(fw==EnumFacing.WEST?.5f:0,0,fw==EnumFacing.NORTH?.5f:0, fw==EnumFacing.EAST?.5f:1,1,fw==EnumFacing.SOUTH?.5f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
 			list.add(new AxisAlignedBB(fw==EnumFacing.EAST?.5f:fw==EnumFacing.WEST?0:.25f,.25f,fw==EnumFacing.SOUTH?.5f:fw==EnumFacing.NORTH?0:.25f, fw==EnumFacing.WEST?.5f:fw==EnumFacing.EAST?1:.75f,.75f,fw==EnumFacing.NORTH?.5f:fw==EnumFacing.SOUTH?1:.75f).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
 			return list;
 		}
 		else if(pos==9||pos==12||pos==15)
 		{
-			List list = Lists.newArrayList(new AxisAlignedBB(fw==EnumFacing.EAST?.5f:0,0,fw==EnumFacing.SOUTH?.5f:0, fw==EnumFacing.WEST?.5f:1,1,fw==EnumFacing.NORTH?.5f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
+			List<AxisAlignedBB> list = Lists.newArrayList(new AxisAlignedBB(fw==EnumFacing.EAST?.5f:0,0,fw==EnumFacing.SOUTH?.5f:0, fw==EnumFacing.WEST?.5f:1,1,fw==EnumFacing.NORTH?.5f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
 			if(pos==9)
 				list.add(new AxisAlignedBB(fw==EnumFacing.WEST||fl==EnumFacing.EAST?.5f:0,.5f,fw==EnumFacing.NORTH||fl==EnumFacing.SOUTH?.5f:0, fw==EnumFacing.EAST||fl==EnumFacing.WEST?.5f:1,1,fw==EnumFacing.SOUTH||fl==EnumFacing.NORTH?.5f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
 			else if(pos==12)
@@ -360,13 +360,13 @@ public class TileEntityExcavator extends TileEntityMultiblockMetal<TileEntityExc
 		}
 		else if(pos==47)
 		{
-			List list = Lists.newArrayList(new AxisAlignedBB(fl==EnumFacing.EAST?.5f:fl==EnumFacing.WEST?.375f:0,0,fl==EnumFacing.SOUTH?.5f:fl==EnumFacing.NORTH?.375f:0, fl==EnumFacing.WEST?.5f:fl==EnumFacing.EAST?.625f:1,1,fl==EnumFacing.NORTH?.5f:fl==EnumFacing.SOUTH?.625f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
+			List<AxisAlignedBB> list = Lists.newArrayList(new AxisAlignedBB(fl==EnumFacing.EAST?.5f:fl==EnumFacing.WEST?.375f:0,0,fl==EnumFacing.SOUTH?.5f:fl==EnumFacing.NORTH?.375f:0, fl==EnumFacing.WEST?.5f:fl==EnumFacing.EAST?.625f:1,1,fl==EnumFacing.NORTH?.5f:fl==EnumFacing.SOUTH?.625f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
 			list.add(new AxisAlignedBB(fl==EnumFacing.EAST?.625f:fw==EnumFacing.EAST?.875f:0,0,fl==EnumFacing.SOUTH?.625f:fw==EnumFacing.SOUTH?.875f:0, fl==EnumFacing.WEST?.375f:fw==EnumFacing.WEST?.125f:1,1,fl==EnumFacing.NORTH?.375f:fw==EnumFacing.NORTH?.125f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
 			return list;
 		}
 		else if(pos==53)
 		{
-			List list = Lists.newArrayList(new AxisAlignedBB(fl==EnumFacing.WEST?.5f:fl==EnumFacing.EAST?.375f:0,0,fl==EnumFacing.NORTH?.5f:fl==EnumFacing.SOUTH?.375f:0, fl==EnumFacing.EAST?.5f:fl==EnumFacing.WEST?.625f:1,1,fl==EnumFacing.SOUTH?.5f:fl==EnumFacing.NORTH?.625f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
+			List<AxisAlignedBB> list = Lists.newArrayList(new AxisAlignedBB(fl==EnumFacing.WEST?.5f:fl==EnumFacing.EAST?.375f:0,0,fl==EnumFacing.NORTH?.5f:fl==EnumFacing.SOUTH?.375f:0, fl==EnumFacing.EAST?.5f:fl==EnumFacing.WEST?.625f:1,1,fl==EnumFacing.SOUTH?.5f:fl==EnumFacing.NORTH?.625f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
 			list.add(new AxisAlignedBB(fl==EnumFacing.WEST?.625f:fw==EnumFacing.EAST?.875f:0,0,fl==EnumFacing.NORTH?.625f:fw==EnumFacing.SOUTH?.875f:0, fl==EnumFacing.EAST?.375f:fw==EnumFacing.WEST?.125f:1,1,fl==EnumFacing.SOUTH?.375f:fw==EnumFacing.NORTH?.125f:1).offset(getPos().getX(),getPos().getY(),getPos().getZ()));
 			return list;
 		}

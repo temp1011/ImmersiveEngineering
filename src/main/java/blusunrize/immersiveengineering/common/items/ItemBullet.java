@@ -22,7 +22,6 @@ import blusunrize.immersiveengineering.common.items.IEItemInterfaces.ITextureOve
 import blusunrize.immersiveengineering.common.util.IEDamageSources;
 import blusunrize.immersiveengineering.common.util.IESounds;
 import blusunrize.immersiveengineering.common.util.ItemNBTHelper;
-import blusunrize.immersiveengineering.common.util.Utils;
 import blusunrize.immersiveengineering.common.util.chickenbones.Matrix4;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.util.ITooltipFlag;
@@ -35,7 +34,6 @@ import net.minecraft.item.ItemLingeringPotion;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemSplashPotion;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
@@ -495,14 +493,7 @@ public class ItemBullet extends ItemIEBase implements ITextureOverride//IBullet
 	{
 		public HomingBullet(float damage, ResourceLocation... textures)
 		{
-			super(new Function<Entity[], DamageSource>()
-				  {
-					  @Override
-					  public DamageSource apply(Entity[] entities)
-					  {
-						  return IEDamageSources.causeHomingDamage((EntityRevolvershot)entities[0], entities[1]);
-					  }
-				  },
+			super(entities -> IEDamageSources.causeHomingDamage((EntityRevolvershot)entities[0], entities[1]),
 					damage,
 					BulletHandler.emptyCasing,
 					textures);

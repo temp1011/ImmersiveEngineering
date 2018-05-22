@@ -122,7 +122,6 @@ public class BlockFakeLight extends BlockIETileProvider<BlockTypes_FakeLight>
 				if( !(tile instanceof TileEntityFloodlight) || !((TileEntityFloodlight)tile).active)
 				{
 					world.setBlockToAir(getPos());
-					return;
 				}
 			}
 

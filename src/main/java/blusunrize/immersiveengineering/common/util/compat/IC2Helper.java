@@ -28,25 +28,20 @@ public class IC2Helper extends IECompatModule
 	@Override
 	public void init()
 	{
-		AssemblerHandler.registerRecipeAdapter(AdvRecipe.class, new IRecipeAdapter<AdvRecipe>()
-		{
-			@Override
-			public RecipeQuery[] getQueriedInputs(AdvRecipe recipe)
+		AssemblerHandler.registerRecipeAdapter(AdvRecipe.class, (IRecipeAdapter<AdvRecipe>) recipe -> {
+			IRecipeInput[] in = recipe.input;
+			if (in!=null)
 			{
-				IRecipeInput[] in = recipe.input;
-				if (in!=null)
+				RecipeQuery[] ret = new RecipeQuery[in.length];
+				for (int i = 0;i<in.length;i++)
 				{
-					RecipeQuery[] ret = new RecipeQuery[in.length];
-					for (int i = 0;i<in.length;i++)
-					{
-						IRecipeInput inStack = in[i];
-						ret[i] = new RecipeQuery(inStack.getInputs(), inStack.getAmount());
-					}
-					return ret;
+					IRecipeInput inStack = in[i];
+					ret[i] = new RecipeQuery(inStack.getInputs(), inStack.getAmount());
 				}
-
-				return new RecipeQuery[0];
+				return ret;
 			}
+
+			return new RecipeQuery[0];
 		});
 
 		Item cropRes = Item.REGISTRY.getObject(new ResourceLocation("ic2","crop_res"));

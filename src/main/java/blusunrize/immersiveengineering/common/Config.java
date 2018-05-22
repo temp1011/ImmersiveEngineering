@@ -40,11 +40,11 @@ import java.util.Map;
 @Mod.EventBusSubscriber
 public class Config
 {
-	public static HashMap<String, Boolean> manual_bool = new HashMap<String, Boolean>();
-	public static HashMap<String, Integer> manual_int = new HashMap<String, Integer>();
-	public static HashMap<String, int[]> manual_intA = new HashMap<String, int[]>();
-	public static HashMap<String, Double> manual_double = new HashMap<String, Double>();
-	public static HashMap<String, double[]> manual_doubleA = new HashMap<String, double[]>();
+	public static HashMap<String, Boolean> manual_bool = new HashMap<>();
+	public static HashMap<String, Integer> manual_int = new HashMap<>();
+	public static HashMap<String, int[]> manual_intA = new HashMap<>();
+	public static HashMap<String, Double> manual_double = new HashMap<>();
+	public static HashMap<String, double[]> manual_doubleA = new HashMap<>();
 
 	public static boolean seaonal_festive = false;
 

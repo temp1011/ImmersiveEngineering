@@ -210,20 +210,15 @@ public class EntityRevolvershot extends Entity
 			List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().offset(this.motionX, this.motionY, this.motionZ).grow(1.0D));
 			double d0 = 0.0D;
 
-			for (int i = 0; i < list.size(); ++i)
-			{
-				Entity entity1 = list.get(i);
-				if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.shootingEntity)))
-				{
+			for (Entity entity1 : list) {
+				if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.shootingEntity))) {
 					float f = 0.3F;
 					AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow(f);
 					RayTraceResult movingobjectposition1 = axisalignedbb.calculateIntercept(vec3, vec31);
 
-					if (movingobjectposition1 != null)
-					{
+					if (movingobjectposition1 != null) {
 						double d1 = vec3.distanceTo(movingobjectposition1.hitVec);
-						if (d1 < d0 || d0 == 0.0D)
-						{
+						if (d1 < d0 || d0 == 0.0D) {
 							entity = entity1;
 							d0 = d1;
 						}
@@ -240,10 +235,8 @@ public class EntityRevolvershot extends Entity
 			this.posX += this.motionX;
 			this.posY += this.motionY;
 			this.posZ += this.motionZ;
-			float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.rotationYaw = (float)(Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) + 90.0F;
 
-			for (this.rotationPitch = (float)(Math.atan2((double)f1, this.motionY) * 180.0D / Math.PI) - 90.0F; this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F);
 
 			while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
 				this.prevRotationPitch += 360.0F;

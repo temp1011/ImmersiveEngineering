@@ -71,19 +71,13 @@ public class ManualUtils
 
 	public static ArrayList<String> getPrimitiveSpellingCorrections(String query, String[] valid, int maxDistance)
 	{
-		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> list = new ArrayList<>();
 		for(String s : valid)
 			if(s!=null && !s.trim().isEmpty())
 				if(getSpellingDistanceBetweenStrings(query,s)<maxDistance)
 					list.add(s);
 
-		Collections.sort(list, new Comparator<String>(){
-			@Override
-			public int compare(String s0, String s1)
-			{
-				return getSpellingDistanceBetweenStrings(s1,s0);
-			}
-		});
+		list.sort((s0, s1) -> getSpellingDistanceBetweenStrings(s1, s0));
 
 		return list;
 	}
@@ -167,7 +161,7 @@ public class ManualUtils
 		return arg;
 	}
 
-	static HashMap<String, ResourceLocation> resourceMap = new HashMap<String, ResourceLocation>();
+	static HashMap<String, ResourceLocation> resourceMap = new HashMap<>();
 	public static Tessellator tes()
 	{
 		return Tessellator.getInstance();

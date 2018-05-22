@@ -162,7 +162,7 @@ public class TileEntityMetalPress extends TileEntityMultiblockMetal<TileEntityMe
 				return;
 			ItemStack displayStack = recipe.getDisplayStack(stack);
 			float transformationPoint = 56.25f/120f;
-			MultiblockProcess process = new MultiblockProcessInWorld(recipe, transformationPoint, Utils.createNonNullItemStackListFromItemStack(displayStack));
+			MultiblockProcess process = new MultiblockProcessInWorld<>(recipe, transformationPoint, Utils.createNonNullItemStackListFromItemStack(displayStack));
 			if(master.addProcessToQueue(process, true))
 			{
 				master.addProcessToQueue(process, false);

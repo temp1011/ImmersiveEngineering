@@ -69,14 +69,14 @@ public class ModelCoresample implements IBakedModel
 		if(bakedQuads == null)
 		{
 			try{
-				bakedQuads = Collections.synchronizedSet(new LinkedHashSet<BakedQuad>());
+				bakedQuads = Collections.synchronizedSet(new LinkedHashSet<>());
 				float width = .25f;
 				float depth = .25f;
 				float wOff = (1-width)/2;
 				float dOff = (1-depth)/2;
 				int pixelLength = 0;
 
-				HashMap<TextureAtlasSprite, Integer> textureOre = new HashMap();
+				HashMap<TextureAtlasSprite, Integer> textureOre = new HashMap<>();
 				if(mineral!=null && mineral.oreOutput!=null)
 				{
 					for(int i=0; i<mineral.oreOutput.size(); i++)
@@ -206,7 +206,7 @@ public class ModelCoresample implements IBakedModel
 	}
 
 
-	ItemOverrideList overrideList = new ItemOverrideList(new ArrayList())
+	ItemOverrideList overrideList = new ItemOverrideList(new ArrayList<>())
 	{
 		@Override
 		public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity)
@@ -240,7 +240,7 @@ public class ModelCoresample implements IBakedModel
 //		return DefaultVertexFormats.ITEM;
 //	}
 
-	static HashMap<TransformType, Matrix4> transformationMap = new HashMap<TransformType, Matrix4>();
+	static HashMap<TransformType, Matrix4> transformationMap = new HashMap<>();
 	static{
 		transformationMap.put(TransformType.FIRST_PERSON_LEFT_HAND, new Matrix4().translate(0, .28, 0).rotate(Math.toRadians(180), 1, 0, 0).rotate(Math.toRadians(-90), 0, 1, 0));
 		transformationMap.put(TransformType.FIRST_PERSON_RIGHT_HAND, new Matrix4().translate(0, .28, 0).rotate(Math.toRadians(180), 1, 0, 0).rotate(Math.toRadians(-90), 0, 1, 0));

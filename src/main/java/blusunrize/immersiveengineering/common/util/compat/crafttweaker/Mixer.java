@@ -72,7 +72,7 @@ public class Mixer
 	private static class RemoveFluid implements IAction
 	{
 		private final FluidStack output;
-		ArrayList<MixerRecipe> removedRecipes = new ArrayList<MixerRecipe>();
+		ArrayList<MixerRecipe> removedRecipes = new ArrayList<>();
 
 		public RemoveFluid(FluidStack output)
 		{

@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class ThermoelectricHandler
 {
-	public static HashMap<IngredientStack, Integer> temperatureMap = new HashMap<IngredientStack, Integer>();
+	public static HashMap<IngredientStack, Integer> temperatureMap = new HashMap<>();
 
 	public static void registerSource(IngredientStack source, int value)
 	{
@@ -61,7 +61,7 @@ public class ThermoelectricHandler
 
 	public static Map<String, Integer> getThermalValuesSorted(boolean inverse)
 	{
-		HashMap<String, Integer> existingMap = new HashMap();
+		HashMap<String, Integer> existingMap = new HashMap<>();
 		for(IngredientStack ingr : temperatureMap.keySet())
 		{
 			ItemStack example = ingr.getExampleStack();

@@ -216,7 +216,7 @@ public class ItemRailgun extends ItemUpgradeableTool implements IIEEnergyItem, I
 		{
 			player.setActiveHand(hand);
 			player.world.playSound(null, player.posX, player.posY, player.posZ, getChargeTime(stack) <= 20 ? IESounds.chargeFast : IESounds.chargeSlow, SoundCategory.PLAYERS, 1.5f, 1f);
-			return new ActionResult(EnumActionResult.SUCCESS, stack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
 		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
@@ -310,7 +310,7 @@ public class ItemRailgun extends ItemUpgradeableTool implements IIEEnergyItem, I
 
 	public String[] compileRender(ItemStack stack)
 	{
-		HashSet<String> render = new HashSet<String>();
+		HashSet<String> render = new HashSet<>();
 		render.add("frame");
 		render.add("barrel");
 		render.add("grip");

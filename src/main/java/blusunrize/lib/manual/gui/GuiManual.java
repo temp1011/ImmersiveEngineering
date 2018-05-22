@@ -49,7 +49,7 @@ public class GuiManual extends GuiScreen
 	GuiTextField searchField;
 	int hasSuggestions = -1;
 	String[] suggestionHeaders = new String[0];
-	int prevGuiScale = -1;
+	int prevGuiScale;
 
 	public GuiManual(ManualInstance manual, String texture)
 	{
@@ -115,7 +115,7 @@ public class GuiManual extends GuiScreen
 		}
 		else if(manual.getSortedCategoryList()==null||manual.getSortedCategoryList().length<=1)
 		{
-			ArrayList<String> lHeaders = new ArrayList<String>();
+			ArrayList<String> lHeaders = new ArrayList<>();
 			for(ManualEntry e : manual.manualContents.values())
 				if(manual.showEntryInList(e))
 					lHeaders.add(e.getName());
@@ -125,7 +125,7 @@ public class GuiManual extends GuiScreen
 		}
 		else if(manual.manualContents.containsKey(selectedCategory))
 		{
-			ArrayList<String> lHeaders = new ArrayList<String>();
+			ArrayList<String> lHeaders = new ArrayList<>();
 			for(ManualEntry e : manual.manualContents.get(selectedCategory))
 				if(manual.showEntryInList(e))
 					lHeaders.add(e.getName());
@@ -135,7 +135,7 @@ public class GuiManual extends GuiScreen
 		}
 		else
 		{
-			ArrayList<String> lHeaders = new ArrayList<String>();
+			ArrayList<String> lHeaders = new ArrayList<>();
 			for(String cat : manual.getSortedCategoryList())
 				if(manual.showCategoryInList(cat))
 					lHeaders.add(cat);
@@ -461,8 +461,8 @@ public class GuiManual extends GuiScreen
 			else
 			{
 				search = search.toLowerCase(Locale.ENGLISH);
-				ArrayList<String> lHeaders = new ArrayList<String>();
-				HashMap<String, String> lSpellcheck = new HashMap<String, String>();
+				ArrayList<String> lHeaders = new ArrayList<>();
+				HashMap<String, String> lSpellcheck = new HashMap<>();
 				for(ManualEntry e : manual.manualContents.values())
 				{
 					if(manual.showEntryInList(e))

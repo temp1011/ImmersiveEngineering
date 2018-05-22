@@ -107,8 +107,8 @@ public class TileEntityFluidSorter extends TileEntityIEBase implements IGuiTile
 	{
 		if(fluidStack==null)
 			return new IFluidHandler[2][0];
-		ArrayList<IFluidHandler> validFilteredInvOuts = new ArrayList<IFluidHandler>(6);
-		ArrayList<IFluidHandler> validUnfilteredInvOuts = new ArrayList<IFluidHandler>(6);
+		ArrayList<IFluidHandler> validFilteredInvOuts = new ArrayList<>(6);
+		ArrayList<IFluidHandler> validUnfilteredInvOuts = new ArrayList<>(6);
 		for(EnumFacing side : EnumFacing.values())
 			if(side!=inputSide && world.isBlockLoaded(getPos().offset(side)))
 			{

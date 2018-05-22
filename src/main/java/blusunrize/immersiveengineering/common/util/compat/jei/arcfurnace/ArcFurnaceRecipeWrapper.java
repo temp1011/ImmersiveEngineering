@@ -60,7 +60,7 @@ public class ArcFurnaceRecipeWrapper extends MultiblockRecipeWrapper
 		return new ArcFurnaceRecipeWrapper(recipe);
 	}
 
-	private static HashMap<String, Class<? extends ArcFurnaceRecipeWrapper>> dynamicSubclasses = new HashMap();
+	private static HashMap<String, Class<? extends ArcFurnaceRecipeWrapper>> dynamicSubclasses = new HashMap<>();
 	public static Class<? extends ArcFurnaceRecipeWrapper> getWrapperClass(String subtype)
 	{
 		if(subtype==null)

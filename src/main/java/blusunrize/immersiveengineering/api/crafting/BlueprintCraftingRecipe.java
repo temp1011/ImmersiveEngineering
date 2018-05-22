@@ -38,9 +38,9 @@ public class BlueprintCraftingRecipe extends MultiblockRecipe
 	public static float timeModifier = 1;
 	public static Item itemBlueprint;
 
-	public static ArrayList<String> blueprintCategories = new ArrayList<String>();
+	public static ArrayList<String> blueprintCategories = new ArrayList<>();
 	public static ArrayListMultimap<String, BlueprintCraftingRecipe> recipeList = ArrayListMultimap.create();
-	public static HashMap<String, ItemStack> villagerPrices = new HashMap<String, ItemStack>();
+	public static HashMap<String, ItemStack> villagerPrices = new HashMap<>();
 
 	public String blueprintCategory;
 	public ItemStack output;
@@ -132,7 +132,7 @@ public class BlueprintCraftingRecipe extends MultiblockRecipe
 	}
 	public int getMaxCrafted(NonNullList<ItemStack> query)
 	{
-		HashMap<ItemStack, Integer> queryAmount = new HashMap<ItemStack, Integer>();
+		HashMap<ItemStack, Integer> queryAmount = new HashMap<>();
 		for(ItemStack q : query)
 			if(!q.isEmpty())
 			{
@@ -149,40 +149,35 @@ public class BlueprintCraftingRecipe extends MultiblockRecipe
 
 		int maxCrafted = 0;
 		ArrayList<IngredientStack> formattedInputList = getFormattedInputs();
-		Iterator<IngredientStack> formInputIt = formattedInputList.iterator();
-		while(formInputIt.hasNext())
-		{
-			IngredientStack ingr = formInputIt.next();
+		for (IngredientStack ingr : formattedInputList) {
 			int supplied = 0;
 			int req = ingr.inputSize;
 			Iterator<Entry<ItemStack, Integer>> queryIt = queryAmount.entrySet().iterator();
-			while(queryIt.hasNext())
-			{
+			while (queryIt.hasNext()) {
 				Entry<ItemStack, Integer> e = queryIt.next();
 				ItemStack compStack = e.getKey();
-				if(ingr.matchesItemStackIgnoringSize(compStack))
+				if (ingr.matchesItemStackIgnoringSize(compStack))
 				{
-					int taken = e.getValue()/req;
-					if(taken>0)
-					{
-						e.setValue(e.getValue()-taken*req);
-						if(e.getValue()<=0)
+					int taken = e.getValue() / req;
+					if (taken > 0) {
+						e.setValue(e.getValue() - taken * req);
+						if (e.getValue() <= 0)
 							queryIt.remove();
 						supplied += taken;
 					}
 				}
 			}
-			if(supplied<=0)
+			if (supplied <= 0)
 				return 0;
 			else
-				maxCrafted = maxCrafted==0?supplied:Math.min(maxCrafted, supplied);
+				maxCrafted = maxCrafted == 0 ? supplied : Math.min(maxCrafted, supplied);
 		}
 		return maxCrafted;
 	}
 
 	public NonNullList<ItemStack> consumeInputs(NonNullList<ItemStack> query, int crafted)
 	{
-		ArrayList<IngredientStack> inputList = new ArrayList(inputs.length);
+		ArrayList<IngredientStack> inputList = new ArrayList<>(inputs.length);
 		for(IngredientStack i : inputs)
 			if(i!=null)
 				inputList.add(i);
@@ -220,7 +215,7 @@ public class BlueprintCraftingRecipe extends MultiblockRecipe
 	}
 	public ArrayList<IngredientStack> getFormattedInputs()
 	{
-		ArrayList<IngredientStack> formattedInputs = new ArrayList<IngredientStack>();
+		ArrayList<IngredientStack> formattedInputs = new ArrayList<>();
 		for(IngredientStack ingr : this.inputs)
 			if(ingr!=null)
 			{
@@ -307,16 +302,16 @@ public class BlueprintCraftingRecipe extends MultiblockRecipe
 		for(BlueprintCraftingRecipe recipe : recipeList)
 		{
 			boolean b = false;
-			for(int i=0; i<inputs.length; i++)
-			{
-				for(int j=0; j<recipe.inputs.length; j++)
-					if(recipe.inputs[j].matches(inputs[i]))
-					{
+			for (IngredientStack input : inputs) {
+				for (int j = 0; j < recipe.inputs.length; j++) {
+					if (recipe.inputs[j].matches(input)) {
 						b = true;
 						break;
 					}
-				if(!b)
+				}
+				if (!b) {
 					break;
+				}
 			}
 			if(b)
 				return recipe;

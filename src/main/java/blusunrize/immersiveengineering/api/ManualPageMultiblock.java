@@ -108,7 +108,7 @@ public class ManualPageMultiblock extends ManualPages
 		IngredientStack[] totalMaterials = this.multiblock.getTotalMaterials();
 		if(totalMaterials != null)
 		{
-			componentTooltip = new ArrayList();
+			componentTooltip = new ArrayList<>();
 			componentTooltip.add(I18n.format("desc.immersiveengineering.info.reqMaterial"));
 			int maxOff = 1;
 			boolean hasAnyItems = false;
@@ -138,12 +138,12 @@ public class ManualPageMultiblock extends ManualPages
 				{
 					IngredientStack req = totalMaterials[ss];
 					int indent = maxOff - ("" + req.inputSize).length();
-					String sIndent = "";
+					StringBuilder sIndent = new StringBuilder();
 					if(indent > 0)
 						for(int ii = 0; ii < indent; ii++)
-							sIndent += "0";
+							sIndent.append("0");
 					String s = hasItems[ss] ? (TextFormatting.GREEN + TextFormatting.BOLD.toString() + "\u2713" + TextFormatting.RESET + " ") : hasAnyItems ? ("   ") : "";
-					s += TextFormatting.GRAY + sIndent + req.inputSize + "x " + TextFormatting.RESET;
+					s += TextFormatting.GRAY + sIndent.toString() + req.inputSize + "x " + TextFormatting.RESET;
 					ItemStack example = req.getExampleStack();
 					if(!example.isEmpty())
 						s += example.getRarity().rarityColor + example.getDisplayName();
@@ -421,7 +421,7 @@ public class ManualPageMultiblock extends ManualPages
 		public int structureWidth = 0;
 		public int showLayer = -1;
 
-		private int blockIndex = -1;
+		private int blockIndex;
 		private int maxBlockIndex;
 
 		public MultiblockRenderInfo(IMultiblock multiblock)

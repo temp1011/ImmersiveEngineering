@@ -62,7 +62,7 @@ public class IESmartObjModel extends OBJBakedModel
 			.maximumSize(100).expireAfterAccess(60, TimeUnit.SECONDS).build();
 	public static HashMap<ExtBlockstateAdapter, List<BakedQuad>> modelCache = new HashMap<>();
 	IBakedModel baseModel;
-	HashMap<TransformType, Matrix4> transformationMap = new HashMap<TransformType, Matrix4>();
+	HashMap<TransformType, Matrix4> transformationMap;
 	ImmutableList<BakedQuad> bakedQuads;
 	ItemStack tempStack = ItemStack.EMPTY;
 	IBlockState tempState;
@@ -276,7 +276,7 @@ public class IESmartObjModel extends OBJBakedModel
 				if(!shader.isEmpty()&&shader.getItem() instanceof IShaderItem)
 					sCase = ((IShaderItem)shader.getItem()).getShaderCase(shader, tempStack, wrapper.getShaderType());
 			}
-		} else if(this.tempState != null && this.tempState instanceof IExtendedBlockState && ((IExtendedBlockState)this.tempState).getUnlistedNames().contains(CapabilityShader.BLOCKSTATE_PROPERTY))
+		} else if(this.tempState instanceof IExtendedBlockState && ((IExtendedBlockState) this.tempState).getUnlistedNames().contains(CapabilityShader.BLOCKSTATE_PROPERTY))
 		{
 			ShaderWrapper wrapper = ((IExtendedBlockState)this.tempState).getValue(CapabilityShader.BLOCKSTATE_PROPERTY);
 			if(wrapper!=null)
@@ -291,7 +291,7 @@ public class IESmartObjModel extends OBJBakedModel
 		{
 			callback = (IOBJModelCallback)tempStack.getItem();
 			callbackObject = this.tempStack;
-		} else if(this.tempState != null && this.tempState instanceof IExtendedBlockState && ((IExtendedBlockState)this.tempState).getUnlistedNames().contains(IOBJModelCallback.PROPERTY))
+		} else if(this.tempState instanceof IExtendedBlockState && ((IExtendedBlockState) this.tempState).getUnlistedNames().contains(IOBJModelCallback.PROPERTY))
 		{
 			callback = ((IExtendedBlockState)this.tempState).getValue(IOBJModelCallback.PROPERTY);
 			callbackObject = this.tempState;

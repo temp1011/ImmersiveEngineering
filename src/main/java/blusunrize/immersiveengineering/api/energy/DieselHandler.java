@@ -23,8 +23,8 @@ import java.util.Set;
  */
 public class DieselHandler
 {
-	static final HashMap<String, Integer> dieselGenBurnTime = new HashMap<String, Integer>();
-	static final Set<Fluid> drillFuel = new HashSet<Fluid>();
+	static final HashMap<String, Integer> dieselGenBurnTime = new HashMap<>();
+	static final Set<Fluid> drillFuel = new HashSet<>();
 
 	/**
 	 * @param fuel the fluid to be used as fuel

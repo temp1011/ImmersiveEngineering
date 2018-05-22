@@ -22,7 +22,7 @@ import java.util.HashMap;
 @SideOnly(Side.CLIENT)
 public class IEItemFontRender extends FontRenderer
 {
-	static HashMap<Character, CharReplacement> unicodeReplacements = new HashMap();
+	static HashMap<Character, CharReplacement> unicodeReplacements = new HashMap<>();
 
 	static
 	{
@@ -56,9 +56,9 @@ public class IEItemFontRender extends FontRenderer
 	@Override
 	public void renderStringAtPos(String text, boolean shadow)
 	{
-		int idx = -1;
+		int idx;
 		int loop = 0;
-		HashMap<Integer, Integer> formattingReplacements = new HashMap<Integer, Integer>();
+		HashMap<Integer, Integer> formattingReplacements = new HashMap<>();
 		while((idx=text.indexOf("<hexcol="))>=0 && loop++<20)
 		{
 			int end = text.indexOf(">",idx);

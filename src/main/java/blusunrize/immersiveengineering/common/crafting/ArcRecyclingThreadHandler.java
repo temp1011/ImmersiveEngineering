@@ -29,7 +29,7 @@ public class ArcRecyclingThreadHandler extends Thread
 {
 	static boolean hasProfiled = false;
 	public static List<ArcFurnaceRecipe> recipesToAdd = null;
-	private List<IRecipe> recipeList = null;
+	private List<IRecipe> recipeList;
 	private ArcRecyclingThreadHandler(List<IRecipe> r)
 	{
 		recipeList = r;
@@ -66,44 +66,39 @@ public class ArcRecyclingThreadHandler extends Thread
 			threads[i] = new RegistryIterationThread(recipeList, limit*i, i==(threadAmount-1)?leftOver:limit);
 
 		//iterate over each thread individually
-		ArrayList<RecyclingCalculation> validated = new ArrayList<RecyclingCalculation>();
+		ArrayList<RecyclingCalculation> validated = new ArrayList<>();
 		ArrayListMultimap<ItemStack, RecyclingCalculation> nonValidated = ArrayListMultimap.create();
 		int invalidCount = 0;
 
-		for(int i=0; i<threads.length; i++)
-		{
-			RegistryIterationThread thread = threads[i];
+		for (RegistryIterationThread thread : threads) {
 			try {
 				thread.join();
-				for(RecyclingCalculation calc : thread.calculatedOutputs)
-					if(calc.isValid())
+				for (RecyclingCalculation calc : thread.calculatedOutputs) {
+					if (calc.isValid()) {
 						validated.add(calc);
-					else
-					{
-						for(ItemStack s : calc.queriedSubcomponents)
+					} else {
+						for (ItemStack s : calc.queriedSubcomponents) {
 							nonValidated.put(s, calc);
+						}
 						invalidCount++;
 					}
-			}
-			catch (InterruptedException e)
-			{
+				}
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		int timeout = 0;
 		while(!nonValidated.isEmpty() && timeout++<(invalidCount*10))
 		{
-			ArrayList<RecyclingCalculation> newlyValid = new ArrayList<RecyclingCalculation>();
+			ArrayList<RecyclingCalculation> newlyValid = new ArrayList<>();
 			for(RecyclingCalculation valid :  validated)
 			{
-				Iterator<Map.Entry<ItemStack,RecyclingCalculation>> itNonValid = nonValidated.entries().iterator(); 
-				while(itNonValid.hasNext())
+				for (Map.Entry<ItemStack, RecyclingCalculation> e : nonValidated.entries())
 				{
-					Map.Entry<ItemStack,RecyclingCalculation> e = itNonValid.next();
-					if(OreDictionary.itemMatches(e.getKey(), valid.stack, false))
+					if (OreDictionary.itemMatches(e.getKey(), valid.stack, false))
 					{
 						RecyclingCalculation nonValid = e.getValue();
-						if(nonValid.validateSubcomponent(valid))
+						if (nonValid.validateSubcomponent(valid))
 							newlyValid.add(nonValid);
 					}
 				}
@@ -112,7 +107,7 @@ public class ArcRecyclingThreadHandler extends Thread
 			validated.addAll(newlyValid);
 		}
 		//HashSet to avoid duplicates
-		HashSet<String> finishedRecycles = new HashSet<String>();
+		HashSet<String> finishedRecycles = new HashSet<>();
 		List<ArcFurnaceRecipe> ret = new ArrayList<>();
 		for(RecyclingCalculation valid :  validated)
 			if(finishedRecycles.add(valid.stack.toString()) && !valid.outputs.isEmpty())
@@ -132,7 +127,7 @@ public class ArcRecyclingThreadHandler extends Thread
 		final List<IRecipe> recipeList;
 		final int baseOffset;
 		final int passes;
-		ArrayList<RecyclingCalculation> calculatedOutputs = new ArrayList<RecyclingCalculation>();
+		ArrayList<RecyclingCalculation> calculatedOutputs = new ArrayList<>();
 
 		public RegistryIterationThread(List<IRecipe> recipeList, int baseOffset, int passes)
 		{
@@ -180,8 +175,8 @@ public class ArcRecyclingThreadHandler extends Thread
 		if(inputs!=null)
 		{
 			int inputSize = stack.getCount();
-			List<ItemStack> missingSub = new ArrayList<ItemStack>();
-			HashMap<ItemStack,Double> outputs = new HashMap<ItemStack,Double>();
+			List<ItemStack> missingSub = new ArrayList<>();
+			HashMap<ItemStack,Double> outputs = new HashMap<>();
 			for(Object in : inputs)
 				if(in!=null)
 				{
@@ -239,7 +234,7 @@ public class ArcRecyclingThreadHandler extends Thread
 		IRecipe recipe;
 		ItemStack stack;
 		HashMap<ItemStack, Double> outputs;
-		ArrayList<ItemStack> queriedSubcomponents = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> queriedSubcomponents = new ArrayList<>();
 		public RecyclingCalculation(IRecipe recipe, ItemStack stack, HashMap<ItemStack, Double> outputs)
 		{
 			this.recipe = recipe;

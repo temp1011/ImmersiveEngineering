@@ -34,7 +34,7 @@ public class IEApi
 	/**
 	 * This map caches the preferred ores for the given OreDict name
 	 */
-	public static HashMap<String, ItemStack> oreOutputPreference = new HashMap<String, ItemStack>();
+	public static HashMap<String, ItemStack> oreOutputPreference = new HashMap<>();
 
 	/**
 	 * The TextureSheet id for the revolver's icons
@@ -45,7 +45,7 @@ public class IEApi
 	 * This map stores a list of OreDict prefixes (ingot, plate, gear, nugget) and their ingot relation (ingot:component) <br>
 	 * Examples:<br>"plate"-{1,1},<br>"nugget"-{1,9},<br>"block"-{9,1},<br>"gear"-{4,1}
 	 */
-	public static HashMap<String, Integer[]> prefixToIngotMap = new HashMap<String, Integer[]>();
+	public static HashMap<String, Integer[]> prefixToIngotMap = new HashMap<>();
 
 	/**
 	 * An array of all potions added by IE. indices are as follows:<br>

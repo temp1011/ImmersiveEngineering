@@ -10,7 +10,6 @@ package blusunrize.immersiveengineering.common.blocks.metal;
 
 import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.crafting.CrusherRecipe;
-import blusunrize.immersiveengineering.common.Config.IEConfig;
 import blusunrize.immersiveengineering.common.EventHandler;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IAdvancedCollisionBounds;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IAdvancedSelectionBounds;
@@ -201,7 +200,7 @@ public class TileEntityCrusher extends TileEntityMultiblockMetal<TileEntityCrush
 		}
 		if((pos>20 && pos<24)||(pos>35 && pos<39))
 		{
-			List<AxisAlignedBB> list = new ArrayList<AxisAlignedBB>(3);
+			List<AxisAlignedBB> list = new ArrayList<>(3);
 			float minY = .5f;
 			float minX = (pos%5==1&&fw==EnumFacing.EAST)||(pos%5==3&&fw==EnumFacing.WEST)?.4375f: 0;
 			float maxX = (pos%5==1&&fw==EnumFacing.WEST)||(pos%5==3&&fw==EnumFacing.EAST)?.5625f: 1;
@@ -223,7 +222,7 @@ public class TileEntityCrusher extends TileEntityMultiblockMetal<TileEntityCrush
 		{
 			if(pos%15>9)
 				fl = fl.getOpposite();
-			List<AxisAlignedBB> list = new ArrayList<AxisAlignedBB>(3);
+			List<AxisAlignedBB> list = new ArrayList<>(3);
 			float minY = .5f;
 			float minX = (pos%5==1&&fw==EnumFacing.EAST)||(pos%5==3&&fw==EnumFacing.WEST)?.4375f: fl==EnumFacing.EAST?.4375f: 0;
 			float maxX = (pos%5==1&&fw==EnumFacing.WEST)||(pos%5==3&&fw==EnumFacing.EAST)?.5625f: fl==EnumFacing.WEST?.5625f: 1;
@@ -314,7 +313,7 @@ public class TileEntityCrusher extends TileEntityMultiblockMetal<TileEntityCrush
 				if(recipe==null)
 					return;
 				ItemStack displayStack = recipe.getDisplayStack(stack);
-				MultiblockProcess<CrusherRecipe> process = new MultiblockProcessInWorld<CrusherRecipe>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
+				MultiblockProcess<CrusherRecipe> process = new MultiblockProcessInWorld<>(recipe, .5f, Utils.createNonNullItemStackListFromItemStack(displayStack));
 				if(master.addProcessToQueue(process, true, true))
 				{
 					master.addProcessToQueue(process, false, true);

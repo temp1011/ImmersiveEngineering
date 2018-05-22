@@ -51,8 +51,8 @@ public class IEPotions
 		static ResourceLocation tex = new ResourceLocation("immersiveengineering","textures/gui/potioneffects.png");
 		final int tickrate;
 		final boolean halfTickRateWIthAmplifier;
-		boolean showInInventory = true;
-		boolean showInHud = true;
+		boolean showInInventory;
+		boolean showInHud;
 		public IEPotion(ResourceLocation resource, boolean isBad, int colour, int tick, boolean halveTick, int icon, boolean showInInventory, boolean showInHud)
 		{
 			super(isBad, colour);

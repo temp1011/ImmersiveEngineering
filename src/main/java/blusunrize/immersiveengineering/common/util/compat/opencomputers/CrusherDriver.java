@@ -10,7 +10,6 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.ManagedEnvironment;
-import li.cil.oc.api.network.Node;
 import li.cil.oc.api.prefab.DriverSidedTileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -87,7 +86,7 @@ public class CrusherDriver extends DriverSidedTileEntity
 					Map<String, Object> recipe = new HashMap<>();
 					recipe.put("progress", curr.processTick);
 					recipe.put("maxProgress", curr.maxTicks);
-					List<Map<String, Object>> input = new ArrayList(curr.inputItems.size());
+					List<Map<String, Object>> input = new ArrayList<>(curr.inputItems.size());
 					for(ItemStack in : curr.inputItems)
 						input.add(Utils.saveStack(in));
 					recipe.put("input", input);

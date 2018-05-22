@@ -223,21 +223,6 @@ public class ConnModelReal implements IBakedModel
 			}
 			else
 				extraCacheKey = null;
-			if (Config.IEConfig.enableDebug)
-			{
-				//Debug code for #2887
-				if (!this.equals(this)||this.hashCode()!=this.hashCode())
-				{
-					String debug = "Basic state:\n";
-					debug += toStringDebug(state);
-					debug += "Layer: "+layer+"\n";
-					debug += "Cache key: "+extraCacheKey+"\nAdditional:\n";
-					debug += "Ignored:\n";
-					for (Object o:ignoredProperties)
-						debug += toStringDebug(o);
-					throw new IllegalStateException(debug);
-				}
-			}
 		}
 
 		private String toStringProp(IProperty<?> o)
@@ -259,19 +244,19 @@ public class ConnModelReal implements IBakedModel
 				return "NULL";
 			if (o instanceof IBlockState)
 			{
-				String ret = "";
+				StringBuilder ret = new StringBuilder();
 				for (IProperty<?> p:((IBlockState) o).getPropertyKeys())
 				{
-					ret += toStringProp(p)+" has value "+toStringDebug(((IBlockState) o).getValue(p))+"\n";
+					ret.append(toStringProp(p)).append(" has value ").append(toStringDebug(((IBlockState) o).getValue(p))).append("\n");
 				}
 				if (o instanceof IExtendedBlockState)
 				{
 					for (Map.Entry<IUnlistedProperty<?>, Optional<?>> p:((IExtendedBlockState) o).getUnlistedProperties().entrySet())
 					{
-						ret += toStringProp(p.getKey())+" has value "+toStringDebug(p.getValue().orElse(null))+"\n";
+						ret.append(toStringProp(p.getKey())).append(" has value ").append(toStringDebug(p.getValue().orElse(null))).append("\n");
 					}
 				}
-				return ret;
+				return ret.toString();
 			}
 			if (o instanceof IUnlistedProperty)
 				return toStringProp((IUnlistedProperty)o);
@@ -284,24 +269,6 @@ public class ConnModelReal implements IBakedModel
 		{
 			this(s, l, ignored);
 			additionalProperties = additional;
-			if (Config.IEConfig.enableDebug)
-			{
-				//Debug code for #2887
-				if (!this.equals(this)||this.hashCode()!=this.hashCode())
-				{
-					String debug = "Basic state:\n";
-					debug += toStringDebug(state);
-					debug += "Layer: "+layer+"\n";
-					debug += "Cache key: "+extraCacheKey+"\nAdditional:\n";
-					if (additionalProperties!=null)
-						for (Object o:additionalProperties)
-							debug += toStringDebug(o);
-					debug += "Ignored:\n";
-					for (Object o:ignoredProperties)
-						debug += toStringDebug(o);
-					throw new IllegalStateException(debug);
-				}
-			}
 		}
 
 		@Override

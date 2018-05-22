@@ -240,7 +240,7 @@ public class ConveyorVertical extends ConveyorBasic
 	@Override
 	public List<AxisAlignedBB> getSelectionBoxes(TileEntity tile, EnumFacing facing)
 	{
-		ArrayList list = new ArrayList();
+		ArrayList<AxisAlignedBB> list = new ArrayList<>();
 		if(facing.ordinal() > 1)
 			list.add(verticalBounds[facing.ordinal() - 2]);
 		if(renderBottomBelt(tile, facing) || list.isEmpty())
@@ -251,7 +251,7 @@ public class ConveyorVertical extends ConveyorBasic
 	@Override
 	public List<AxisAlignedBB> getColisionBoxes(TileEntity tile, EnumFacing facing)
 	{
-		ArrayList list = new ArrayList();
+		ArrayList<AxisAlignedBB> list = new ArrayList<>();
 		if(facing.ordinal() > 1)
 			list.add(verticalBounds[facing.ordinal() - 2]);
 		if(renderBottomBelt(tile, facing) || list.isEmpty())

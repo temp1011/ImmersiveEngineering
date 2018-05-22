@@ -59,13 +59,13 @@ public class TileEntityWoodenPost extends TileEntityIEBase implements IPostBlock
 		return new AxisAlignedBB(getPos().add(-1,0,-1),getPos().add(1,4,1));
 	}
 
-	static ArrayList<String> emptyDisplayList = new ArrayList();
+	static ArrayList<String> emptyDisplayList = new ArrayList<>();
 	@Override
 	public ArrayList<String> compileDisplayList()
 	{
 		if(dummy!=0)
 			return emptyDisplayList;
-		ArrayList<String> list = new ArrayList();
+		ArrayList<String> list = new ArrayList<>();
 		list.add("base");
 		TileEntity te;
 		for(int i=0; i<=2; i++)

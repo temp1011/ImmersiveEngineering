@@ -84,8 +84,6 @@ public class ContainerAutoWorkbench extends ContainerIEBase<TileEntityAutoWorkbe
 								b = false;
 								break;
 							}
-							else
-								continue;
 					}
 					if(b)
 						return ItemStack.EMPTY;

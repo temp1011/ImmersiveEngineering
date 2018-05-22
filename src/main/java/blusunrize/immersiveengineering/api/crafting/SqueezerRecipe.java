@@ -53,7 +53,7 @@ public class SqueezerRecipe extends MultiblockRecipe
 		return this;
 	}
 	
-	public static ArrayList<SqueezerRecipe> recipeList = new ArrayList();
+	public static ArrayList<SqueezerRecipe> recipeList = new ArrayList<>();
 	public static SqueezerRecipe addRecipe(FluidStack fluidOutput, @Nonnull ItemStack itemOutput, Object input, int energy)
 	{
 		SqueezerRecipe r = new SqueezerRecipe(fluidOutput, itemOutput, input, energy);
@@ -110,7 +110,7 @@ public class SqueezerRecipe extends MultiblockRecipe
 	}
 	public static Map<String, Integer> getFluidValuesSorted(Fluid f, boolean inverse)
 	{
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Integer> map = new HashMap<>();
 		for(SqueezerRecipe recipe : recipeList)
 			if(recipe.fluidOutput!=null && recipe.fluidOutput.getFluid()==f)
 			{

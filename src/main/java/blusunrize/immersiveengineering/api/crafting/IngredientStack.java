@@ -137,7 +137,7 @@ public class IngredientStack
 		List<ItemStack> list;
 		if(oreName!=null)
 		{
-			list = new ArrayList<ItemStack>();
+			list = new ArrayList<>();
 			for(ItemStack stack : OreDictionary.getOres(oreName))
 				list.add(ApiUtils.copyStackWithAmount(stack, inputSize));
 		}
@@ -334,7 +334,7 @@ public class IngredientStack
 					return ingr;
 				case 1:
 					NBTTagList list = nbt.getTagList("stackList", 10);
-					List<ItemStack> stackList = new ArrayList();
+					List<ItemStack> stackList = new ArrayList<>();
 					for(int i=0; i<list.tagCount(); i++)
 						stackList.add(new ItemStack(list.getCompoundTagAt(i)));
 					return new IngredientStack(stackList, nbt.getInteger("inputSize"));

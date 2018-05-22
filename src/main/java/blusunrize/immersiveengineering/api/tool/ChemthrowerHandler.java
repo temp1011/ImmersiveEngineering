@@ -37,9 +37,9 @@ import java.util.HashSet;
 
 public class ChemthrowerHandler
 {
-	public static HashMap<String, ChemthrowerEffect> effectMap = new HashMap<String, ChemthrowerEffect>();
-	public static HashSet<String> flammableList = new HashSet<String>();
-	public static HashSet<String> gasList = new HashSet<String>();
+	public static HashMap<String, ChemthrowerEffect> effectMap = new HashMap<>();
+	public static HashSet<String> flammableList = new HashSet<>();
+	public static HashSet<String> gasList = new HashSet<>();
 
 	/**
 	 * registers a special effect to a fluid. Fluids without an effect simply do damage based on temperature
@@ -193,7 +193,7 @@ public class ChemthrowerHandler
 					{
 						PotionEffect e = this.potionEffects[iEffect];
 						PotionEffect newEffect = new PotionEffect(e.getPotion(),e.getDuration(),e.getAmplifier());
-						newEffect.setCurativeItems(new ArrayList(e.getCurativeItems()));
+						newEffect.setCurativeItems(new ArrayList<>(e.getCurativeItems()));
 						target.addPotionEffect(newEffect);
 					}
 		}

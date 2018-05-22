@@ -89,17 +89,17 @@ public class ItemShaderBag extends ItemIEBase
 			{
 				String shader = ShaderRegistry.getRandomShader(player.getName(), player.getRNG(), stack.getRarity(), true);
 				if(shader==null || shader.isEmpty())
-					return new ActionResult(EnumActionResult.FAIL, stack);
+					return new ActionResult<>(EnumActionResult.FAIL, stack);
 				ItemStack shaderItem = new ItemStack(IEContent.itemShader);
 				ItemNBTHelper.setString(shaderItem, "shader_name", shader);
 				if(ShaderRegistry.sortedRarityMap.indexOf(ShaderRegistry.shaderRegistry.get(shader).getRarity())<=ShaderRegistry.sortedRarityMap.indexOf(EnumRarity.EPIC) && ShaderRegistry.sortedRarityMap.indexOf(stack.getRarity())>=ShaderRegistry.sortedRarityMap.indexOf(EnumRarity.COMMON))
 					Utils.unlockIEAdvancement(player, "main/secret_luckofthedraw");
 				stack.shrink(1);
 				if(stack.getCount()<=0)
-					return new ActionResult(EnumActionResult.SUCCESS, shaderItem);
+					return new ActionResult<>(EnumActionResult.SUCCESS, shaderItem);
 				if(!player.inventory.addItemStackToInventory(shaderItem))
 					player.dropItem(shaderItem, false, true);
 			}
-		return new ActionResult(EnumActionResult.PASS, stack);
+		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
 }

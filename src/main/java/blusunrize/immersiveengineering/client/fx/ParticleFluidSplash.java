@@ -76,7 +76,7 @@ public class ParticleFluidSplash extends Particle
 		{
 			double d0;
 			if(iblockstate.getBlock() instanceof BlockLiquid)
-				d0 = (double)(1.0F - BlockLiquid.getLiquidHeightPercent(iblockstate.getValue(BlockLiquid.LEVEL).intValue()));
+				d0 = (double)(1.0F - BlockLiquid.getLiquidHeightPercent(iblockstate.getValue(BlockLiquid.LEVEL)));
 			else
 				d0 = iblockstate.getBoundingBox(this.world, blockpos).maxY;
 			double d1 = (double)MathHelper.floor(this.posY) + d0;

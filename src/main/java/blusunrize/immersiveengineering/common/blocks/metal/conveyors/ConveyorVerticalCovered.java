@@ -92,7 +92,7 @@ public class ConveyorVerticalCovered extends ConveyorVertical
 	@Override
 	public List<AxisAlignedBB> getColisionBoxes(TileEntity tile, EnumFacing facing)
 	{
-		ArrayList list = new ArrayList();
+		ArrayList<AxisAlignedBB> list = new ArrayList<>();
 		boolean bottom = renderBottomBelt(tile, facing);
 		if(facing.ordinal() > 1)
 		{
@@ -137,7 +137,7 @@ public class ConveyorVerticalCovered extends ConveyorVertical
 				if(q!=null&&q.getSprite()!=null&&q.getFace()!=null)
 					sprites.put(q.getFace(), q.getSprite());
 
-			Function<EnumFacing, TextureAtlasSprite> getSprite = f -> sprites.containsKey(f)?sprites.get(f):sprite;
+			Function<EnumFacing, TextureAtlasSprite> getSprite = f -> sprites.getOrDefault(f, sprite);
 
 			float[] colour = {1, 1, 1, 1};
 			Matrix4 matrix = new Matrix4(facing);

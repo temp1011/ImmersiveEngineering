@@ -153,7 +153,7 @@ public class IERecipes
 		if(!BulletHandler.homingCartridges.isEmpty())
 		{
 			bullet = BulletHandler.getBulletStack("wolfpack");
-			ArrayList<ItemStack> homingCartridges = new ArrayList();
+			ArrayList<ItemStack> homingCartridges = new ArrayList<>();
 			for(String s : BulletHandler.homingCartridges)
 				homingCartridges.add(BulletHandler.getBulletStack(s));
 			BlueprintCraftingRecipe.addRecipe("specialBullet", bullet.copy(), new ItemStack(IEContent.itemBullet, 1, 1), Items.GUNPOWDER, homingCartridges, homingCartridges, homingCartridges, homingCartridges);
@@ -218,9 +218,9 @@ public class IERecipes
 		MetalPressRecipe.recipeList.put(mold, new MetalPressUnpackingRecipe(mold, 3200));
 	}
 
-	public static HashMap<String, ItemStack> oreOutputModifier = new HashMap<String, ItemStack>();
-	public static HashMap<String, Object[]> oreOutputSecondaries = new HashMap<String, Object[]>();
-	public static ArrayList<String> hammerCrushingList = new ArrayList<String>();
+	public static HashMap<String, ItemStack> oreOutputModifier = new HashMap<>();
+	public static HashMap<String, Object[]> oreOutputSecondaries = new HashMap<>();
+	public static ArrayList<String> hammerCrushingList = new ArrayList<>();
 	public static void initCrusherRecipes()
 	{
 		oreOutputSecondaries.put("Iron", new Object[]{"dustNickel",.1f});
@@ -471,8 +471,8 @@ public class IERecipes
 			AlloyRecipe.addRecipe(output, new IngredientStack("dust"+input0, size0), new IngredientStack("ingot"+input1, size1), time);
 	}
 
-	public static HashMap<String, ItemStack> arcOutputModifier = new HashMap<String, ItemStack>();
-	public static HashSet<String> arcBlacklist = new HashSet<String>();
+	public static HashMap<String, ItemStack> arcOutputModifier = new HashMap<>();
+	public static HashSet<String> arcBlacklist = new HashSet<>();
 	public static void initArcSmeltingRecipes()
 	{
 		//Steel

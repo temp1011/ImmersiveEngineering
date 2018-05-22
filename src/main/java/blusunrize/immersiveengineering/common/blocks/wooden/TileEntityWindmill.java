@@ -9,7 +9,6 @@
 package blusunrize.immersiveengineering.common.blocks.wooden;
 
 import blusunrize.immersiveengineering.api.energy.IRotationAcceptor;
-import blusunrize.immersiveengineering.common.Config.IEConfig;
 import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IDirectionalTile;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IHasObjProperty;
@@ -200,7 +199,7 @@ public class TileEntityWindmill extends TileEntityIEBase implements ITickable, I
 		return false;
 	}
 
-	static ArrayList<String> emptyDisplayList = new ArrayList();
+	static ArrayList<String> emptyDisplayList = new ArrayList<>();
 	@Override
 	public ArrayList<String> compileDisplayList()
 	{

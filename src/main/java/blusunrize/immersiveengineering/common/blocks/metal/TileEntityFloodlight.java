@@ -144,7 +144,7 @@ public class TileEntityFloodlight extends TileEntityImmersiveConnectable impleme
 	public void updateFakeLights(boolean deleteOld, boolean genNew)
 	{
 		Iterator<BlockPos> it = this.fakeLights.iterator();
-		ArrayList<BlockPos> tempRemove = new ArrayList<BlockPos>();
+		ArrayList<BlockPos> tempRemove = new ArrayList<>();
 		while(it.hasNext())
 		{
 			BlockPos cc = it.next();
@@ -234,7 +234,7 @@ public class TileEntityFloodlight extends TileEntityImmersiveConnectable impleme
 	{
 		Vec3d light = new Vec3d(getPos()).addVector(.5,.75,.5);
 		int range = 32;
-		HashSet<BlockPos> ignore = new HashSet<BlockPos>();
+		HashSet<BlockPos> ignore = new HashSet<>();
 		ignore.add(getPos());
 		BlockPos hit = Utils.rayTraceForFirst(Utils.addVectors(vec,light), light.addVector(vec.x*range,vec.y*range,vec.z*range), world, ignore);
 		double maxDistance = hit!=null?new Vec3d(hit).addVector(.5,.75,.5).squareDistanceTo(light):range*range;

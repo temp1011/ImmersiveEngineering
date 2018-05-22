@@ -29,7 +29,7 @@ public class MetalPressPackingRecipe extends MetalPressRecipe
 	private final int gridSize;
 	private final int totalAmount;
 	private final int baseEnergy;
-	private HashMap<ComparableItemStack, PackedDelegate> cache = new HashMap();
+	private HashMap<ComparableItemStack, PackedDelegate> cache = new HashMap<>();
 
 	public MetalPressPackingRecipe(ComparableItemStack mold, int energy, int gridSize)
 	{

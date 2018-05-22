@@ -79,7 +79,6 @@ public class Thermoelectric
 		@Override
 		public void apply()
 		{
-			if(ThermoelectricHandler.temperatureMap.containsKey(this.ingredientStack))
 				ThermoelectricHandler.temperatureMap.remove(this.ingredientStack);
 		}
 

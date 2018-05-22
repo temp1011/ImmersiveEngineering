@@ -41,10 +41,10 @@ public class BakedModelTransformer
 
 	public static IBakedModel transform(IBakedModel model, IVertexTransformer transformer, IBlockState state, long rand, Function<VertexFormat, VertexFormat> formatRemapper)
 	{
-		List<BakedQuad>[] quads = new List[7];
+		List[] quads = new List[7];
 		for(int i = 0; i < quads.length; i++)
 		{
-			quads[i] = new ArrayList<BakedQuad>();
+			quads[i] = new ArrayList<>();
 			for(BakedQuad quad : model.getQuads(state, (i == 6 ? null : EnumFacing.getFront(i)), rand))
 				quads[i].add(transform(quad, transformer, formatRemapper));
 		}

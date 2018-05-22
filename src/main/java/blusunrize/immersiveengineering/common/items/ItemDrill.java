@@ -151,7 +151,7 @@ public class ItemDrill extends ItemUpgradeableTool implements IAdvancedFluidItem
 	{
 		return true;
 	}
-	public static HashMap<String, Integer> animationTimer = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> animationTimer = new HashMap<>();
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
 	{

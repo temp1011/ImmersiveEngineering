@@ -20,7 +20,6 @@ import blusunrize.immersiveengineering.api.energy.wires.ImmersiveNetHandler.Abst
 import blusunrize.immersiveengineering.api.energy.wires.ImmersiveNetHandler.Connection;
 import blusunrize.immersiveengineering.api.tool.ITool;
 import blusunrize.immersiveengineering.common.CommonProxy;
-import blusunrize.immersiveengineering.common.Config.IEConfig;
 import blusunrize.immersiveengineering.common.IESaveData;
 import blusunrize.immersiveengineering.common.blocks.BlockIEBase;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IConfigurableSides;
@@ -274,7 +273,6 @@ public class ItemIETool extends ItemIEBase implements ITool, IGuiItem, IItemDama
 							if(mb.getUniqueName().equalsIgnoreCase(s))
 							{
 								b = true;
-								continue;
 							}
 					if(!b)
 						break;
@@ -283,7 +281,6 @@ public class ItemIETool extends ItemIEBase implements ITool, IGuiItem, IItemDama
 							if(mb.getUniqueName().equalsIgnoreCase(s))
 							{
 								b = false;
-								continue;
 							}
 					if(!b)
 						break;
@@ -342,8 +339,8 @@ public class ItemIETool extends ItemIEBase implements ITool, IGuiItem, IItemDama
 		{
 			if(!player.isSneaking()&&(tileEntity instanceof IFluxReceiver||tileEntity instanceof IFluxProvider))
 			{
-				int max = 0;
-				int stored = 0;
+				int max;
+				int stored;
 				if(tileEntity instanceof IFluxReceiver)
 				{
 					max = ((IFluxReceiver)tileEntity).getMaxEnergyStored(side);
@@ -451,7 +448,7 @@ public class ItemIETool extends ItemIEBase implements ITool, IGuiItem, IItemDama
 	public Set<String> getToolClasses(ItemStack stack)
 	{
 		int meta = stack.getMetadata();
-		return meta==HAMMER_META?ImmutableSet.of(TOOL_HAMMER): meta==CUTTER_META?ImmutableSet.of(Lib.TOOL_WIRECUTTER): new HashSet<String>();
+		return meta==HAMMER_META?ImmutableSet.of(TOOL_HAMMER): meta==CUTTER_META?ImmutableSet.of(Lib.TOOL_WIRECUTTER): new HashSet<>();
 	}
 
 	@Override

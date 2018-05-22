@@ -69,7 +69,7 @@ public class ManualPageShader extends ManualPages
 
 		if(unlocked)
 		{
-			ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> list = new ArrayList<>();
 			for(ItemStack is : ShaderRegistry.itemExamples)
 				if(!is.isEmpty() && is.hasCapability(CapabilityShader.SHADER_CAPABILITY,null))
 				{

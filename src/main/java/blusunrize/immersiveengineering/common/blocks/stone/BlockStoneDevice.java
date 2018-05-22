@@ -72,7 +72,7 @@ public class BlockStoneDevice extends BlockIEMultiblock<BlockTypes_StoneDevices>
 		else if(meta==BlockTypes_StoneDevices.CORESAMPLE)
 		{
 			TileEntity te = world.getTileEntity(pos);
-			if(te!=null && te instanceof TileEntityCoresample)
+			if(te instanceof TileEntityCoresample)
 				return ((TileEntityCoresample)te).facing.getAxis()==Axis.Z?AABB_CORESAMPLE_Z:AABB_CORESAMPLE_X;
 		}
 		return super.getBoundingBox(state, world, pos);

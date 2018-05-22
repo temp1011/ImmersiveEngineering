@@ -64,7 +64,7 @@ public class BlockIEFluidConcrete extends BlockIEFluid
 		int level = state.getValue(LEVEL);
 		int timer = state.getValue(IEProperties.INT_16);
 		int quantaRemaining = quantaPerBlock - level;
-		int expQuanta = -101;
+		int expQuanta;
 		if(timer>=Math.min(14,quantaRemaining))
 		{
 			IBlockState solidState;

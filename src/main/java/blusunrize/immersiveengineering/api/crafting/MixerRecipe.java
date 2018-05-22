@@ -52,7 +52,7 @@ public class MixerRecipe extends MultiblockRecipe
 		this.fluidOutputList = Lists.newArrayList(this.fluidOutput);
 	}
 
-	public static ArrayList<MixerRecipe> recipeList = new ArrayList();
+	public static ArrayList<MixerRecipe> recipeList = new ArrayList<>();
 	public static MixerRecipe addRecipe(FluidStack fluidOutput, FluidStack fluidInput, Object[] itemInput, int energy)
 	{
 		MixerRecipe r = new MixerRecipe(fluidOutput, fluidInput, itemInput, energy);
@@ -80,7 +80,7 @@ public class MixerRecipe extends MultiblockRecipe
 		if(fluid!=null && fluid.containsFluid(this.fluidInput))
 		{
 
-			ArrayList<ItemStack> queryList = new ArrayList<ItemStack>(components.size());
+			ArrayList<ItemStack> queryList = new ArrayList<>(components.size());
 			for(ItemStack s : components)
 				if(!s.isEmpty())
 					queryList.add(s.copy());
@@ -122,13 +122,11 @@ public class MixerRecipe extends MultiblockRecipe
 
 	public int[] getUsedSlots(FluidStack input, NonNullList<ItemStack> components)
 	{
-		Set<Integer> usedSlotSet = new HashSet<Integer>();
-		for(int i=0; i<itemInputs.length; i++)
+		Set<Integer> usedSlotSet = new HashSet<>();
+		for (IngredientStack ingr : itemInputs)
 		{
-			IngredientStack ingr = itemInputs[i];
-			for(int j=0; j<components.size(); j++)
-				if(!usedSlotSet.contains(j) && !components.get(j).isEmpty() && ingr.matchesItemStack(components.get(j)))
-				{
+			for (int j = 0; j < components.size(); j++)
+				if (!usedSlotSet.contains(j) && !components.get(j).isEmpty() && ingr.matchesItemStack(components.get(j))) {
 					usedSlotSet.add(j);
 					break;
 				}

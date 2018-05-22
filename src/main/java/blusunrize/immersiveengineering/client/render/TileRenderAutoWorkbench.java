@@ -113,7 +113,7 @@ public class TileRenderAutoWorkbench extends TileEntitySpecialRenderer<TileEntit
 			} else if(processTimer <= 100)
 			{
 				itemX += 1;
-				float drillStep = 0;
+				float drillStep;
 				if(processTimer <= 60)
 				{
 					lift = (processTimer-40)/20f*.3125f;
@@ -214,7 +214,7 @@ public class TileRenderAutoWorkbench extends TileEntitySpecialRenderer<TileEntit
 			if(itemDisplays[i]!=null)
 			{
 				MultiblockProcess<IMultiblockRecipe> process = te.processQueue.get(i);
-				if(process==null || !(process instanceof MultiblockProcessInWorld))
+				if(!(process instanceof MultiblockProcessInWorld))
 					continue;
 
 				float scale = .3125f;
@@ -321,7 +321,7 @@ public class TileRenderAutoWorkbench extends TileEntitySpecialRenderer<TileEntit
 		tessellator.draw();
 	}
 
-	public static HashMap<BlueprintCraftingRecipe, BlueprintLines> blueprintCache = new HashMap<BlueprintCraftingRecipe, BlueprintLines>();
+	public static HashMap<BlueprintCraftingRecipe, BlueprintLines> blueprintCache = new HashMap<>();
 	public static BlueprintLines getBlueprintDrawable(BlueprintCraftingRecipe recipe, World world)
 	{
 		if(recipe==null)
@@ -344,7 +344,7 @@ public class TileRenderAutoWorkbench extends TileEntitySpecialRenderer<TileEntit
 		try
 		{
 			IBakedModel ibakedmodel = ClientUtils.mc().getRenderItem().getItemModelWithOverrides(stack, world, player);
-			HashSet<String> textures = new HashSet();
+			HashSet<String> textures = new HashSet<>();
 			Collection<BakedQuad> quads = ibakedmodel.getQuads(null, null, 0);
 			for(BakedQuad quad : quads)
 				if(quad != null && quad.getSprite() != null)
@@ -363,8 +363,8 @@ public class TileRenderAutoWorkbench extends TileEntitySpecialRenderer<TileEntit
 		}
 		if(images.isEmpty())
 			return null;
-		ArrayList<Pair<TexturePoint, TexturePoint>> lines = new ArrayList();
-		HashSet testSet = new HashSet();
+		ArrayList<Pair<TexturePoint, TexturePoint>> lines = new ArrayList<>();
+		HashSet<TexturePoint> testSet = new HashSet<>();
 		HashMultimap<Integer, TexturePoint> area = HashMultimap.create();
 		int wMax = 0;
 		for(BufferedImage bufferedImage : images)
@@ -424,9 +424,9 @@ public class TileRenderAutoWorkbench extends TileEntitySpecialRenderer<TileEntit
 							int u = ww + xx;
 							int v = hh + yy;
 
-							int neighbour = 0;
+							int neighbour;
 							float delta = 1;
-							boolean notTransparent = false;
+							boolean notTransparent;
 							if(u >= 0 && u < w && v >= 0 && v < h)
 							{
 								neighbour = bufferedImage.getRGB(u, v);
@@ -454,7 +454,7 @@ public class TileRenderAutoWorkbench extends TileEntitySpecialRenderer<TileEntit
 		}
 
 		ArrayList<Integer> lumiSort = new ArrayList<>(area.keySet());
-		Collections.sort(lumiSort, (rgb1, rgb2) -> Double.compare(getLuminance(rgb1),getLuminance(rgb2)));
+		lumiSort.sort(Comparator.comparingDouble(TileRenderAutoWorkbench::getLuminance));
 		HashMultimap<ShadeStyle, Point> complete_areaMap = HashMultimap.create();
 		int lineNumber = 2;
 		int lineStyle = 0;
@@ -521,8 +521,8 @@ public class TileRenderAutoWorkbench extends TileEntitySpecialRenderer<TileEntit
 	}
 	private static class ShadeStyle
 	{
-		int stripeAmount = 1;
-		int stripeDirection = 0;
+		int stripeAmount;
+		int stripeDirection;
 
 		ShadeStyle(int stripeAmount, int stripeDirection)
 		{

@@ -21,6 +21,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -95,8 +96,7 @@ public class ItemToolUpgrade extends ItemIEBase implements IUpgrade {
 		if(stack.getItemDamage()<getSubNames().length)
 		{
 			String[] flavour = ImmersiveEngineering.proxy.splitStringOnWidth(I18n.format(Lib.DESC_FLAVOUR+"toolupgrade."+this.getSubNames()[stack.getItemDamage()]), 200);
-			for(String s : flavour)
-				list.add(s);
+			Collections.addAll(list, flavour);
 		}
 	}
 	@Override

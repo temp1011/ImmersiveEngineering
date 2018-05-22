@@ -53,10 +53,10 @@ public class ItemBlockClothDevice extends ItemBlockIEBase
 					if(itemStackIn.getCount() <= 0)
 						playerIn.setHeldItem(hand, ItemStack.EMPTY);
 				}
-				return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
+				return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 			}
 		}
-		return new ActionResult(EnumActionResult.PASS, itemStackIn);
+		return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 	}
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)

@@ -43,7 +43,7 @@ public class ExternalHeaterHandler
 		int doHeatTick(int energyAvailable, boolean redstone);
 	}
 
-	public static HashMap<Class<? extends TileEntity>, HeatableAdapter> adapterMap = new HashMap<Class<? extends TileEntity>, HeatableAdapter>();
+	public static HashMap<Class<? extends TileEntity>, HeatableAdapter> adapterMap = new HashMap<>();
 	/**
 	 * @author BluSunrize - 09.12.2015
 	 * 

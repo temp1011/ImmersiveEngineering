@@ -92,8 +92,8 @@ public class MetalPressRecipe extends MultiblockRecipe
 	}
 	public static List<MetalPressRecipe> removeRecipes(ItemStack output)
 	{
-		List<MetalPressRecipe> list = new ArrayList();
-		Set<ComparableItemStack> keySet = new HashSet<ComparableItemStack>(recipeList.keySet());
+		List<MetalPressRecipe> list = new ArrayList<>();
+		Set<ComparableItemStack> keySet = new HashSet<>(recipeList.keySet());
 		for(ComparableItemStack mold : keySet)
 		{
 			Iterator<MetalPressRecipe> it = recipeList.get(mold).iterator();

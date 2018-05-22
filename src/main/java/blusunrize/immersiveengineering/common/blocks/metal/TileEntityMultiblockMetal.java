@@ -134,9 +134,9 @@ public abstract class TileEntityMultiblockMetal<T extends TileEntityMultiblockMe
 		IMultiblockRecipe recipe = readRecipeFromNBT(tag);
 		if(recipe!=null)
 			if(isInWorldProcessingMachine())
-				return new MultiblockProcessInWorld(recipe, tag.getFloat("process_transformationPoint"), Utils.loadItemStacksFromNBT(tag.getTag("process_inputItem")));
+				return new MultiblockProcessInWorld<>(recipe, tag.getFloat("process_transformationPoint"), Utils.loadItemStacksFromNBT(tag.getTag("process_inputItem")));
 			else
-				return new MultiblockProcessInMachine(recipe, tag.getIntArray("process_inputSlots")).setInputTanks(tag.getIntArray("process_inputTanks"));
+				return new MultiblockProcessInMachine<>(recipe, tag.getIntArray("process_inputSlots")).setInputTanks(tag.getIntArray("process_inputTanks"));
 		return null;
 	}
 	protected NBTTagCompound writeProcessToNBT(MultiblockProcess process)
@@ -301,7 +301,7 @@ public abstract class TileEntityMultiblockMetal<T extends TileEntityMultiblockMe
 	//	=================================
 	//		PROCESS MANAGEMENT
 	//	=================================
-	public List<MultiblockProcess<R>> processQueue = new ArrayList<MultiblockProcess<R>>();
+	public List<MultiblockProcess<R>> processQueue = new ArrayList<>();
 	public int tickedProcesses = 0;
 	@Override
 	public void update()
@@ -600,7 +600,7 @@ public abstract class TileEntityMultiblockMetal<T extends TileEntityMultiblockMe
 
 	public static class MultiblockProcessInMachine<R extends IMultiblockRecipe> extends MultiblockProcess<R>
 	{
-		protected int[] inputSlots = new int[0];
+		protected int[] inputSlots;
 		protected int[] inputTanks = new int[0];
 		public MultiblockProcessInMachine(R recipe, int... inputSlots)
 		{
@@ -670,7 +670,7 @@ public abstract class TileEntityMultiblockMetal<T extends TileEntityMultiblockMe
 			List<IngredientStack> itemInputList = this.getRecipeItemInputs(multiblock);
 			if(inv != null && this.inputSlots != null && itemInputList != null)
 			{
-				Iterator<IngredientStack> iterator = new ArrayList(itemInputList).iterator();
+				Iterator<IngredientStack> iterator = new ArrayList<>(itemInputList).iterator();
 				while(iterator.hasNext())
 				{
 					IngredientStack ingr = iterator.next();
@@ -691,7 +691,7 @@ public abstract class TileEntityMultiblockMetal<T extends TileEntityMultiblockMe
 			List<FluidStack> fluidInputList = this.getRecipeFluidInputs(multiblock);
 			if(tanks != null && this.inputTanks != null && fluidInputList != null)
 			{
-				Iterator<FluidStack> iterator = new ArrayList(fluidInputList).iterator();
+				Iterator<FluidStack> iterator = new ArrayList<>(fluidInputList).iterator();
 				while(iterator.hasNext())
 				{
 					FluidStack ingr = iterator.next();
@@ -734,8 +734,7 @@ public abstract class TileEntityMultiblockMetal<T extends TileEntityMultiblockMe
 		{
 			super(recipe);
 			this.inputItems = new ArrayList<>(inputItem.size());
-			for(ItemStack s : inputItem)
-				this.inputItems.add(s);
+			this.inputItems.addAll(inputItem);
 			this.transformationPoint = transformationPoint;
 		}
 
@@ -821,7 +820,7 @@ public abstract class TileEntityMultiblockMetal<T extends TileEntityMultiblockMe
 			if(recipe==null)
 				return stack;
 			ItemStack displayStack = recipe.getDisplayStack(stack);
-			if(multiblock.addProcessToQueue(new MultiblockProcessInWorld(recipe, transformationPoint, Utils.createNonNullItemStackListFromItemStack(displayStack)), simulate, doProcessStacking))
+			if(multiblock.addProcessToQueue(new MultiblockProcessInWorld<>(recipe, transformationPoint, Utils.createNonNullItemStackListFromItemStack(displayStack)), simulate, doProcessStacking))
 			{
 				multiblock.markDirty();
 				multiblock.markContainingBlockForUpdate(null);

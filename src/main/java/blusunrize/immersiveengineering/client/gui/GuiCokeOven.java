@@ -30,7 +30,7 @@ public class GuiCokeOven extends GuiIEContainerBase
 	public void drawScreen(int mx, int my, float partial)
 	{
 		super.drawScreen(mx, my, partial);
-		ArrayList<String> tooltip = new ArrayList<String>();
+		ArrayList<String> tooltip = new ArrayList<>();
 		ClientUtils.handleGuiTank(tile.tank, guiLeft+129,guiTop+20, 16,47, 176,31,20,51, mx,my, "immersiveengineering:textures/gui/coke_oven.png", tooltip);
 		if(!tooltip.isEmpty())
 		{

@@ -33,7 +33,7 @@ public class GuiToolboxBlock extends GuiIEContainerBase
 	public void drawScreen(int mx, int my, float partial)
 	{
 		super.drawScreen(mx, my, partial);
-		ArrayList<String> tooltip = new ArrayList<String>();
+		ArrayList<String> tooltip = new ArrayList<>();
 		int slot = -1;
 		for(int i=0; i<((ContainerToolboxBlock)this.inventorySlots).slotCount; i++)
 		{

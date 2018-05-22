@@ -259,54 +259,12 @@ public class ClientProxy extends CommonProxy
 				.setTransformations(TransformType.GROUND, new Matrix4().translate(.125, .125, .125).scale(.25, .25, .25)));
 
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityRevolvershot.class, new IRenderFactory<EntityRevolvershot>()
-		{
-			@Override
-			public Render createRenderFor(RenderManager manager)
-			{
-				return new EntityRenderRevolvershot(manager);
-			}
-		});
-		RenderingRegistry.registerEntityRenderingHandler(EntitySkylineHook.class, new IRenderFactory<EntitySkylineHook>()
-		{
-			@Override
-			public Render createRenderFor(RenderManager manager)
-			{
-				return new EntityRenderNone(manager);
-			}
-		});
-		RenderingRegistry.registerEntityRenderingHandler(EntityChemthrowerShot.class, new IRenderFactory<EntityChemthrowerShot>()
-		{
-			@Override
-			public Render createRenderFor(RenderManager manager)
-			{
-				return new EntityRenderChemthrowerShot(manager);
-			}
-		});
-		RenderingRegistry.registerEntityRenderingHandler(EntityRailgunShot.class, new IRenderFactory<EntityRailgunShot>()
-		{
-			@Override
-			public Render createRenderFor(RenderManager manager)
-			{
-				return new EntityRenderRailgunShot(manager);
-			}
-		});
-		RenderingRegistry.registerEntityRenderingHandler(EntityIEExplosive.class, new IRenderFactory<EntityIEExplosive>()
-		{
-			@Override
-			public Render createRenderFor(RenderManager manager)
-			{
-				return new EntityRenderIEExplosive(manager);
-			}
-		});
-		RenderingRegistry.registerEntityRenderingHandler(EntityFluorescentTube.class, new IRenderFactory<EntityFluorescentTube>()
-		{
-			@Override
-			public Render createRenderFor(RenderManager manager)
-			{
-				return new EntityRenderFluorescentTube(manager);
-			}
-		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityRevolvershot.class, manager -> new EntityRenderRevolvershot(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkylineHook.class, manager -> new EntityRenderNone(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityChemthrowerShot.class, manager -> new EntityRenderChemthrowerShot(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRailgunShot.class, manager -> new EntityRenderRailgunShot(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityIEExplosive.class, manager -> new EntityRenderIEExplosive(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFluorescentTube.class, manager -> new EntityRenderFluorescentTube(manager));
 		ModelLoaderRegistry.registerLoader(new ConnLoader());
 		ModelLoaderRegistry.registerLoader(new FeedthroughLoader());
 		ModelLoaderRegistry.registerLoader(new ModelConfigurableSides.Loader());
@@ -328,14 +286,7 @@ public class ClientProxy extends CommonProxy
 				IIEMetaBlock ieMetaBlock = (IIEMetaBlock)block;
 				if(ieMetaBlock.useCustomStateMapper())
 					ModelLoader.setCustomStateMapper(block, IECustomStateMapper.getStateMapper(ieMetaBlock));
-				ModelLoader.setCustomMeshDefinition(blockItem, new ItemMeshDefinition()
-				{
-					@Override
-					public ModelResourceLocation getModelLocation(ItemStack stack)
-					{
-						return new ModelResourceLocation(loc, "inventory");
-					}
-				});
+				ModelLoader.setCustomMeshDefinition(blockItem, stack -> new ModelResourceLocation(loc, "inventory"));
 				for(int meta = 0; meta < ieMetaBlock.getMetaEnums().length; meta++)
 				{
 					String location = loc.toString();
@@ -381,28 +332,14 @@ public class ClientProxy extends CommonProxy
 				{
 					final ResourceLocation loc = new ResourceLocation("immersiveengineering", ieMetaItem.itemName);
 					ModelBakery.registerItemVariants(ieMetaItem, loc);
-					ModelLoader.setCustomMeshDefinition(ieMetaItem, new ItemMeshDefinition()
-					{
-						@Override
-						public ModelResourceLocation getModelLocation(ItemStack stack)
-						{
-							return new ModelResourceLocation(loc, "inventory");
-						}
-					});
+					ModelLoader.setCustomMeshDefinition(ieMetaItem, stack -> new ModelResourceLocation(loc, "inventory"));
 				}
 			}
 			else
 			{
 				final ResourceLocation loc = Item.REGISTRY.getNameForObject(item);
 				ModelBakery.registerItemVariants(item, loc);
-				ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition()
-				{
-					@Override
-					public ModelResourceLocation getModelLocation(ItemStack stack)
-					{
-						return new ModelResourceLocation(loc, "inventory");
-					}
-				});
+				ModelLoader.setCustomMeshDefinition(item, stack -> new ModelResourceLocation(loc, "inventory"));
 			}
 		}
 	}
@@ -640,7 +577,7 @@ public class ClientProxy extends CommonProxy
 		ManualHelper.addEntry("graphite", ManualHelper.CAT_GENERAL, new ManualPages.ItemDisplay(ManualHelper.getManual(), "graphite0", new ItemStack(IEContent.itemMaterial, 1, 18), new ItemStack(IEContent.itemMaterial, 1, 19)), new ManualPageBlueprint(ManualHelper.getManual(), "graphite1", new ItemStack(IEContent.itemGraphiteElectrode)));
 		ManualHelper.addEntry("shader", ManualHelper.CAT_GENERAL, new ManualPages.Text(ManualHelper.getManual(), "shader0"), new ManualPages.Text(ManualHelper.getManual(), "shader1"), new ManualPages.ItemDisplay(ManualHelper.getManual(), "shader2"), new ManualPages.Text(ManualHelper.getManual(), "shader2"));
 		ShaderRegistry.manualEntry = ManualHelper.getManual().getEntry("shader");
-		pages = new ArrayList<IManualPage>();
+		pages = new ArrayList<>();
 		for(ShaderRegistry.ShaderRegistryEntry entry : ShaderRegistry.shaderRegistry.values())
 			pages.add(new ManualPageShader(ManualHelper.getManual(), entry));
 		ManualHelper.addEntry("shaderList", ManualHelper.CAT_GENERAL, pages.toArray(new IManualPage[pages.size()]));
@@ -807,7 +744,7 @@ public class ClientProxy extends CommonProxy
 				new ManualPages.Crafting(ManualHelper.getManual(), "revolver2", new ItemStack(IEContent.itemToolUpgrades, 1, ToolUpgrades.REVOLVER_BAYONET.ordinal())),
 				new ManualPages.Crafting(ManualHelper.getManual(), "revolver3", new ItemStack(IEContent.itemToolUpgrades, 1, ToolUpgrades.REVOLVER_MAGAZINE.ordinal())),
 				new ManualPages.Crafting(ManualHelper.getManual(), "revolver4", new ItemStack(IEContent.itemToolUpgrades, 1, ToolUpgrades.REVOLVER_ELECTRO.ordinal())));
-		pages = new ArrayList<IManualPage>();
+		pages = new ArrayList<>();
 		pages.add(new ManualPages.Crafting(ManualHelper.getManual(), "bullets0", BlueprintCraftingRecipe.getTypedBlueprint("bullet")));
 		pages.add(new ManualPages.CraftingMulti(ManualHelper.getManual(), "bullets1", new ItemStack(IEContent.itemBullet, 1, 0), new ItemStack(IEContent.itemBullet, 1, 1), new ItemStack(IEContent.itemMold, 1, 3)));
 		for(String key : BulletHandler.registry.keySet())
@@ -852,7 +789,7 @@ public class ClientProxy extends CommonProxy
 				new ManualPages.Text(ManualHelper.getManual(), "fluidSorter1"));
 		ManualHelper.addEntry("turntable", ManualHelper.CAT_MACHINES,
 				new ManualPages.Crafting(ManualHelper.getManual(), "turntable0", new ItemStack(IEContent.blockWoodenDevice0, 1, BlockTypes_WoodenDevice0.TURNTABLE.getMeta())));
-		pages = new ArrayList<IManualPage>();
+		pages = new ArrayList<>();
 		pages.add(new ManualPages.Crafting(ManualHelper.getManual(), "fluidPipes0", new ItemStack(IEContent.blockMetalDevice1, 1, BlockTypes_MetalDevice1.FLUID_PIPE.getMeta())));
 		pages.add(new ManualPages.Text(ManualHelper.getManual(), "fluidPipes1"));
 		pages.add(new ManualPages.Crafting(ManualHelper.getManual(), "fluidPipes2", new ItemStack(IEContent.blockMetalDevice0, 1, BlockTypes_MetalDevice0.FLUID_PUMP.getMeta())));
@@ -975,33 +912,28 @@ public class ClientProxy extends CommonProxy
 	{
 		if(ManualHelper.getManual()!=null)
 		{
-			ArrayList<IManualPage> pages = new ArrayList();
+			ArrayList<IManualPage> pages = new ArrayList<>();
 			pages.add(new ManualPages.Text(ManualHelper.getManual(), "minerals0"));
 			pages.add(new ManualPages.Crafting(ManualHelper.getManual(), "minerals1", new ItemStack(IEContent.blockMetalDevice1, 1, BlockTypes_MetalDevice1.SAMPLE_DRILL.getMeta())));
 			pages.add(new ManualPages.Text(ManualHelper.getManual(), "minerals2"));
 
 			final ExcavatorHandler.MineralMix[] minerals = ExcavatorHandler.mineralList.keySet().toArray(new ExcavatorHandler.MineralMix[0]);
 
-			ArrayList<Integer> mineralIndices = new ArrayList();
+			ArrayList<Integer> mineralIndices = new ArrayList<>();
 			for(int i = 0; i < minerals.length; i++)
 				if(minerals[i].isValid())
 					mineralIndices.add(i);
-			Collections.sort(mineralIndices, new Comparator<Integer>()
-			{
-				@Override
-				public int compare(Integer paramT1, Integer paramT2)
-				{
-					String name1 = Lib.DESC_INFO+"mineral."+minerals[paramT1].name;
-					String localizedName1 = I18n.format(name1);
-					if(localizedName1==name1)
-						localizedName1 = minerals[paramT1].name;
+			mineralIndices.sort((paramT1, paramT2) -> {
+				String name1 = Lib.DESC_INFO + "mineral." + minerals[paramT1].name;
+				String localizedName1 = I18n.format(name1);
+				if (localizedName1.equals(name1))
+					localizedName1 = minerals[paramT1].name;
 
-					String name2 = Lib.DESC_INFO+"mineral."+minerals[paramT2].name;
-					String localizedName2 = I18n.format(name2);
-					if(localizedName2==name2)
-						localizedName2 = minerals[paramT2].name;
-					return localizedName1.compareToIgnoreCase(localizedName2);
-				}
+				String name2 = Lib.DESC_INFO + "mineral." + minerals[paramT2].name;
+				String localizedName2 = I18n.format(name2);
+				if (localizedName2.equals(name2))
+					localizedName2 = minerals[paramT2].name;
+				return localizedName1.compareToIgnoreCase(localizedName2);
 			});
 			for(int i : mineralIndices)
 			{
@@ -1010,47 +942,40 @@ public class ClientProxy extends CommonProxy
 				if(localizedName.equalsIgnoreCase(name))
 					localizedName = minerals[i].name;
 
-				String s0 = "";
+				String s0;
 				if(minerals[i].dimensionWhitelist!=null&&minerals[i].dimensionWhitelist.length > 0)
 				{
-					String validDims = "";
+					StringBuilder validDims = new StringBuilder();
 					for(int dim : minerals[i].dimensionWhitelist)
-						validDims += (!validDims.isEmpty()?", ": "")+"<dim;"+dim+">";
-					s0 = I18n.format("ie.manual.entry.mineralsDimValid", localizedName, validDims);
+						validDims.append((validDims.length() > 0) ? ", " : "").append("<dim;").append(dim).append(">");
+					s0 = I18n.format("ie.manual.entry.mineralsDimValid", localizedName, validDims.toString());
 				}
 				else if(minerals[i].dimensionBlacklist!=null&&minerals[i].dimensionBlacklist.length > 0)
 				{
-					String invalidDims = "";
+					StringBuilder invalidDims = new StringBuilder();
 					for(int dim : minerals[i].dimensionBlacklist)
-						invalidDims += (!invalidDims.isEmpty()?", ": "")+"<dim;"+dim+">";
-					s0 = I18n.format("ie.manual.entry.mineralsDimInvalid", localizedName, invalidDims);
+						invalidDims.append((invalidDims.length() > 0) ? ", " : "").append("<dim;").append(dim).append(">");
+					s0 = I18n.format("ie.manual.entry.mineralsDimInvalid", localizedName, invalidDims.toString());
 				}
 				else
 					s0 = I18n.format("ie.manual.entry.mineralsDimAny", localizedName);
 
-				ArrayList<Integer> formattedOutputs = new ArrayList<Integer>();
+				ArrayList<Integer> formattedOutputs = new ArrayList<>();
 				for(int j = 0; j < minerals[i].oreOutput.size(); j++)
 					formattedOutputs.add(j);
 				final int fi = i;
-				Collections.sort(formattedOutputs, new Comparator<Integer>()
-				{
-					@Override
-					public int compare(Integer paramT1, Integer paramT2)
-					{
-						return -Double.compare(minerals[fi].recalculatedChances[paramT1], minerals[fi].recalculatedChances[paramT2]);
-					}
-				});
+				formattedOutputs.sort((paramT1, paramT2) -> -Double.compare(minerals[fi].recalculatedChances[paramT1], minerals[fi].recalculatedChances[paramT2]));
 
-				String s1 = "";
+				StringBuilder s1 = new StringBuilder();
 				NonNullList<ItemStack> sortedOres = NonNullList.withSize(minerals[i].oreOutput.size(), ItemStack.EMPTY);
 				for(int j = 0; j < formattedOutputs.size(); j++)
 					if(!minerals[i].oreOutput.get(j).isEmpty())
 					{
 						int sorted = formattedOutputs.get(j);
-						s1 += "<br>"+new DecimalFormat("00.00").format(minerals[i].recalculatedChances[sorted]*100).replaceAll("\\G0", " ")+"% "+minerals[i].oreOutput.get(sorted).getDisplayName();
+						s1.append("<br>").append(new DecimalFormat("00.00").format(minerals[i].recalculatedChances[sorted] * 100).replaceAll("\\G0", " ")).append("% ").append(minerals[i].oreOutput.get(sorted).getDisplayName());
 						sortedOres.set(j, minerals[i].oreOutput.get(sorted));
 					}
-				String s2 = I18n.format("ie.manual.entry.minerals3", s0, s1);
+				String s2 = I18n.format("ie.manual.entry.minerals3", s0, s1.toString());
 				pages.add(new ManualPages.ItemDisplay(ManualHelper.getManual(), s2, sortedOres));
 			}
 
@@ -1077,7 +1002,7 @@ public class ClientProxy extends CommonProxy
 			if(minerals[i].isValid())
 			{
 				String name = Lib.DESC_INFO+"mineral."+minerals[i].name;
-				if(I18n.format(name)==name)
+				if(I18n.format(name).equals(name))
 					name = minerals[i].name;
 				multiTables[curTable][i][0] = name;
 				multiTables[curTable][i][1] = "";
@@ -1110,8 +1035,8 @@ public class ClientProxy extends CommonProxy
 			Scanner s = new Scanner(url.openStream());
 			//sorted map to keep the chronological order
 			Map<String, String> entries = new LinkedHashMap<>();
-			String readVersion = null;
-			String readLog = "";
+			StringBuilder readVersion = null;
+			StringBuilder readLog = new StringBuilder();
 			String currVersion = ImmersiveEngineering.VERSION;
 			boolean readVersionBuilt = false;
 			while(s.hasNextLine())
@@ -1120,21 +1045,21 @@ public class ClientProxy extends CommonProxy
 				if(line.startsWith("#####"))
 				{
 					//add read log to map
-					addToMap(readVersion, currVersion, readLog, readVersionBuilt, entries);
+					addToMap(readVersion.toString(), currVersion, readLog.toString(), readVersionBuilt, entries);
 					//parse new version
-					readVersion = "";
-					readLog = "";
+					readVersion = new StringBuilder();
+					readLog = new StringBuilder();
 					for(int i = line.indexOf(' ')+1; i < line.length()&&line.charAt(i)!=' '; i++)
-						readVersion += line.charAt(i);
+						readVersion.append(line.charAt(i));
 					readVersionBuilt = line.endsWith("BUILT");
 				}
 				else
 				{
-					readLog += line+"\n";
+					readLog.append(line).append("\n");
 				}
 			}
 			s.close();
-			addToMap(readVersion, currVersion, readLog, readVersionBuilt, entries);
+			addToMap(readVersion.toString(), currVersion, readLog.toString(), readVersionBuilt, entries);
 			//add to manual
 			for(Entry<String, String> e : entries.entrySet())
 			{
@@ -1144,10 +1069,10 @@ public class ClientProxy extends CommonProxy
 				ManualPages.Text[] pages = new ManualPages.Text[pageCount];
 				for(int i = 0; i < pageCount; i++)
 				{
-					String nextPage = "";
+					StringBuilder nextPage = new StringBuilder();
 					for(int j = LINES_PER_PAGE*i; j < l.size()&&j < (i+1)*LINES_PER_PAGE; j++)
-						nextPage += l.get(j)+"\n";
-					pages[i] = new ManualPages.Text(ManualHelper.getManual(), nextPage);
+						nextPage.append(l.get(j)).append("\n");
+					pages[i] = new ManualPages.Text(ManualHelper.getManual(), nextPage.toString());
 				}
 				ManualHelper.addEntry(e.getKey(), ManualHelper.CAT_UPDATE, pages);
 			}
@@ -1277,10 +1202,6 @@ public class ClientProxy extends CommonProxy
 				if(!held.isEmpty()&&held.getItem() instanceof IGuiItem&&((IGuiItem)held.getItem()).getGuiID(held)==ID)
 					item = held;
 			}
-			if(!item.isEmpty())
-			{
-
-			}
 		}
 		else
 		{
@@ -1354,8 +1275,8 @@ public class ClientProxy extends CommonProxy
 	}
 
 
-	HashMap<String, IETileSound> soundMap = new HashMap<String, IETileSound>();
-	HashMap<BlockPos, IETileSound> tileSoundMap = new HashMap<BlockPos, IETileSound>();
+	HashMap<String, IETileSound> soundMap = new HashMap<>();
+	HashMap<BlockPos, IETileSound> tileSoundMap = new HashMap<>();
 
 	@Override
 	public void handleTileSound(SoundEvent soundEvent, TileEntity tile, boolean tileActive, float volume, float pitch)
@@ -1417,7 +1338,6 @@ public class ClientProxy extends CommonProxy
 		if(sound!=null&&new BlockPos(sound.getXPosF(), sound.getYPosF(), sound.getZPosF()).equals(tile.getPos()))
 		{
 			ClientUtils.mc().getSoundHandler().stopSound(sound);
-			sound = null;
 		}
 	}
 
@@ -1619,23 +1539,21 @@ public class ClientProxy extends CommonProxy
 	static String[][] formatToTable_ItemIntHashmap(Map<String, Integer> map, String valueType)
 	{
 		Entry<String, Integer>[] sortedMapArray = map.entrySet().toArray(new Entry[0]);
-		ArrayList<String[]> list = new ArrayList();
+		ArrayList<String[]> list = new ArrayList<>();
 		try
 		{
-			for(int i = 0; i < sortedMapArray.length; i++)
-			{
-				String item = sortedMapArray[i].getKey();
-				if(ApiUtils.isExistingOreName(sortedMapArray[i].getKey()))
-				{
-					ItemStack is = OreDictionary.getOres(sortedMapArray[i].getKey()).get(0);
-					if(!is.isEmpty())
+			for (Entry<String, Integer> aSortedMapArray : sortedMapArray) {
+				String item = aSortedMapArray.getKey();
+				if (ApiUtils.isExistingOreName(aSortedMapArray.getKey())) {
+					ItemStack is = OreDictionary.getOres(aSortedMapArray.getKey()).get(0);
+					if (!is.isEmpty()) {
 						item = is.getDisplayName();
+					}
 				}
 
-				if(item!=null)
-				{
-					int bt = sortedMapArray[i].getValue();
-					String am = bt+" "+valueType;
+				if (item != null) {
+					int bt = aSortedMapArray.getValue();
+					String am = bt + " " + valueType;
 					list.add(new String[]{item, am});
 				}
 			}

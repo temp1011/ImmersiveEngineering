@@ -31,7 +31,7 @@ import java.util.ArrayList;
  */
 public class MultiblockHandler
 {
-	static ArrayList<IMultiblock> multiblocks = new ArrayList<IMultiblock>();
+	static ArrayList<IMultiblock> multiblocks = new ArrayList<>();
 
 	public static void registerMultiblock(IMultiblock multiblock)
 	{

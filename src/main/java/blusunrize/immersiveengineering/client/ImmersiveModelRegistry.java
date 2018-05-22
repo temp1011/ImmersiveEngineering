@@ -47,7 +47,7 @@ public class ImmersiveModelRegistry
 {
 	public static ImmersiveModelRegistry instance = new ImmersiveModelRegistry();
 	private static final ImmutableMap<String, String> flipData = ImmutableMap.of("flip-v", String.valueOf(true));
-	private HashMap<ModelResourceLocation, ItemModelReplacement> itemModelReplacements = new HashMap<ModelResourceLocation, ItemModelReplacement>();
+	private HashMap<ModelResourceLocation, ItemModelReplacement> itemModelReplacements = new HashMap<>();
 
 	@SubscribeEvent
 	public void onModelBakeEvent(ModelBakeEvent event)
@@ -101,7 +101,7 @@ public class ImmersiveModelRegistry
 	public static class ItemModelReplacement_OBJ extends ItemModelReplacement
 	{
 		String objPath;
-		HashMap<TransformType, Matrix4> transformationMap = new HashMap<TransformType, Matrix4>();
+		HashMap<TransformType, Matrix4> transformationMap = new HashMap<>();
 		boolean dynamic;
 
 		public ItemModelReplacement_OBJ(String path, boolean dynamic)
@@ -123,14 +123,7 @@ public class ImmersiveModelRegistry
 		{
 			try
 			{
-				Function<ResourceLocation, TextureAtlasSprite> textureGetter = new Function<ResourceLocation, TextureAtlasSprite>()
-				{
-					@Override
-					public TextureAtlasSprite apply(ResourceLocation location)
-					{
-						return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
-					}
-				};
+				Function<ResourceLocation, TextureAtlasSprite> textureGetter = location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
 				ResourceLocation modelLocation = new ResourceLocation(objPath);
 				OBJModel objModel = (OBJModel) OBJLoader.INSTANCE.loadModel(modelLocation);
 				objModel = (OBJModel) objModel.process(flipData);

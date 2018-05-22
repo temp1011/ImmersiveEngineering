@@ -81,7 +81,7 @@ public class Blueprint
 		@Override
 		public void apply()
 		{
-			removedRecipes = new ArrayList();
+			removedRecipes = new ArrayList<>();
 			Iterator<String> itCat = BlueprintCraftingRecipe.blueprintCategories.iterator();
 			while(itCat.hasNext())
 			{

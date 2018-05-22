@@ -75,7 +75,7 @@ public abstract class MultiblockRecipe implements IMultiblockRecipe, IJEIRecipe
 		if(inputList!=null)
 		{
 			this.jeiItemInputList = new ArrayList[inputList.size()];
-			this.jeiTotalItemInputList = new ArrayList();
+			this.jeiTotalItemInputList = new ArrayList<>();
 			for(int i=0; i<inputList.size(); i++)
 			{
 				IngredientStack ingr = inputList.get(i);
@@ -111,10 +111,9 @@ public abstract class MultiblockRecipe implements IMultiblockRecipe, IJEIRecipe
 			this.jeiTotalItemOutputList = Collections.emptyList();
 		if(fluidInputList!=null)
 		{
-			this.jeiFluidInputList = new ArrayList();
-			for(int i=0; i<fluidInputList.size(); i++)
+			this.jeiFluidInputList = new ArrayList<>();
+			for(FluidStack fs : fluidInputList)
 			{
-				FluidStack fs = fluidInputList.get(i);
 				if(fs!=null)
 					this.jeiFluidInputList.add(fs.copy());
 			}
@@ -123,11 +122,10 @@ public abstract class MultiblockRecipe implements IMultiblockRecipe, IJEIRecipe
 			this.jeiFluidInputList = Collections.emptyList();
 		if(fluidOutputList!=null)
 		{
-			this.jeiFluidOutputList = new ArrayList();
-			for(int i=0; i<fluidOutputList.size(); i++)
+			this.jeiFluidOutputList = new ArrayList<>();
+			for (FluidStack fs : fluidOutputList)
 			{
-				FluidStack fs = fluidOutputList.get(i);
-				if(fs!=null)
+				if (fs != null)
 					this.jeiFluidOutputList.add(fs.copy());
 			}
 		}

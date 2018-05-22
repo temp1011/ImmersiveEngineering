@@ -49,7 +49,7 @@ public class GuiFluidSorter extends GuiIEContainerBase
 	public void drawScreen(int mx, int my, float partial)
 	{
 		super.drawScreen(mx, my, partial);
-		ArrayList<String> tooltip = new ArrayList<String>();
+		ArrayList<String> tooltip = new ArrayList<>();
 		for(GuiButton button : this.buttonList)
 		{
 			if(button instanceof ButtonSorter)

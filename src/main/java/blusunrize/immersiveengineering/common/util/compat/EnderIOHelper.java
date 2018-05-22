@@ -52,27 +52,17 @@ public class EnderIOHelper extends IECompatModule
 		ChemthrowerHandler.registerEffect("cloud_seed_concentrated", new ChemthrowerEffect_Potion(null, 0, MobEffects.BLINDNESS, 40, 0));
 		ChemthrowerHandler.registerEffect("vapor_of_levity", new ChemthrowerEffect_Potion(null, 0, MobEffects.LEVITATION, 80, 2));
 
-		ConveyorHandler.registerMagnetSupression(new BiConsumer<Entity, IConveyorTile>()
-		{
-			@Override
-			public void accept(Entity entity, IConveyorTile iConveyorTile)
+		ConveyorHandler.registerMagnetSupression((entity, iConveyorTile) -> {
+			if(entity instanceof EntityItem)
 			{
-				if(entity instanceof EntityItem)
-				{
-					NBTTagCompound data = entity.getEntityData();
-					long pos = ((TileEntity)iConveyorTile).getPos().toLong();
-					if(!data.hasKey(EIO_MAGNET_NBT)||data.getLong(EIO_MAGNET_NBT)!=pos)
-						data.setLong(EIO_MAGNET_NBT, pos);
-				}
+				NBTTagCompound data = entity.getEntityData();
+				long pos = ((TileEntity)iConveyorTile).getPos().toLong();
+				if(!data.hasKey(EIO_MAGNET_NBT)||data.getLong(EIO_MAGNET_NBT)!=pos)
+					data.setLong(EIO_MAGNET_NBT, pos);
 			}
-		}, new BiConsumer<Entity, IConveyorTile>()
-		{
-			@Override
-			public void accept(Entity entity, IConveyorTile iConveyorTile)
-			{
-				if(entity instanceof EntityItem)
-					entity.getEntityData().removeTag(EIO_MAGNET_NBT);
-			}
+		}, (entity, iConveyorTile) -> {
+			if(entity instanceof EntityItem)
+				entity.getEntityData().removeTag(EIO_MAGNET_NBT);
 		});
 	}
 

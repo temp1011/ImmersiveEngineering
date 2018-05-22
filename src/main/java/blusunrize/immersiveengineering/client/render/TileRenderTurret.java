@@ -63,7 +63,7 @@ public class TileRenderTurret extends TileEntitySpecialRenderer<TileEntityTurret
 		{
 			if(((TileEntityTurretGun)tile).cycleRender>0)
 			{
-				float cycle = 0;
+				float cycle;
 				if(((TileEntityTurretGun)tile).cycleRender>3)
 					cycle = (5-((TileEntityTurretGun)tile).cycleRender)/2f;
 				else

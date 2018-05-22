@@ -170,14 +170,7 @@ public class CapabilityShader
 				if(!tags.hasKey("IE:NoShader"))
 					instance.setShaderItem(new ItemStack(tags));
 			}
-		}, new Callable<ShaderWrapper>()
-		{
-			@Override
-			public ShaderWrapper call()
-			{
-				return new ShaderWrapper_Direct("");
-			}
-		});
+		}, () -> new ShaderWrapper_Direct(""));
 	}
 
 	public static IUnlistedProperty<ShaderWrapper> BLOCKSTATE_PROPERTY = new IUnlistedProperty<ShaderWrapper>()

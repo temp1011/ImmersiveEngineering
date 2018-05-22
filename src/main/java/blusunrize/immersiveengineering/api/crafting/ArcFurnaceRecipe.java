@@ -40,8 +40,8 @@ public class ArcFurnaceRecipe extends MultiblockRecipe
 	public final ItemStack slag;
 
 	public String specialRecipeType;
-	public static ArrayList<String> specialRecipeTypes = new ArrayList<String>();
-	public static ArrayList<ArcFurnaceRecipe> recipeList = new ArrayList<ArcFurnaceRecipe>();
+	public static ArrayList<String> specialRecipeTypes = new ArrayList<>();
+	public static ArrayList<ArcFurnaceRecipe> recipeList = new ArrayList<>();
 
 	public ArcFurnaceRecipe(ItemStack output, Object input, @Nonnull ItemStack slag, int time, int energyPerTick, Object... additives)
 	{
@@ -138,9 +138,8 @@ public class ArcFurnaceRecipe extends MultiblockRecipe
 	{
 		if(this.input!=null && this.input.matches(input))
 		{
-			ArrayList<ItemStack> qAdd = new ArrayList<ItemStack>(additives.size());
-			for(ItemStack s : additives)
-				qAdd.add(s);
+			ArrayList<ItemStack> qAdd = new ArrayList<>(additives.size());
+			qAdd.addAll(additives);
 
 			for(IngredientStack add : this.additives)
 				if(add!=null)
@@ -214,7 +213,7 @@ public class ArcFurnaceRecipe extends MultiblockRecipe
 	}
 	public static List<ArcFurnaceRecipe> removeRecipes(ItemStack stack)
 	{
-		List<ArcFurnaceRecipe> list = new ArrayList();
+		List<ArcFurnaceRecipe> list = new ArrayList<>();
 		Iterator<ArcFurnaceRecipe> it = recipeList.iterator();
 		while(it.hasNext())
 		{

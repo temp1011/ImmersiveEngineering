@@ -75,7 +75,7 @@ public class Squeezer
 	private static class RemoveFluid implements IAction
 	{
 		private final FluidStack output;
-		ArrayList<SqueezerRecipe> removedRecipes = new ArrayList<SqueezerRecipe>();
+		ArrayList<SqueezerRecipe> removedRecipes = new ArrayList<>();
 
 		public RemoveFluid(FluidStack output)
 		{
@@ -115,7 +115,7 @@ public class Squeezer
 	private static class RemoveStack implements IAction
 	{
 		private final ItemStack output;
-		ArrayList<SqueezerRecipe> removedRecipes = new ArrayList<SqueezerRecipe>();
+		ArrayList<SqueezerRecipe> removedRecipes = new ArrayList<>();
 
 		public RemoveStack(ItemStack output)
 		{
@@ -155,7 +155,7 @@ public class Squeezer
 	private static class RemoveByInput implements IAction
 	{
 		private final ItemStack input;
-		ArrayList<SqueezerRecipe> removedRecipes = new ArrayList<SqueezerRecipe>();
+		ArrayList<SqueezerRecipe> removedRecipes = new ArrayList<>();
 
 		public RemoveByInput(ItemStack input)
 		{

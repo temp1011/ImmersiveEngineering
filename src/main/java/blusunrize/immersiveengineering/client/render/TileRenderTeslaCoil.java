@@ -75,9 +75,9 @@ public class TileRenderTeslaCoil extends TileEntitySpecialRenderer<TileEntityTes
 		worldrenderer.begin(GL11.GL_LINE_STRIP, DefaultVertexFormats.POSITION);
 		List<Vec3d> subs = animation.subPoints;
 		worldrenderer.pos(animation.startPos.x-tileX,animation.startPos.y-tileY,animation.startPos.z-tileZ).endVertex();
-		
-		for(int i=0; i<subs.size(); i++)
-			worldrenderer.pos(subs.get(i).x-tileX,subs.get(i).y-tileY,subs.get(i).z-tileZ).endVertex();
+
+		for (Vec3d sub : subs)
+			worldrenderer.pos(sub.x - tileX, sub.y - tileY, sub.z - tileZ).endVertex();
 
 		Vec3d end = (animation.targetEntity!=null?animation.targetEntity.getPositionVector():animation.targetPos).addVector(-tileX,-tileY,-tileZ);
 		worldrenderer.pos(end.x,end.y,end.z).endVertex();

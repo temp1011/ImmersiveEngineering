@@ -54,8 +54,8 @@ public class MixerRecipeCategory extends IERecipeCategory<MixerRecipe, MixerReci
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 		for(int i=0; i<recipeWrapper.recipeInputs.length; i++)
 		{
-			int x = 0+(i%2)*18;
-			int y = 0+i/2*18;
+			int x = (i % 2) * 18;
+			int y = i / 2 * 18;
 			guiItemStacks.init(i, true, x,y);
 			guiItemStacks.set(i, recipeWrapper.recipeInputs[i]);
 		}

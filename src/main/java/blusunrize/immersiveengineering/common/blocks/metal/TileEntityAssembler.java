@@ -182,10 +182,9 @@ public class TileEntityAssembler extends TileEntityMultiblockMetal<TileEntityAss
 						{
 							AssemblerHandler.RecipeQuery recipeQuery = queries[i];
 							Optional<ItemStack> taken = Optional.absent();
-							for (int j = 0; j < outputBuffer.length; j++)
-								if (outputBuffer[j] != null)
-								{
-									taken = consumeItem(recipeQuery.query, recipeQuery.querySize, outputBuffer[j], outputList);
+							for (NonNullList<ItemStack> anOutputBuffer : outputBuffer)
+								if (anOutputBuffer != null) {
+									taken = consumeItem(recipeQuery.query, recipeQuery.querySize, anOutputBuffer, outputList);
 									if (taken.isPresent())
 										break;
 								}
@@ -220,12 +219,11 @@ public class TileEntityAssembler extends TileEntityMultiblockMetal<TileEntityAss
 						int free = -1;
 						if (iOutput == 0)//Main recipe output
 						{
-							if (this.inventory.get(18 + buffer).isEmpty() && free < 0)
+							if (this.inventory.get(18 + buffer).isEmpty())
 								free = 18 + buffer;
 							else if (!this.inventory.get(18 + buffer).isEmpty() && OreDictionary.itemMatches(output, this.inventory.get(18 + buffer), true) && this.inventory.get(18 + buffer).getCount() + output.getCount() <= this.inventory.get(18 + buffer).getMaxStackSize())
 							{
 								this.inventory.get(18 + buffer).grow(output.getCount());
-								free = -1;
 								continue;
 							}
 						} else
@@ -661,7 +659,7 @@ public class TileEntityAssembler extends TileEntityMultiblockMetal<TileEntityAss
 		}
 		public ArrayList<ItemStack> getTotalPossibleOutputs()
 		{
-			ArrayList<ItemStack> outputList = new ArrayList<ItemStack>();
+			ArrayList<ItemStack> outputList = new ArrayList<>();
 			outputList.add(inv.get(9).copy());
 			for(int i=0; i<9; i++)
 			{

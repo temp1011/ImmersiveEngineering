@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class MessageMineralListSync implements IMessage
 {
-	HashMap<MineralMix,Integer> map = new HashMap<MineralMix,Integer>();
+	HashMap<MineralMix,Integer> map = new HashMap<>();
 	public MessageMineralListSync(HashMap<MineralMix,Integer> map)
 	{
 		this.map = map;

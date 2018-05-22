@@ -32,7 +32,6 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -123,7 +122,7 @@ public class ApiUtils
 	}
 	public static boolean stacksMatchIngredientList(List<IngredientStack> list, NonNullList<ItemStack> stacks)
 	{
-		ArrayList<ItemStack> queryList = new ArrayList<ItemStack>(stacks.size());
+		ArrayList<ItemStack> queryList = new ArrayList<>(stacks.size());
 		for(ItemStack s : stacks)
 			if(!s.isEmpty())
 				queryList.add(s.copy());
@@ -202,28 +201,32 @@ public class ApiUtils
 	{
 		ItemStack comp = copyStackWithAmount(stack, 1);
 		for(String oreName : OreDictionary.getOreNames())//This is super ugly, but I don't want to force the latest forge ._.
-			for(int iType=0; iType<componentTypes.length; iType++)
-				if(oreName.startsWith(componentTypes[iType]))
-				{
+			for (String componentType : componentTypes) {
+				if (oreName.startsWith(componentType)) {
 					List<ItemStack> s = OreDictionary.getOres(oreName);
-					for(ItemStack st : s)
-						if(ItemStack.areItemStacksEqual(comp, st))
-							return componentTypes[iType];
+					for (ItemStack st : s) {
+						if (ItemStack.areItemStacksEqual(comp, st)) {
+							return componentType;
+						}
+					}
 				}
+			}
 		return null;
 	}
 	public static String[] getMetalComponentTypeAndMetal(ItemStack stack, String... componentTypes)
 	{
 		ItemStack comp = copyStackWithAmount(stack, 1);
 		for(String oreName : OreDictionary.getOreNames())//This is super ugly, but I don't want to force the latest forge ._.
-			for(int iType=0; iType<componentTypes.length; iType++)
-				if(oreName.startsWith(componentTypes[iType]))
-				{
+			for (String componentType : componentTypes) {
+				if (oreName.startsWith(componentType)) {
 					List<ItemStack> s = OreDictionary.getOres(oreName);
-					for(ItemStack st : s)
-						if(ItemStack.areItemStacksEqual(comp, st))
-							return new String[]{componentTypes[iType], oreName.substring(componentTypes[iType].length())};
+					for (ItemStack st : s) {
+						if (ItemStack.areItemStacksEqual(comp, st)) {
+							return new String[]{componentType, oreName.substring(componentType.length())};
+						}
+					}
 				}
+			}
 		return null;
 	}
 	public static boolean isIngot(ItemStack stack)
@@ -785,7 +788,7 @@ public class ApiUtils
 				return new IngredientStack(((List<ItemStack>) input));
 			else if(((List)input).get(0) instanceof String)
 			{
-				ArrayList<ItemStack> itemList = new ArrayList();
+				ArrayList<ItemStack> itemList = new ArrayList<>();
 				for(String s : ((List<String>) input))
 					itemList.addAll(OreDictionary.getOres(s));
 				return new IngredientStack(itemList);
@@ -794,7 +797,7 @@ public class ApiUtils
 			return new IngredientStack(Arrays.asList((ItemStack[]) input));
 		else if(input instanceof String[])
 		{
-			ArrayList<ItemStack> itemList = new ArrayList();
+			ArrayList<ItemStack> itemList = new ArrayList<>();
 			for(String s : ((String[]) input))
 				itemList.addAll(OreDictionary.getOres(s));
 			return new IngredientStack(itemList);
@@ -895,7 +898,7 @@ public class ApiUtils
 
 	public static Map<String, Integer> sortMap(Map<String, Integer> map, boolean inverse)
 	{
-		TreeMap<String,Integer> sortedMap = new TreeMap<String,Integer>(new ValueComparator(map, inverse));
+		TreeMap<String,Integer> sortedMap = new TreeMap<>(new ValueComparator(map, inverse));
 		sortedMap.putAll(map);
 		return sortedMap;
 	}

@@ -11,9 +11,6 @@ package blusunrize.immersiveengineering.client.fx;
 import blusunrize.immersiveengineering.common.util.Utils;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 

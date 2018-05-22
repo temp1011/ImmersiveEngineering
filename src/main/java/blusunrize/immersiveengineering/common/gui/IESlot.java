@@ -427,7 +427,7 @@ public abstract class IESlot extends Slot
 
 	public static class Belljar extends IESlot
 	{
-		int type = 0;
+		int type;
 		public Belljar(int type, Container container, IInventory inv, int id, int x, int y)
 		{
 			super(container, inv, id, x, y);

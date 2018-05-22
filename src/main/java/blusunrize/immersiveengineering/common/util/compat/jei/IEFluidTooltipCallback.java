@@ -25,7 +25,7 @@ public class IEFluidTooltipCallback implements ITooltipCallback<FluidStack>
 	{
 		if(ingredient!=null && ingredient.getFluid() instanceof IEFluid)
 		{
-			ArrayList<String> fluidInfo = new ArrayList<String>();
+			ArrayList<String> fluidInfo = new ArrayList<>();
 			((IEFluid)ingredient.getFluid()).addTooltipInfo(ingredient, null, fluidInfo);
 			if(tooltip.size()>1)
 				tooltip.addAll(1, fluidInfo);

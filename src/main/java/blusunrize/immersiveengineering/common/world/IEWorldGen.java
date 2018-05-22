@@ -64,9 +64,9 @@ public class IEWorldGen implements IWorldGenerator
 				}
 		}
 	}
-	public static ArrayList<OreGen> orespawnList = new ArrayList();
-	public static ArrayList<Integer> oreDimBlacklist = new ArrayList();
-	public static HashMap<String, Boolean> retrogenMap = new HashMap();
+	public static ArrayList<OreGen> orespawnList = new ArrayList<>();
+	public static ArrayList<Integer> oreDimBlacklist = new ArrayList<>();
+	public static HashMap<String, Boolean> retrogenMap = new HashMap<>();
 	public static OreGen addOreGen(String name, IBlockState state, int maxVeinSize, int minY, int maxY,int chunkOccurence,int weight)
 	{
 		OreGen gen = new OreGen(name, state, maxVeinSize, Blocks.STONE, minY, maxY, chunkOccurence, weight);

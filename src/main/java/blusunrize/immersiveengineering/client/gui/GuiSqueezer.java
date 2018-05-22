@@ -30,7 +30,7 @@ public class GuiSqueezer extends GuiIEContainerBase
 	public void drawScreen(int mx, int my, float partial)
 	{
 		super.drawScreen(mx, my, partial);
-		ArrayList<String> tooltip = new ArrayList<String>();
+		ArrayList<String> tooltip = new ArrayList<>();
 		ClientUtils.handleGuiTank(tile.tanks[0], guiLeft+112,guiTop+21, 16,47, 177,31,20,51, mx,my, "immersiveengineering:textures/gui/cokeOven.png", tooltip);
 		if(mx>guiLeft+158&&mx<guiLeft+165 && my>guiTop+22&&my<guiTop+68)
 			tooltip.add(tile.getEnergyStored(null)+"/"+tile.getMaxEnergyStored(null)+" RF");

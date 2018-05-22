@@ -47,7 +47,7 @@ public class TileEntityStripCurtain extends TileEntityIEBase implements ITickabl
 	{
 		if(!world.isRemote &&world.getTotalWorldTime()%4==((getPos().getX()^getPos().getZ())&3))
 		{
-			List<Entity> entities = null;
+			List<Entity> entities;
 			AxisAlignedBB aabb = bounds[ceilingAttached?(facing.getAxis()== Axis.Z?4:5):((facing.ordinal()-2)%4)];
 			aabb = new AxisAlignedBB(aabb.minX,aabb.minY-.8125,aabb.minZ, aabb.maxX,aabb.maxY,aabb.maxZ).offset(getPos());
 			entities = world.getEntitiesWithinAABB(Entity.class, aabb);

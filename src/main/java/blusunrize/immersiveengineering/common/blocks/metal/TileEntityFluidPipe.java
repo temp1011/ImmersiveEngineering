@@ -60,9 +60,9 @@ import static java.util.Collections.newSetFromMap;
 
 public class TileEntityFluidPipe extends TileEntityIEBase implements IFluidPipe, IAdvancedHasObjProperty, IOBJModelCallback<IBlockState>, IColouredTile, IPlayerInteraction, IHammerInteraction, IAdvancedSelectionBounds, IAdvancedCollisionBounds, IAdditionalDrops
 {
-	static ConcurrentHashMap<BlockPos, Set<DirectionalFluidOutput>> indirectConnections = new ConcurrentHashMap<BlockPos, Set<DirectionalFluidOutput>>();
-	public static ArrayList<Function<ItemStack, Boolean>> validPipeCovers = new ArrayList();
-	public static ArrayList<Function<ItemStack, Boolean>> climbablePipeCovers = new ArrayList();
+	static ConcurrentHashMap<BlockPos, Set<DirectionalFluidOutput>> indirectConnections = new ConcurrentHashMap<>();
+	public static ArrayList<Function<ItemStack, Boolean>> validPipeCovers = new ArrayList<>();
+	public static ArrayList<Function<ItemStack, Boolean>> climbablePipeCovers = new ArrayList<>();
 	public static void initCovers() {
 		final ArrayList<ItemStack> scaffolds = Lists.newArrayList(
 				new ItemStack(IEContent.blockWoodenDecoration, 1, BlockTypes_WoodenDecoration.SCAFFOLDING.getMeta()),
@@ -110,9 +110,9 @@ public class TileEntityFluidPipe extends TileEntityIEBase implements IFluidPipe,
 		if(indirectConnections.containsKey(node))
 			return indirectConnections.get(node);
 
-		ArrayList<BlockPos> openList = new ArrayList();
-		ArrayList<BlockPos> closedList = new ArrayList();
-		Set<DirectionalFluidOutput> fluidHandlers = Collections.newSetFromMap(new ConcurrentHashMap<DirectionalFluidOutput, Boolean>());
+		ArrayList<BlockPos> openList = new ArrayList<>();
+		ArrayList<BlockPos> closedList = new ArrayList<>();
+		Set<DirectionalFluidOutput> fluidHandlers = Collections.newSetFromMap(new ConcurrentHashMap<>());
 		openList.add(node);
 		while(!openList.isEmpty() && closedList.size()<1024)
 		{
@@ -150,7 +150,7 @@ public class TileEntityFluidPipe extends TileEntityIEBase implements IFluidPipe,
 		{
 			if(!indirectConnections.containsKey(node))
 			{
-				indirectConnections.put(node, newSetFromMap(new ConcurrentHashMap<DirectionalFluidOutput, Boolean>()));
+				indirectConnections.put(node, newSetFromMap(new ConcurrentHashMap<>()));
 				indirectConnections.get(node).addAll(fluidHandlers);
 			}
 		}
@@ -169,9 +169,7 @@ public class TileEntityFluidPipe extends TileEntityIEBase implements IFluidPipe,
 	@Override
 	public void onEntityCollision(World world, Entity entity)
 	{
-		if(!(entity instanceof EntityLivingBase) || ((EntityLivingBase)entity).isOnLadder() || pipeCover.isEmpty())
-			return;
-		else
+		if((entity instanceof EntityLivingBase) && !((EntityLivingBase)entity).isOnLadder() && !pipeCover.isEmpty())
 		{
 			boolean climb = false;
 			for(Function<ItemStack,Boolean> f : climbablePipeCovers)
@@ -325,7 +323,7 @@ public class TileEntityFluidPipe extends TileEntityIEBase implements IFluidPipe,
 				return 0;
 			BlockPos ccFrom = new BlockPos(pipe.getPos().offset(facing));
 			int sum = 0;
-			HashMap<DirectionalFluidOutput, Integer> sorting = new HashMap<DirectionalFluidOutput, Integer>();
+			HashMap<DirectionalFluidOutput, Integer> sorting = new HashMap<>();
 			for(DirectionalFluidOutput output : outputList)
 			{
 				BlockPos cc = Utils.toCC(output.containingTile);
@@ -581,7 +579,7 @@ public class TileEntityFluidPipe extends TileEntityIEBase implements IFluidPipe,
 		return false;
 	}
 
-	public static HashMap<String, OBJState> cachedOBJStates = new HashMap<String, OBJState>();
+	public static HashMap<String, OBJState> cachedOBJStates = new HashMap<>();
 	static String[] CONNECTIONS = new String[]{
 			"con_yMin", "con_yMax", "con_zMin", "con_zMax", "con_xMin", "con_xMax"
 	};
@@ -589,17 +587,17 @@ public class TileEntityFluidPipe extends TileEntityIEBase implements IFluidPipe,
 	String getRenderCacheKey()
 	{
 		byte connections = getConnectionByte();
-		String key = "";
+		StringBuilder key = new StringBuilder();
 		for(int i=0; i<6; i++)
 		{
 			if((connections&(1<<i))!=0)
-				key += getConnectionStyle(i)==1?"2":"1";
+				key.append(getConnectionStyle(i) == 1 ? "2" : "1");
 			else
-				key += "0";
+				key.append("0");
 		}
 		if(!pipeCover.isEmpty())
-			key += "scaf:" + pipeCover;
-		return key;
+			key.append("scaf:").append(pipeCover);
+		return key.toString();
 	}
 
 	// Lowest 6 bits are conns, bits 8 to 14 (1&(b>>8)) ore conn style
@@ -659,7 +657,7 @@ public class TileEntityFluidPipe extends TileEntityIEBase implements IFluidPipe,
 	{
 		if(!cachedOBJStates.containsKey(key))
 		{
-			ArrayList<String> parts = new ArrayList();
+			ArrayList<String> parts = new ArrayList<>();
 			Matrix4 rotationMatrix = new Matrix4(TRSRTransformation.identity().getMatrix());//new Matrix4();
 			short connections = getConnectionsFromKey(key);
 //			if(pipeCover!=null)

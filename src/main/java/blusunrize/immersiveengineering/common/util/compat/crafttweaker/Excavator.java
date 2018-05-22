@@ -88,8 +88,8 @@ public class Excavator
 		public RemoveMineral(String name)
 		{
 			this.name = name;
-			mix = new ArrayList<MineralMix>();
-			weight = new ArrayList<Integer>();
+			mix = new ArrayList<>();
+			weight = new ArrayList<>();
 		}
 
 		@Override
@@ -166,7 +166,7 @@ public class Excavator
 		@ZenMethod
 		public void removeOre(String ore)
 		{
-			HashMap<String, Float> map = new HashMap<String, Float>();
+			HashMap<String, Float> map = new HashMap<>();
 			for(int i = 0; i < mix.ores.length; i++)
 				map.put(mix.ores[i], mix.chances[i]);
 			map.remove(ore);

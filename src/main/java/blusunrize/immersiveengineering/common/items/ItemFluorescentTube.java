@@ -163,10 +163,10 @@ public class ItemFluorescentTube extends ItemIEBase implements IConfigurableTool
 	}
 	public static String hexColorString(ItemStack stack)
 	{
-		String hexCol = Integer.toHexString(getRGBInt(stack, 1));
+		StringBuilder hexCol = new StringBuilder(Integer.toHexString(getRGBInt(stack, 1)));
 		while (hexCol.length()<6)
-			hexCol = "0"+hexCol;
-		return hexCol;
+			hexCol.insert(0, "0");
+		return hexCol.toString();
 	}
 
 	private static final String LIT_TIME = "litTime";

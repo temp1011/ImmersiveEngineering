@@ -26,7 +26,7 @@ import java.util.function.Function;
  */
 public class AssemblerHandler
 {
-	private static final HashMap<Class<? extends IRecipe>, IRecipeAdapter> registry = new LinkedHashMap<Class<? extends IRecipe>, IRecipeAdapter>();
+	private static final HashMap<Class<? extends IRecipe>, IRecipeAdapter> registry = new LinkedHashMap<>();
 	private static final List<Function<Object, RecipeQuery>> specialQueryConverters = new ArrayList<>();
 
 	public static void registerRecipeAdapter(Class<? extends IRecipe> recipeClass, IRecipeAdapter adapter)

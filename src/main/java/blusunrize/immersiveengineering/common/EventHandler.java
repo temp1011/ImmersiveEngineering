@@ -24,7 +24,6 @@ import blusunrize.immersiveengineering.api.tool.ExcavatorHandler;
 import blusunrize.immersiveengineering.api.tool.ExcavatorHandler.MineralMix;
 import blusunrize.immersiveengineering.api.tool.IDrillHead;
 import blusunrize.immersiveengineering.common.Config.IEConfig;
-import blusunrize.immersiveengineering.common.blocks.BlockIEBase;
 import blusunrize.immersiveengineering.common.blocks.BlockIEMultiblock;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IEntityProof;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.ISpawnInterdiction;
@@ -57,7 +56,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -95,9 +93,9 @@ import java.util.Map.Entry;
 
 public class EventHandler
 {
-	public static ArrayList<ISpawnInterdiction> interdictionTiles = new ArrayList<ISpawnInterdiction>();
+	public static ArrayList<ISpawnInterdiction> interdictionTiles = new ArrayList<>();
 	public static boolean validateConnsNextTick = false;
-	public static HashSet<IEExplosion> currentExplosions = new HashSet<IEExplosion>();
+	public static HashSet<IEExplosion> currentExplosions = new HashSet<>();
 	public static final Queue<Pair<Integer, BlockPos>> requestedBlockUpdates = new LinkedList<>();
 	public static final Set<TileEntity> REMOVE_FROM_TICKING = new HashSet<>();
 
@@ -332,7 +330,7 @@ public class EventHandler
 		ExcavatorHandler.allowPackets = true;
 		if(!event.player.world.isRemote)
 		{
-			HashMap<MineralMix,Integer> packetMap = new HashMap<MineralMix,Integer>();
+			HashMap<MineralMix,Integer> packetMap = new HashMap<>();
 			for(Entry<MineralMix,Integer> e: ExcavatorHandler.mineralList.entrySet())
 				if(e.getKey()!=null && e.getValue()!=null)
 					packetMap.put(e.getKey(), e.getValue());
@@ -356,8 +354,8 @@ public class EventHandler
 	//			event.setCanceled(true);
 	//	}
 
-	public static HashMap<UUID, TileEntityCrusher> crusherMap = new HashMap<UUID, TileEntityCrusher>();
-	public static HashSet<Class<? extends EntityLiving>> listOfBoringBosses = new HashSet();
+	public static HashMap<UUID, TileEntityCrusher> crusherMap = new HashMap<>();
+	public static HashSet<Class<? extends EntityLiving>> listOfBoringBosses = new HashSet<>();
 	static{
 		listOfBoringBosses.add(EntityWither.class);
 	}

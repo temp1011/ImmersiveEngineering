@@ -217,7 +217,7 @@ public class ItemIEShield extends ItemUpgradeableTool implements IIEEnergyItem, 
 	{
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		playerIn.setActiveHand(handIn);
-		return new ActionResult(EnumActionResult.SUCCESS, itemstack);
+		return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 	}
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack)

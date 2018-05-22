@@ -131,7 +131,7 @@ public class TileEntityBucketWheel extends TileEntityMultiblockPart<TileEntityBu
 	{
 		synchronized (digStacks)
 		{
-			HashMap<String,String> texMap = new HashMap<String,String>();
+			HashMap<String,String> texMap = new HashMap<>();
 			for(int i = 0; i< this.digStacks.size(); i++)
 				if(!this.digStacks.get(i).isEmpty())
 				{

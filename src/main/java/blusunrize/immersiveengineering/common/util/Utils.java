@@ -148,7 +148,7 @@ public class Utils
 
 	public static boolean canCombineArrays(ItemStack[] stacks, ItemStack[] target)
 	{
-		HashSet<IngredientStack> inputSet = new HashSet();
+		HashSet<IngredientStack> inputSet = new HashSet<>();
 		for(ItemStack s : stacks)
 			inputSet.add(new IngredientStack(s));
 		for(ItemStack t : target)
@@ -200,8 +200,8 @@ public class Utils
 			return false;
 		if(stack.getItem().equals(Items.DYE))
 			return true;
-		for(int dye=0;dye<dyeNames.length;dye++)
-			if(compareToOreName(stack,"dye"+dyeNames[dye]))
+		for (String dyeName : dyeNames)
+			if (compareToOreName(stack, "dye" + dyeName))
 				return true;
 		return false;
 	}
@@ -221,7 +221,7 @@ public class Utils
 	}
 
 	static long UUIDBase = 109406000905L;
-	static long UUIDAdd = 01L;
+	static long UUIDAdd = 1L;
 	public static UUID generateNewUUID()
 	{
 		UUID uuid = new UUID(UUIDBase,UUIDAdd);
@@ -375,10 +375,9 @@ public class Utils
 	public static boolean canBlocksSeeOther(World world, BlockPos cc0, BlockPos cc1, Vec3d pos0, Vec3d pos1)
 	{
 		HashSet<BlockPos> inter = rayTrace(pos0, pos1, world);
-		Iterator<BlockPos> it = inter.iterator();
-		while (it.hasNext()) {
-			BlockPos cc = it.next();
-			if (!cc.equals(cc0)&&!cc.equals(cc1))
+		for (BlockPos cc : inter)
+		{
+			if (!cc.equals(cc0) && !cc.equals(cc1))
 				return false;
 		}
 		return true;
@@ -414,13 +413,7 @@ public class Utils
 				maxInArray(start.x,endLow.x,endHigh.x), maxInArray(start.y,endLow.y,endHigh.y), maxInArray(start.z,endLow.z,endHigh.z));
 
 		List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, box);
-		Iterator<EntityLivingBase> iterator = list.iterator();
-		while(iterator.hasNext())
-		{
-			EntityLivingBase e = iterator.next();
-			if(!isPointInCone(start, dirNorm, radius, length, truncationLength, e.getPositionVector().subtract(start)))
-				iterator.remove();
-		}
+		list.removeIf(e -> !isPointInCone(start, dirNorm, radius, length, truncationLength, e.getPositionVector().subtract(start)));
 		return list;
 	}
 
@@ -550,7 +543,7 @@ public class Utils
 			}
 		}
 
-		if(state.getValue(BlockLiquid.LEVEL).intValue()>=8)
+		if(state.getValue(BlockLiquid.LEVEL) >=8)
 		{
 			for(EnumFacing enumfacing1 : EnumFacing.Plane.HORIZONTAL)
 			{
@@ -698,7 +691,7 @@ public class Utils
 
 		if(fluidBlock!=null && canPlace && fluid.amount>=1000)
 		{
-			boolean placed = false;
+			boolean placed;
 			if ((fluidBlock instanceof BlockFluidBase))
 			{
 				BlockFluidBase blockFluid = (BlockFluidBase)fluidBlock;
@@ -1181,8 +1174,8 @@ public class Utils
 	}
 	public static HashSet<BlockPos> rayTrace(Vec3d start, Vec3d end, World world, Consumer<BlockPos> out)
 	{
-		HashSet<BlockPos> ret = new HashSet<BlockPos>();
-		HashSet<BlockPos> checked = new HashSet<BlockPos>();
+		HashSet<BlockPos> ret = new HashSet<>();
+		HashSet<BlockPos> checked = new HashSet<>();
 		// x
 		if (start.x>end.x)
 		{
@@ -1313,7 +1306,7 @@ public class Utils
 		return null;
 	}
 	public static HashSet<BlockPos> findMinOrMax(HashSet<BlockPos> in, boolean max, int coord) {
-		HashSet<BlockPos> ret = new HashSet<BlockPos>();
+		HashSet<BlockPos> ret = new HashSet<>();
 		int currMinMax = max?Integer.MIN_VALUE:Integer.MAX_VALUE;
 		//find minimum
 		for (BlockPos cc:in)

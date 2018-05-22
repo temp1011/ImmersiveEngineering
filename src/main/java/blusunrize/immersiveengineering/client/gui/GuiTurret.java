@@ -137,7 +137,7 @@ public class GuiTurret extends GuiIEContainerBase
 		super.drawScreen(mx, my, partial);
 		this.nameField.drawTextBox();
 
-		ArrayList<String> tooltip = new ArrayList<String>();
+		ArrayList<String> tooltip = new ArrayList<>();
 		if(mx>=guiLeft+158&&mx<guiLeft+165 && my>=guiTop+16&&my<guiTop+62)
 			tooltip.add(tile.getEnergyStored(null)+"/"+tile.getMaxEnergyStored(null)+" RF");
 

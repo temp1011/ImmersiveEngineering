@@ -121,7 +121,7 @@ public class TileEntityMixer extends TileEntityMultiblockMetal<TileEntityMixer,M
 				int tankAmount = tank.getFluidAmount();
 				if(tankAmount>0)
 				{
-					Set<Integer> usedInvSlots = new HashSet<Integer>();
+					Set<Integer> usedInvSlots = new HashSet<>();
 					for(MultiblockProcess<MixerRecipe> process : processQueue)
 						if(process instanceof MultiblockProcessInMachine)
 							for(int i : ((MultiblockProcessInMachine<MixerRecipe>)process).inputSlots)
@@ -272,7 +272,7 @@ public class TileEntityMixer extends TileEntityMultiblockMetal<TileEntityMixer,M
 		}
 		else if((pos==13||pos==14||pos==16||pos==17))
 		{
-			List<AxisAlignedBB> list = new ArrayList<AxisAlignedBB>(3);
+			List<AxisAlignedBB> list = new ArrayList<>(3);
 			if(pos%9>5)
 				fl = fl.getOpposite();
 			if(pos%3==2)
@@ -299,7 +299,7 @@ public class TileEntityMixer extends TileEntityMultiblockMetal<TileEntityMixer,M
 		}
 		else if(pos==21)
 		{
-			List<AxisAlignedBB> list = new ArrayList<AxisAlignedBB>(1);
+			List<AxisAlignedBB> list = new ArrayList<>(1);
 			float minX = fl==EnumFacing.WEST?.1875f: fl==EnumFacing.EAST?.3125f: fw==EnumFacing.EAST?.1875f: 0f;
 			float maxX = fl==EnumFacing.EAST?.8125f: fl==EnumFacing.WEST?.6875f: fw==EnumFacing.EAST?1f: .8125f;
 			float minZ = fl==EnumFacing.NORTH?.1875f: fl==EnumFacing.SOUTH?.3125f: fw==EnumFacing.SOUTH?.1875f: 0f;
@@ -309,7 +309,7 @@ public class TileEntityMixer extends TileEntityMultiblockMetal<TileEntityMixer,M
 		}
 		else if(pos==22)
 		{
-			List<AxisAlignedBB> list = new ArrayList<AxisAlignedBB>(2);
+			List<AxisAlignedBB> list = new ArrayList<>(2);
 			float minX = fl==EnumFacing.WEST?-.4375f: fl==EnumFacing.EAST?.5625f: fw==EnumFacing.EAST?.5625f: -.4375f;
 			float maxX = fl==EnumFacing.EAST?1.4375f: fl==EnumFacing.WEST?.4375f: fw==EnumFacing.EAST?1.4375f: .4375f;
 			float minZ = fl==EnumFacing.NORTH?-.4375f: fl==EnumFacing.SOUTH?.5625f: fw==EnumFacing.SOUTH?.5625f: -.4375f;
@@ -515,7 +515,7 @@ public class TileEntityMixer extends TileEntityMultiblockMetal<TileEntityMixer,M
 	protected MultiblockProcess loadProcessFromNBT(NBTTagCompound tag)
 	{
 		IMultiblockRecipe recipe = readRecipeFromNBT(tag);
-		if(recipe!=null && recipe instanceof MixerRecipe)
+		if(recipe instanceof MixerRecipe)
 			return new MultiblockProcessMixer((MixerRecipe)recipe, tag.getIntArray("process_inputSlots")).setInputTanks(tag.getIntArray("process_inputTanks"));
 		return null;
 	}

@@ -58,7 +58,7 @@ public class ItemEarmuffs extends ItemArmor implements ISpecialArmor, IConfigura
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
 	{
-		if(type=="overlay")
+		if(type.equals("overlay"))
 			return "immersiveengineering:textures/models/earmuffs_overlay.png";
 		return "immersiveengineering:textures/models/earmuffs.png";
 	}

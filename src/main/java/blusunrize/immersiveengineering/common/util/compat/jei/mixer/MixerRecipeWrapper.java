@@ -48,8 +48,8 @@ public class MixerRecipeWrapper extends MultiblockRecipeWrapper
 	{
 		for(int i=0; i<recipeInputs.length; i++)
 		{
-			int x = 0+(i%2)*18;
-			int y = 0+i/2*18;
+			int x = (i % 2) * 18;
+			int y = i / 2 * 18;
 			JEIHelper.slotDrawable.draw(minecraft, x, y);
 		}
 	}

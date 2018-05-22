@@ -70,7 +70,7 @@ public class ConveyorDrop extends ConveyorBasic
 			return true;
 		IBlockState state = world.getBlockState(pos);
 		if(state.getBlock() instanceof BlockTrapDoor)
-			return state.getValue(BlockTrapDoor.OPEN).booleanValue();
+			return state.getValue(BlockTrapDoor.OPEN);
 		return false;
 	}
 

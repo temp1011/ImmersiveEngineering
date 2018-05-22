@@ -82,7 +82,7 @@ public class TileEntityRefinery extends TileEntityMultiblockMetal<TileEntityRefi
 				RefineryRecipe recipe = RefineryRecipe.findRecipe(tanks[0].getFluid(), tanks[1].getFluid());
 				if(recipe!=null)
 				{
-					MultiblockProcessInMachine<RefineryRecipe> process = new MultiblockProcessInMachine(recipe).setInputTanks((tanks[0].getFluidAmount() > 0&&tanks[1].getFluidAmount() > 0)?new int[]{0, 1}: tanks[0].getFluidAmount() > 0?new int[]{0}: new int[]{1});
+					MultiblockProcessInMachine<RefineryRecipe> process = new MultiblockProcessInMachine<>(recipe).setInputTanks((tanks[0].getFluidAmount() > 0&&tanks[1].getFluidAmount() > 0)?new int[]{0, 1}: tanks[0].getFluidAmount() > 0?new int[]{0}: new int[]{1});
 					if(this.addProcessToQueue(process, true))
 					{
 						this.addProcessToQueue(process, false);

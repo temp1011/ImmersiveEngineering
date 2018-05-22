@@ -70,7 +70,7 @@ public class Refinery
 	private static class Remove implements IAction
 	{
 		private final FluidStack output;
-		ArrayList<RefineryRecipe> removedRecipes = new ArrayList<RefineryRecipe>();
+		ArrayList<RefineryRecipe> removedRecipes = new ArrayList<>();
 
 		public Remove(FluidStack output)
 		{

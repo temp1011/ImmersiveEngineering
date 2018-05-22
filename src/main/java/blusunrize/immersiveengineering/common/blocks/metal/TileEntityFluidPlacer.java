@@ -41,9 +41,9 @@ public class TileEntityFluidPlacer extends TileEntityIEBase implements ITickable
 
 	private int tickCount = 0;
 
-	HashSet<BlockPos> checkedPositions = new HashSet<BlockPos>();
-	TreeMap<Integer, Queue<BlockPos>> layeredPlacementQueue = new TreeMap<Integer, Queue<BlockPos>>();
-	HashSet<BlockPos> tempFluids = new HashSet<BlockPos>();
+	HashSet<BlockPos> checkedPositions = new HashSet<>();
+	TreeMap<Integer, Queue<BlockPos>> layeredPlacementQueue = new TreeMap<>();
+	HashSet<BlockPos> tempFluids = new HashSet<>();
 
 	@Override
 	public void update()
@@ -135,12 +135,7 @@ public class TileEntityFluidPlacer extends TileEntityIEBase implements ITickable
 
 	private Queue<BlockPos> getQueueForYLevel(int yLevel)
 	{
-		Queue<BlockPos> queue = layeredPlacementQueue.get(yLevel);
-		if(queue==null)
-		{
-			queue = new LinkedList<BlockPos>();
-			layeredPlacementQueue.put(yLevel, queue);
-		}
+		Queue<BlockPos> queue = layeredPlacementQueue.computeIfAbsent(yLevel, k -> new LinkedList<>());
 		return queue;
 	}
 

@@ -12,7 +12,6 @@ import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.api.crafting.ArcFurnaceRecipe;
 import blusunrize.immersiveengineering.api.crafting.IMultiblockRecipe;
-import blusunrize.immersiveengineering.common.Config.IEConfig;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IAdvancedCollisionBounds;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IAdvancedSelectionBounds;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IGuiTile;
@@ -107,7 +106,7 @@ public class TileEntityArcFurnace extends TileEntityMultiblockMetal<TileEntityAr
 
 			if (this.processQueue.size() < this.getProcessQueueMaxLength())
 			{
-				Set<Integer> usedInvSlots = new HashSet<Integer>();
+				Set<Integer> usedInvSlots = new HashSet<>();
 				//			final int[] usedInvSlots = new int[8];
 				for (MultiblockProcess<ArcFurnaceRecipe> process : processQueue)
 					if (process instanceof MultiblockProcessInMachine)
@@ -575,7 +574,7 @@ public class TileEntityArcFurnace extends TileEntityMultiblockMetal<TileEntityAr
 					possibleSlots.add(i);
 				}
 			}
-			Collections.sort(possibleSlots, (a, b) -> Integer.compare(inventory.get(a).getCount(), inventory.get(b).getCount()));
+			possibleSlots.sort(Comparator.comparingInt(a -> inventory.get(a).getCount()));
 			for (int i : possibleSlots)
 			{
 				ItemStack here = inventory.get(i);
@@ -635,7 +634,7 @@ public class TileEntityArcFurnace extends TileEntityMultiblockMetal<TileEntityAr
 	protected MultiblockProcess loadProcessFromNBT(NBTTagCompound tag)
 	{
 		IMultiblockRecipe recipe = readRecipeFromNBT(tag);
-		if(recipe!=null && recipe instanceof ArcFurnaceRecipe)
+		if(recipe instanceof ArcFurnaceRecipe)
 			return new MultiblockProcessArcFurnace((ArcFurnaceRecipe)recipe, tag.getIntArray("process_inputSlots"));
 		return null;
 	}

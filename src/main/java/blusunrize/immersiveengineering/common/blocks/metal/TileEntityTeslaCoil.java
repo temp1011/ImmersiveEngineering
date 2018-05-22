@@ -239,7 +239,7 @@ public class TileEntityTeslaCoil extends TileEntityIEBase implements ITickable, 
 				double dy = target.posY-getPos().getY();
 				double dz = target.posZ-getPos().getZ();
 
-				EnumFacing f = null;
+				EnumFacing f;
 				if(facing.getAxis()==Axis.Y)
 				{
 					if(Math.abs(dz)>Math.abs(dx))
@@ -290,7 +290,7 @@ public class TileEntityTeslaCoil extends TileEntityIEBase implements ITickable, 
 		double ty = facing.getAxis()==Axis.Y?tL:tV;
 		double tz = facing.getAxis()==Axis.Y?tV:facing.getAxis()==Axis.X?tH:tL;
 
-		EnumFacing f = null;
+		EnumFacing f;
 		if(facing.getAxis()==Axis.Y)
 		{
 			if(Math.abs(tz)>Math.abs(tx))

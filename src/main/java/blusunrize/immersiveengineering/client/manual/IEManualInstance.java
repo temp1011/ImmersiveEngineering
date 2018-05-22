@@ -73,16 +73,16 @@ public class IEManualInstance extends ManualInstance
 			String[] segment = rep.substring(0,rep.length()-1).split(splitKey);
 			if(segment.length<3)
 				break;
-			String result = "";
+			StringBuilder result = new StringBuilder();
 			if(segment[1].equalsIgnoreCase("b"))
 			{
 				if(segment.length>3)
-					result = (Config.manual_bool.get(segment[2])?segment[3]: segment.length>4?segment[4]:"");
+					result = new StringBuilder((Config.manual_bool.get(segment[2]) ? segment[3] : segment.length > 4 ? segment[4] : ""));
 				else
-					result = ""+ Config.manual_bool.get(segment[2]);
+					result = new StringBuilder("" + Config.manual_bool.get(segment[2]));
 			}
 			else if(segment[1].equalsIgnoreCase("i"))
-				result = ""+ Config.manual_int.get(segment[2]);
+				result = new StringBuilder("" + Config.manual_int.get(segment[2]));
 			else if(segment[1].equalsIgnoreCase("iA"))
 			{
 				int[] iA = Config.manual_intA.get(segment[2]);
@@ -92,38 +92,38 @@ public class IEManualInstance extends ManualInstance
 						{
 							int limiter = Integer.parseInt(segment[3].substring(1));
 							for(int i=0; i<limiter; i++)
-								result += (i>0?", ":"")+iA[i];
+								result.append(i > 0 ? ", " : "").append(iA[i]);
 						}
 						else
 						{
 							int idx = Integer.parseInt(segment[3]);
-							result = ""+iA[idx];
+							result = new StringBuilder("" + iA[idx]);
 						}
 					}catch(Exception ex){
 						break;
 					}
 				else
 					for(int i=0; i<iA.length; i++)
-						result += (i>0?", ":"")+iA[i];
+						result.append(i > 0 ? ", " : "").append(iA[i]);
 			}
 			else if(segment[1].equalsIgnoreCase("d"))
-				result = ""+ Config.manual_double.get(segment[2]);
+				result = new StringBuilder("" + Config.manual_double.get(segment[2]));
 			else if(segment[1].equalsIgnoreCase("dA"))
 			{
 				double[] iD = Config.manual_doubleA.get(segment[2]);
 				if(segment.length>3)
 					try{
 						int idx = Integer.parseInt(segment[3]);
-						result = ""+Utils.formatDouble(iD[idx], "##0.0##");
+						result = new StringBuilder("" + Utils.formatDouble(iD[idx], "##0.0##"));
 					}catch(Exception ex){
 						break;
 					}
 				else
 					for(int i=0; i<iD.length; i++)
-						result += (i>0?", ":"")+Utils.formatDouble(iD[i], "##0.0##");
+						result.append(i > 0 ? ", " : "").append(Utils.formatDouble(iD[i], "##0.0##"));
 			}
 
-			s = s.replaceFirst(rep, result);
+			s = s.replaceFirst(rep, result.toString());
 		}
 		overflow=0;
 		while( (start=s.indexOf("<dim"))>=0 && overflow<50)
@@ -257,10 +257,9 @@ public class IEManualInstance extends ManualInstance
 	public void addEntry(String name, String category, IManualPage... pages)
 	{
 		super.addEntry(name, category, pages);
-		if(!categorySet.contains(category))
 			categorySet.add(category);
 	}
-	LinkedHashSet<String> categorySet = new LinkedHashSet<String>();
+	LinkedHashSet<String> categorySet = new LinkedHashSet<>();
 	@Override
 	public String[] getSortedCategoryList()
 	{

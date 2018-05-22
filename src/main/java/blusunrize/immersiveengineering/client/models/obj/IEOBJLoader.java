@@ -23,9 +23,9 @@ import java.util.*;
 public class IEOBJLoader implements ICustomModelLoader
 {
 	private IResourceManager manager;
-	private final Set<String> enabledDomains = new HashSet<String>();
-	private final Map<ResourceLocation, IEOBJModel> cache = new HashMap<ResourceLocation, IEOBJModel>();
-	private final Map<ResourceLocation, Exception> errors = new HashMap<ResourceLocation, Exception>();
+	private final Set<String> enabledDomains = new HashSet<>();
+	private final Map<ResourceLocation, IEOBJModel> cache = new HashMap<>();
+	private final Map<ResourceLocation, Exception> errors = new HashMap<>();
 	public static IEOBJLoader instance = new IEOBJLoader();
 
 	public void addDomain(String domain)

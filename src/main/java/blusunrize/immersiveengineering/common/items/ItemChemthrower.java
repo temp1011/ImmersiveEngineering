@@ -110,7 +110,7 @@ public class ItemChemthrower extends ItemUpgradeableTool implements IAdvancedFlu
 				ItemNBTHelper.setBoolean(stack, "ignite", !ItemNBTHelper.getBoolean(stack, "ignite"));
 		} else
 			player.setActiveHand(hand);
-		return new ActionResult(EnumActionResult.SUCCESS, stack);
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
 	@Override

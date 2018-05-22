@@ -204,7 +204,7 @@ public class TileEntityConveyorBelt extends TileEntityIEBase implements IDirecti
 	{
 		if(conveyorBeltSubtype != null)
 		{
-			List<AxisAlignedBB> boxes = new ArrayList();
+			List<AxisAlignedBB> boxes = new ArrayList<>();
 			for(AxisAlignedBB aabb : conveyorBeltSubtype.getColisionBoxes(this, facing))
 				boxes.add(aabb.offset(getPos()));
 			return boxes;
@@ -217,7 +217,7 @@ public class TileEntityConveyorBelt extends TileEntityIEBase implements IDirecti
 	{
 		if(conveyorBeltSubtype != null)
 		{
-			List<AxisAlignedBB> boxes = new ArrayList();
+			List<AxisAlignedBB> boxes = new ArrayList<>();
 			for(AxisAlignedBB aabb : conveyorBeltSubtype.getSelectionBoxes(this, facing))
 				boxes.add(aabb.offset(getPos()));
 			return boxes;

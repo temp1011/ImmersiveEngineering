@@ -56,7 +56,6 @@ public class VillageEngineersHouse extends Village
 		this.boundingBox = par4StructureBoundingBox;
 	}
 
-	static List<BlockPos> framesHung = new ArrayList();
 	private int groundLevel = -1;
 	@Override
 	public boolean addComponentParts(World world, Random rand, StructureBoundingBox box)

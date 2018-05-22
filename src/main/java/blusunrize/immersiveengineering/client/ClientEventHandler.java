@@ -232,10 +232,9 @@ public class ClientEventHandler implements IResourceManagerReloadListener
 				event.getToolTip().add(TextFormatting.GRAY.toString()+EnergyHelper.getEnergyStored(powerpack)+"/"+EnergyHelper.getMaxEnergyStored(powerpack)+" IF");
 			}
 		}
-		if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT
-				&&ClientUtils.mc().currentScreen!=null
-				&&ClientUtils.mc().currentScreen instanceof GuiBlastFurnace
-				&&BlastFurnaceRecipe.isValidBlastFuel(event.getItemStack()))
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT
+				&& ClientUtils.mc().currentScreen instanceof GuiBlastFurnace
+				&& BlastFurnaceRecipe.isValidBlastFuel(event.getItemStack()))
 			event.getToolTip().add(TextFormatting.GRAY+I18n.format("desc.immersiveengineering.info.blastFuelTime", BlastFurnaceRecipe.getBlastFuelTime(event.getItemStack())));
 		if(IEConfig.oreTooltips&&event.getFlags().isAdvanced())
 		{
@@ -550,8 +549,7 @@ public class ClientEventHandler implements IResourceManagerReloadListener
 								ItemStack b = bullets.get(i);
 								if(!b.isEmpty())
 								{
-									int x = 0;
-									int y = 0;
+									int x, y;
 									if(i==0)
 									{
 										x = 29;
@@ -991,7 +989,7 @@ public class ClientEventHandler implements IResourceManagerReloadListener
 					GlStateManager.glLineWidth(2.0F);
 					GlStateManager.disableTexture2D();
 					GlStateManager.depthMask(false);
-					ArrayList<AxisAlignedBB> additionalBoxes = new ArrayList<AxisAlignedBB>();
+					ArrayList<AxisAlignedBB> additionalBoxes = new ArrayList<>();
 					AxisAlignedBB overrideBox = null;
 					for(AxisAlignedBB aabb : boxes)
 						if(aabb!=null)

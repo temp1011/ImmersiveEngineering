@@ -26,9 +26,9 @@ public abstract class ContainerInternalStorageItem extends Container
 	protected World world;
 	protected int blockedSlot;
 	public IItemHandler inv;
-	protected EntityEquipmentSlot equipmentSlot = null;
-	protected ItemStack heldItem = ItemStack.EMPTY;
-	protected EntityPlayer player = null;
+	protected EntityEquipmentSlot equipmentSlot;
+	protected ItemStack heldItem;
+	protected EntityPlayer player;
 	public final int internalSlots;
 
 	public ContainerInternalStorageItem(InventoryPlayer iinventory, World world, EntityEquipmentSlot entityEquipmentSlot, ItemStack heldItem)

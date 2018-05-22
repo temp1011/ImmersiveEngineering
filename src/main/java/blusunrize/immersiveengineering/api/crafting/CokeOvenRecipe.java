@@ -36,7 +36,7 @@ public class CokeOvenRecipe
 		this.creosoteOutput=creosoteOutput;
 	}
 
-	public static ArrayList<CokeOvenRecipe> recipeList = new ArrayList<CokeOvenRecipe>();
+	public static ArrayList<CokeOvenRecipe> recipeList = new ArrayList<>();
 	public static void addRecipe(ItemStack output, Object input, int time, int creosoteOutput)
 	{
 		CokeOvenRecipe recipe = new CokeOvenRecipe(output, input, time, creosoteOutput);
@@ -52,7 +52,7 @@ public class CokeOvenRecipe
 	}
 	public static List<CokeOvenRecipe> removeRecipes(ItemStack stack)
 	{
-		List<CokeOvenRecipe> list = new ArrayList();
+		List<CokeOvenRecipe> list = new ArrayList<>();
 		Iterator<CokeOvenRecipe> it = recipeList.iterator();
 		while(it.hasNext())
 		{

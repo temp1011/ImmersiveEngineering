@@ -30,7 +30,7 @@ public class GuiRefinery extends GuiIEContainerBase
 	public void drawScreen(int mx, int my, float partial)
 	{
 		super.drawScreen(mx, my, partial);
-		ArrayList<String> tooltip = new ArrayList();
+		ArrayList<String> tooltip = new ArrayList<>();
 		ClientUtils.handleGuiTank(tile.tanks[0], guiLeft+ 13,guiTop+20, 16,47, 177,31,20,51, mx,my, "immersiveengineering:textures/gui/refinery.png", tooltip);
 		ClientUtils.handleGuiTank(tile.tanks[1], guiLeft+ 61,guiTop+20, 16,47, 177,31,20,51, mx,my, "immersiveengineering:textures/gui/refinery.png", tooltip);
 		ClientUtils.handleGuiTank(tile.tanks[2], guiLeft+109,guiTop+20, 16,47, 177,31,20,51, mx,my, "immersiveengineering:textures/gui/refinery.png", tooltip);

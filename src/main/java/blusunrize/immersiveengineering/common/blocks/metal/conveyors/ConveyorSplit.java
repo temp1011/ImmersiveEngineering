@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class ConveyorSplit extends ConveyorBasic
 {
-	EnumFacing outputFace = EnumFacing.NORTH;
+	EnumFacing outputFace;
 
 	public ConveyorSplit(EnumFacing startingOutputFace)
 	{

@@ -58,8 +58,7 @@ public class IngredientIngrStack extends Ingredient
 				{
 					NonNullList<ItemStack> lst = NonNullList.create();
 					stack.getItem().getSubItems(CreativeTabs.SEARCH, lst);
-					for(ItemStack item : lst)
-						list2.add(item);
+					list2.addAll(lst);
 				}
 				else
 					list2.add(stack);

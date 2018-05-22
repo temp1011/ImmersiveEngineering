@@ -274,7 +274,7 @@ public class ItemRevolver extends ItemUpgradeableTool implements IOBJModelCallba
 			if(player.isSneaking())
 			{
 				CommonProxy.openGuiForItem(player, hand==EnumHand.MAIN_HAND? EntityEquipmentSlot.MAINHAND:EntityEquipmentSlot.OFFHAND);
-				return new ActionResult(EnumActionResult.SUCCESS, revolver);
+				return new ActionResult<>(EnumActionResult.SUCCESS, revolver);
 			}
 			else if(player.getCooledAttackStrength(1)>=1)
 			{
@@ -283,7 +283,7 @@ public class ItemRevolver extends ItemUpgradeableTool implements IOBJModelCallba
 				else
 				{
 					if(getShootCooldown(revolver) > 0 || ItemNBTHelper.hasKey(revolver, "reload"))
-						return new ActionResult(EnumActionResult.PASS, revolver);
+						return new ActionResult<>(EnumActionResult.PASS, revolver);
 
 					NonNullList<ItemStack> bullets = getBullets(revolver);
 
@@ -303,7 +303,7 @@ public class ItemRevolver extends ItemUpgradeableTool implements IOBJModelCallba
 									ImmersiveEngineering.packetHandler.sendTo(new MessageSpeedloaderSync(i, hand), (EntityPlayerMP)player);
 
 								ItemNBTHelper.setInt(revolver, "reload", 60);
-								return new ActionResult(EnumActionResult.SUCCESS, revolver);
+								return new ActionResult<>(EnumActionResult.SUCCESS, revolver);
 							}
 						}
 
@@ -346,7 +346,7 @@ public class ItemRevolver extends ItemUpgradeableTool implements IOBJModelCallba
 						setBullets(revolver, cycled);
 						player.inventory.markDirty();
 						ItemNBTHelper.setInt(revolver, "cooldown", getMaxShootCooldown(revolver));
-						return new ActionResult(EnumActionResult.SUCCESS, revolver);
+						return new ActionResult<>(EnumActionResult.SUCCESS, revolver);
 					}
 				}
 			}
@@ -354,7 +354,7 @@ public class ItemRevolver extends ItemUpgradeableTool implements IOBJModelCallba
 		else if(!player.isSneaking()&&revolver.getItemDamage()==0)
 		{
 			if(getShootCooldown(revolver) > 0||ItemNBTHelper.hasKey(revolver, "reload"))
-				return new ActionResult(EnumActionResult.PASS, revolver);
+				return new ActionResult<>(EnumActionResult.PASS, revolver);
 			NonNullList<ItemStack> bullets = getBullets(revolver);
 			if(!bullets.get(0).isEmpty()&&bullets.get(0).getItem() instanceof ItemBullet&&ItemNBTHelper.hasKey(bullets.get(0), "bullet"))
 			{
@@ -362,9 +362,9 @@ public class ItemRevolver extends ItemUpgradeableTool implements IOBJModelCallba
 				if(shader!=null)
 					shader.getMiddle().getEffectFunction().execute(world, shader.getLeft(), revolver, shader.getRight().getShaderType(), Utils.getLivingFrontPos(player, .75, player.height*.75, hand==EnumHand.MAIN_HAND?player.getPrimaryHand(): player.getPrimaryHand().opposite(), false, 1));
 			}
-			return new ActionResult(EnumActionResult.SUCCESS, revolver);
+			return new ActionResult<>(EnumActionResult.SUCCESS, revolver);
 		}
-		return new ActionResult(EnumActionResult.SUCCESS, revolver);
+		return new ActionResult<>(EnumActionResult.SUCCESS, revolver);
 	}
 
 	EntityRevolvershot getBullet(EntityPlayer player, Vec3d vecSpawn, Vec3d vecDir, String type, ItemStack stack, boolean electro)
@@ -460,22 +460,20 @@ public class ItemRevolver extends ItemUpgradeableTool implements IOBJModelCallba
 		if(group.equals("frame")||group.equals("cylinder")||group.equals("barrel")||group.equals("cosmetic_compensator"))
 			return true;
 
-		HashSet<String> render = new HashSet<String>();
+		HashSet<String> render = new HashSet<>();
 		String tag = ItemNBTHelper.getString(stack, "elite");
 		String flavour = ItemNBTHelper.getString(stack, "flavour");
 		if(tag!=null && !tag.isEmpty() && specialRevolversByTag.containsKey(tag))
 		{
 			SpecialRevolver r = specialRevolversByTag.get(tag);
 			if(r!=null && r.renderAdditions!=null)
-				for(String ss : r.renderAdditions)
-					render.add(ss);
+				Collections.addAll(render, r.renderAdditions);
 		}
 		else if(flavour!=null && !flavour.isEmpty() && specialRevolversByTag.containsKey(flavour))
 		{
 			SpecialRevolver r = specialRevolversByTag.get(flavour);
 			if(r!=null && r.renderAdditions!=null)
-				for(String ss : r.renderAdditions)
-					render.add(ss);
+				Collections.addAll(render, r.renderAdditions);
 		}
 		NBTTagCompound upgrades = this.getUpgrades(stack);
 		if(upgrades.getInteger("bullets")>0 && !render.contains("dev_mag"))
@@ -593,7 +591,7 @@ public class ItemRevolver extends ItemUpgradeableTool implements IOBJModelCallba
 		String uuid = player.getUniqueID().toString();
 		if(specialRevolvers.containsKey(uuid))
 		{
-			ArrayList<SpecialRevolver> list = new ArrayList(specialRevolvers.get(uuid));
+			ArrayList<SpecialRevolver> list = new ArrayList<>(specialRevolvers.get(uuid));
 			if(!list.isEmpty())
 			{
 				list.add(null);
@@ -671,7 +669,7 @@ public class ItemRevolver extends ItemUpgradeableTool implements IOBJModelCallba
 	}
 
 	public static final ArrayListMultimap<String, SpecialRevolver> specialRevolvers = ArrayListMultimap.create();
-	public static final Map<String, SpecialRevolver> specialRevolversByTag = new HashMap<String, SpecialRevolver>();
+	public static final Map<String, SpecialRevolver> specialRevolversByTag = new HashMap<>();
 
 	@Override
 	public int getGuiID(ItemStack stack)

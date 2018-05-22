@@ -111,7 +111,7 @@ public class RecipeShapelessIngredient extends ShapelessOreRecipe
 	@Override
 	public boolean matches(InventoryCrafting matrix, World world)
 	{
-		ArrayList<Ingredient> required = new ArrayList(getIngredients());
+		ArrayList<Ingredient> required = new ArrayList<>(getIngredients());
 
 		for(int i = 0; i < matrix.getSizeInventory(); i++)
 		{

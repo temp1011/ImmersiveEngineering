@@ -36,9 +36,9 @@ public class ExcavatorHandler
 	/**
 	 * A HashMap of MineralMixes and their rarity (Integer out of 100)
 	 */
-	public static LinkedHashMap<MineralMix, Integer> mineralList = new LinkedHashMap<MineralMix, Integer>();
-	public static HashMap<DimensionChunkCoords, MineralWorldInfo> mineralCache = new HashMap<DimensionChunkCoords, MineralWorldInfo>();
-	private static HashMap<Integer,Integer> dimensionBasedTotalWeight = new HashMap<Integer,Integer>();
+	public static LinkedHashMap<MineralMix, Integer> mineralList = new LinkedHashMap<>();
+	public static HashMap<DimensionChunkCoords, MineralWorldInfo> mineralCache = new HashMap<>();
+	private static HashMap<Integer,Integer> dimensionBasedTotalWeight = new HashMap<>();
 	public static int mineralVeinCapacity = 0;
 	public static double mineralChance = 0;
 	public static int[] defaultDimensionBlacklist = new int[0];
@@ -58,7 +58,7 @@ public class ExcavatorHandler
 		dimensionBasedTotalWeight.clear();
 		if(FMLCommonHandler.instance().getEffectiveSide()==Side.SERVER && allowPackets && !mutePackets)
 		{
-			HashMap<MineralMix,Integer> packetMap = new HashMap<MineralMix,Integer>();
+			HashMap<MineralMix,Integer> packetMap = new HashMap<>();
 			for(Map.Entry<MineralMix,Integer> e: ExcavatorHandler.mineralList.entrySet())
 				if(e.getKey()!=null && e.getValue()!=null)
 					packetMap.put(e.getKey(), e.getValue());
@@ -150,7 +150,7 @@ public class ExcavatorHandler
 		/**Should an ore given to this mix not be present in the dictionary, it will attempt to draw a replacement from this list*/
 		public HashMap<String,String> replacementOres;
 		public int[] dimensionWhitelist = new int[0];
-		public int[] dimensionBlacklist = new int[0];
+		public int[] dimensionBlacklist;
 
 		public MineralMix(String name, float failChance, String[] ores, float[] chances)
 		{
@@ -163,7 +163,7 @@ public class ExcavatorHandler
 		public MineralMix addReplacement(String original, String replacement)
 		{
 			if(replacementOres==null)
-				replacementOres = new HashMap();
+				replacementOres = new HashMap<>();
 			replacementOres.put(original, replacement);
 			return this;
 		}

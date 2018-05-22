@@ -37,9 +37,9 @@ public class BulletHandler
 	/**
 	 * A list of all cartridges that shoot a homing bullet. Used to add Wolfpack Cartridges
 	 */
-	public static List<String> homingCartridges = new ArrayList<String>();
+	public static List<String> homingCartridges = new ArrayList<>();
 
-	public static HashMap<String, IBullet> registry = new LinkedHashMap<String, IBullet>();
+	public static HashMap<String, IBullet> registry = new LinkedHashMap<>();
 
 	public static void registerBullet(String name, IBullet bullet)
 	{

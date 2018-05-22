@@ -51,7 +51,7 @@ import java.util.function.Supplier;
  */
 public class ConveyorCovered extends ConveyorBasic
 {
-	public static ArrayList<com.google.common.base.Function<ItemStack, Boolean>> validCoveyorCovers = new ArrayList();
+	public static ArrayList<com.google.common.base.Function<ItemStack, Boolean>> validCoveyorCovers = new ArrayList<>();
 	static
 	{
 		final ArrayList<ItemStack> scaffolds = Lists.newArrayList(
@@ -133,8 +133,8 @@ public class ConveyorCovered extends ConveyorBasic
 				if(q!=null&&q.getSprite()!=null&&q.getFace()!=null)
 					sprites.put(q.getFace(), q.getSprite());
 
-			Function<EnumFacing, TextureAtlasSprite> getSprite = f -> sprites.containsKey(f)?sprites.get(f):sprite;
-			Function<EnumFacing, TextureAtlasSprite> getSpriteHorizontal = f -> f.getAxis()==Axis.Y?null:sprites.containsKey(f)?sprites.get(f):sprite;
+			Function<EnumFacing, TextureAtlasSprite> getSprite = f -> sprites.getOrDefault(f, sprite);
+			Function<EnumFacing, TextureAtlasSprite> getSpriteHorizontal = f -> f.getAxis()==Axis.Y?null: sprites.getOrDefault(f, sprite);
 
 			float[] colour = {1, 1, 1, 1};
 			Matrix4 matrix = new Matrix4(facing);

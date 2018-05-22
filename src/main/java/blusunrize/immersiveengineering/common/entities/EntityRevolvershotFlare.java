@@ -59,7 +59,7 @@ public class EntityRevolvershotFlare extends EntityRevolvershot implements ILigh
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.dataManager.register(dataMarker_colour, Integer.valueOf(-1));
+		this.dataManager.register(dataMarker_colour, -1);
 	}
 
 	public void setColourSynced()
@@ -81,7 +81,7 @@ public class EntityRevolvershotFlare extends EntityRevolvershot implements ILigh
 		super.onUpdate();
 		if(colour<0)
 			colour = getColourSynced();
-		if(world.isRemote && ticksExisted%1==0)
+		if(world.isRemote)
 		{
 			float r = (getColour()>>16&255)/255f;
 			float g = (getColour()>>8&255)/255f;

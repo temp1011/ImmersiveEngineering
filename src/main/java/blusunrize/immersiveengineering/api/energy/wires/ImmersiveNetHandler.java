@@ -62,7 +62,7 @@ public class ImmersiveNetHandler
 	{
 		if (directConnections.get(dimension) == null)
 		{
-			ConcurrentHashMap<BlockPos, Set<Connection>> mm = new ConcurrentHashMap<BlockPos, Set<Connection>>();
+			ConcurrentHashMap<BlockPos, Set<Connection>> mm = new ConcurrentHashMap<>();
 			directConnections.put(dimension, mm);
 		}
 		return directConnections.get(dimension);
@@ -70,7 +70,7 @@ public class ImmersiveNetHandler
 	public HashMap<Connection, Integer> getTransferedRates(int dimension)
 	{
 		if (!transferPerTick.containsKey(dimension))
-			transferPerTick.put(dimension, new HashMap<Connection,Integer>());
+			transferPerTick.put(dimension, new HashMap<>());
 		return transferPerTick.get(dimension);
 	}
 
@@ -203,7 +203,7 @@ public class ImmersiveNetHandler
 	}
 	public Collection<Connection> getAllConnections(int dimensionId)
 	{
-		Set<Connection> ret = newSetFromMap(new ConcurrentHashMap<Connection, Boolean>());
+		Set<Connection> ret = newSetFromMap(new ConcurrentHashMap<>());
 		for (Set<Connection> conlist : getMultimap(dimensionId).values())
 			ret.addAll(conlist);
 		return ret;
@@ -477,7 +477,7 @@ public class ImmersiveNetHandler
 			return indirectConnectionsIgnoreOut.get(dimension).get(node);
 
 		PriorityQueue<Pair<IImmersiveConnectable, Float>> queue = new PriorityQueue<>(Comparator.comparingDouble(Pair::getRight));
-		Set<AbstractConnection> closedList = newSetFromMap(new ConcurrentHashMap<AbstractConnection, Boolean>());
+		Set<AbstractConnection> closedList = newSetFromMap(new ConcurrentHashMap<>());
 		List<BlockPos> checked = new ArrayList<>();
 		HashMap<BlockPos,BlockPos> backtracker = new HashMap<>();
 

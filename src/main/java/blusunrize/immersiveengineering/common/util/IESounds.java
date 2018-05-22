@@ -24,7 +24,7 @@ import java.util.Set;
  */
 public class IESounds
 {
-	static Set<SoundEvent> registeredEvents = new HashSet();
+	static Set<SoundEvent> registeredEvents = new HashSet<>();
 	public static SoundEvent metalpress_piston = registerSound("metalPressPiston");
 	public static SoundEvent metalpress_smash = registerSound("metalPressSmash");
 	public static SoundEvent birthdayParty = registerSound("birthdayParty");

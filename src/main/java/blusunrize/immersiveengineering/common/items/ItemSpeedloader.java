@@ -49,7 +49,7 @@ public class ItemSpeedloader extends ItemInternalStorage implements ITool, IGuiI
 		ItemStack stack = player.getHeldItem(hand);
 		if(!world.isRemote)
 			CommonProxy.openGuiForItem(player, hand==EnumHand.MAIN_HAND? EntityEquipmentSlot.MAINHAND:EntityEquipmentSlot.OFFHAND);
-		return new ActionResult(EnumActionResult.SUCCESS, stack);
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
 	public boolean isEmpty(ItemStack stack)

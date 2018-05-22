@@ -114,7 +114,7 @@ public class TileRenderMetalPress extends TileEntitySpecialRenderer<TileEntityMe
 		for(int i=0; i<shift.length; i++)
 		{
 			MultiblockProcess process = te.processQueue.get(i);
-			if(process==null || !(process instanceof MultiblockProcessInWorld))
+			if(!(process instanceof MultiblockProcessInWorld))
 				continue;
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0,0,-2.5*shift[i]);

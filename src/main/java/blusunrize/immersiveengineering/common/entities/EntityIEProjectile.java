@@ -178,22 +178,18 @@ public abstract class EntityIEProjectile extends EntityArrow//Yes I have to exte
 			if(mop==null || mop.entityHit==null)
 			{
 				Entity entity = null;
-				List list = this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1), (e)->e.canBeCollidedWith());
+				List list = this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1), Entity::canBeCollidedWith);
 				double d0 = 0.0D;
-				for (int i = 0; i < list.size(); ++i)
-				{
-					Entity entity1 = (Entity)list.get(i);
-					if(entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.shootingEntity) || this.ticksInAir>5))
-					{
+				for (Object aList : list) {
+					Entity entity1 = (Entity) aList;
+					if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.shootingEntity) || this.ticksInAir > 5)) {
 						float f = 0.3F;
-						AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow((double)f, (double)f, (double)f);
+						AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow((double) f, (double) f, (double) f);
 						RayTraceResult movingobjectposition1 = axisalignedbb.calculateIntercept(currentPos, nextPos);
 
-						if (movingobjectposition1 != null)
-						{
+						if (movingobjectposition1 != null) {
 							double d1 = currentPos.distanceTo(movingobjectposition1.hitVec);
-							if (d1 < d0 || d0 == 0.0D)
-							{
+							if (d1 < d0 || d0 == 0.0D) {
 								entity = entity1;
 								d0 = d1;
 							}
@@ -249,10 +245,8 @@ public abstract class EntityIEProjectile extends EntityArrow//Yes I have to exte
 			this.posY += this.motionY;
 			this.posZ += this.motionZ;
 
-			float motion = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-			for (this.rotationPitch = (float)(Math.atan2(this.motionY, (double)motion) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F);
 			while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
 				this.prevRotationPitch += 360.0F;
 			while (this.rotationYaw - this.prevRotationYaw < -180.0F)

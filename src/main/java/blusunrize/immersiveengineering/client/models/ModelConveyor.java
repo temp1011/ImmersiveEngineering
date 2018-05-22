@@ -117,7 +117,7 @@ public class ModelConveyor implements IBakedModel
 
 	public static Set<BakedQuad> getBaseConveyor(EnumFacing facing, float length, Matrix4 matrix, ConveyorDirection conDir, TextureAtlasSprite tex_conveyor, boolean[] walls, boolean[] corners, TextureAtlasSprite tex_conveyor_colour, int stripeColour)
 	{
-		Set<BakedQuad> quads = new LinkedHashSet<BakedQuad>();
+		Set<BakedQuad> quads = new LinkedHashSet<>();
 
 		Vector3f[] vertices = {new Vector3f(.0625f, 0, 1 - length), new Vector3f(.0625f, 0, 1), new Vector3f(.9375f, 0, 1), new Vector3f(.9375f, 0, 1 - length)};
 		TextureAtlasSprite tex_casing0 = ClientUtils.getSprite(rl_casing[0]);
@@ -357,8 +357,8 @@ public class ModelConveyor implements IBakedModel
 		return overrideList;
 	}
 
-	static HashMap<String, IBakedModel> itemModelCache = new HashMap<String, IBakedModel>();
-	ItemOverrideList overrideList = new ItemOverrideList(new ArrayList())
+	static HashMap<String, IBakedModel> itemModelCache = new HashMap<>();
+	ItemOverrideList overrideList = new ItemOverrideList(new ArrayList<>())
 	{
 		@Override
 		public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity)
@@ -374,7 +374,7 @@ public class ModelConveyor implements IBakedModel
 		}
 	};
 
-	static HashMap<TransformType, Matrix4> transformationMap = new HashMap<TransformType, Matrix4>();
+	static HashMap<TransformType, Matrix4> transformationMap = new HashMap<>();
 
 	static
 	{

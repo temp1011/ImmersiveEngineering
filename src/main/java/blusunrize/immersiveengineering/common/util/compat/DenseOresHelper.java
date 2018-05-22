@@ -45,8 +45,8 @@ public class DenseOresHelper extends IECompatModule
 		
 		if(map!=null && f_baseOreDictionary!=null)
 		{
-			ArrayList<CrusherRecipe> crushRecipes = new ArrayList<CrusherRecipe>();
-			ArrayList<ArcFurnaceRecipe> arcRecipes = new ArrayList<ArcFurnaceRecipe>();
+			ArrayList<CrusherRecipe> crushRecipes = new ArrayList<>();
+			ArrayList<ArcFurnaceRecipe> arcRecipes = new ArrayList<>();
 			for(Object o : map.values())
 			{
 				try{

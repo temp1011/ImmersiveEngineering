@@ -41,7 +41,7 @@ public class BottlingMachineRecipe extends MultiblockRecipe
 		this.outputList = ListUtils.fromItem(this.output);
 	}
 
-	public static ArrayList<BottlingMachineRecipe> recipeList = new ArrayList<BottlingMachineRecipe>();
+	public static ArrayList<BottlingMachineRecipe> recipeList = new ArrayList<>();
 	public static void addRecipe(ItemStack output, Object input, FluidStack fluidInput)
 	{
 		BottlingMachineRecipe recipe = new BottlingMachineRecipe(output, input, fluidInput);
@@ -58,7 +58,7 @@ public class BottlingMachineRecipe extends MultiblockRecipe
 	}
 	public static List<BottlingMachineRecipe> removeRecipes(ItemStack stack)
 	{
-		List<BottlingMachineRecipe> list = new ArrayList();
+		List<BottlingMachineRecipe> list = new ArrayList<>();
 		Iterator<BottlingMachineRecipe> it = recipeList.iterator();
 		while(it.hasNext())
 		{

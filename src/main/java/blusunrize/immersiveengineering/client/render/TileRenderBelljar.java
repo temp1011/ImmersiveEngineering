@@ -95,7 +95,7 @@ public class TileRenderBelljar extends TileEntitySpecialRenderer<TileEntityBellj
 					if(plantQuadList==null)
 					{
 						IBakedModel plantModel = blockRenderer.getModelForState(s);
-						plantQuadList = new ArrayList<BakedQuad>(plantModel.getQuads(s,null,0));
+						plantQuadList = new ArrayList<>(plantModel.getQuads(s, null, 0));
 						for(EnumFacing f : EnumFacing.values())
 							plantQuadList.addAll(plantModel.getQuads(s,f,0));
 						plantQuads.put(s, plantQuadList);

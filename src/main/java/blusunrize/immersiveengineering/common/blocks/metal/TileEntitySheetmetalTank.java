@@ -10,7 +10,6 @@ package blusunrize.immersiveengineering.common.blocks.metal;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.Lib;
-import blusunrize.immersiveengineering.common.Config.IEConfig;
 import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.blocks.BlockTypes_MetalsAll;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockOverlayText;
@@ -62,7 +61,7 @@ public class TileEntitySheetmetalTank extends TileEntityMultiblockPart<TileEntit
 		{
 			TileEntitySheetmetalTank master = master();
 			FluidStack fs = master!=null?master.tank.getFluid():this.tank.getFluid();
-			String s = null;
+			String s;
 			if(fs!=null)
 				s = fs.getLocalizedName()+": "+fs.amount+"mB";
 			else

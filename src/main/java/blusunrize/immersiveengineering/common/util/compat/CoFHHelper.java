@@ -28,17 +28,12 @@ public class CoFHHelper extends IECompatModule
 			final Class c_ingredientClass = Class.forName("cofh.core.util.crafting.FluidIngredientFactory$FluidIngredient");
 			final Field f_fluid = c_ingredientClass.getDeclaredField("fluid");
 			f_fluid.setAccessible(true);
-			AssemblerHandler.registerSpecialQueryConverters(new Function<Object, RecipeQuery>()
-			{
-				@Override
-				public RecipeQuery apply(Object o)
-				{
-					if(c_ingredientClass.isAssignableFrom(o.getClass()))
-						try	{
-							return new RecipeQuery(f_fluid.get(o), 10000);
-						} catch(Exception e) {}
-					return null;
-				}
+			AssemblerHandler.registerSpecialQueryConverters(o -> {
+				if(c_ingredientClass.isAssignableFrom(o.getClass()))
+					try	{
+						return new RecipeQuery(f_fluid.get(o), 10000);
+					} catch(Exception e) {}
+				return null;
 			});
 		}catch(Exception e){}
 	}

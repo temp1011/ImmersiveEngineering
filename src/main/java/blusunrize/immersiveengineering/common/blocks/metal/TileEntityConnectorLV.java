@@ -360,7 +360,7 @@ public class TileEntityConnectorLV extends TileEntityImmersiveConnectable implem
 						int maxInput = getMaxInput();
 						tempR -= (int) Math.max(0, Math.floor(tempR*con.getPreciseLossRate(tempR,maxInput)));
 						end.outputEnergy(tempR, simulate, energyType);
-						HashSet<IImmersiveConnectable> passedConnectors = new HashSet<IImmersiveConnectable>();
+						HashSet<IImmersiveConnectable> passedConnectors = new HashSet<>();
 						float intermediaryLoss = 0;
 						for(Connection sub : con.subConnections)
 						{
@@ -411,9 +411,7 @@ public class TileEntityConnectorLV extends TileEntityImmersiveConnectable implem
 	{
 		float loss = c!=null?c.getAverageLossRate():0;
 		float max = (1-loss)*energyStorage.getEnergyStored();
-		Consumer<Float> extract = (energy)->{
-			energyStorage.modifyEnergyStored((int) (-energy/(1-loss)));
-		};
+		Consumer<Float> extract = (energy)-> energyStorage.modifyEnergyStored((int) (-energy/(1-loss)));
 		return new ImmutablePair<>(max, extract);
 	}
 

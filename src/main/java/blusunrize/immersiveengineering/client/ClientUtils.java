@@ -72,7 +72,7 @@ import java.util.function.Function;
 public class ClientUtils
 {
 	public static final AxisAlignedBB standardBlockAABB = new AxisAlignedBB(0, 0, 0, 1, 1, 1);
-	static HashMap<String, ResourceLocation> resourceMap = new HashMap<String, ResourceLocation>();
+	static HashMap<String, ResourceLocation> resourceMap = new HashMap<>();
 	public static TextureAtlasSprite[] destroyBlockIcons = new TextureAtlasSprite[10];
 
 	//
@@ -190,7 +190,7 @@ public class ClientUtils
 			worldrenderer.setTranslation(0, 0, 0);
 		} else
 		{
-			double u0 = uMin;
+			double u0;
 			double u1 = uMin;
 			for(int i = b ? (vertex.length - 1) : 0; (b ? (i >= 0) : (i < vertex.length)); i += (b ? -1 : 1))
 			{
@@ -353,21 +353,21 @@ public class ClientUtils
 
 	public static String fomatTimestamp(long timestamp, TimestampFormat format)
 	{
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		for(TimestampFormat core : TimestampFormat.coreValues)
 			if(format.containsFormat(core) && timestamp >= core.getTickCut())
 			{
-				s += I18n.format(Lib.DESC_INFO + core.getLocalKey(), Long.toString(timestamp / core.getTickCut()));
+				s.append(I18n.format(Lib.DESC_INFO + core.getLocalKey(), Long.toString(timestamp / core.getTickCut())));
 				timestamp %= core.getTickCut();
 			}
-		if(s.isEmpty())
+		if(s.length() == 0)
 			for(int i = TimestampFormat.coreValues.length - 1; i >= 0; i--)
 				if(format.containsFormat(TimestampFormat.coreValues[i]))
 				{
-					s = I18n.format(Lib.DESC_INFO + TimestampFormat.coreValues[i].getLocalKey(), 0);
+					s = new StringBuilder(I18n.format(Lib.DESC_INFO + TimestampFormat.coreValues[i].getLocalKey(), 0));
 					break;
 				}
-		return s;
+		return s.toString();
 	}
 
 	//	public static String getResourceNameForItemStack(ItemStack stack)
@@ -450,7 +450,7 @@ public class ClientUtils
 				int toY = oldRenderers[i].textureOffsetY;
 				newRenderers[i].setTextureOffset(toX, toY);
 				newRenderers[i].mirror = oldRenderers[i].mirror;
-				ArrayList<ModelBox> newCubes = new ArrayList<ModelBox>();
+				ArrayList<ModelBox> newCubes = new ArrayList<>();
 				for(ModelBox cube : oldRenderers[i].cubeList)
 					newCubes.add(new ModelBox(newRenderers[i], toX, toY, cube.posX1, cube.posY1, cube.posZ1, (int) (cube.posX2 - cube.posX1), (int) (cube.posY2 - cube.posY1), (int) (cube.posZ2 - cube.posZ1), 0));
 				newRenderers[i].cubeList = newCubes;
@@ -1240,12 +1240,10 @@ public class ClientUtils
 			GlStateManager.disableLighting();
 			GlStateManager.disableDepth();
 			int k = 0;
-			Iterator<String> iterator = list.iterator();
-			while(iterator.hasNext())
+			for (String s : list)
 			{
-				String s = iterator.next();
 				int l = font.getStringWidth(s);
-				if(l > k)
+				if (l > k)
 					k = l;
 			}
 

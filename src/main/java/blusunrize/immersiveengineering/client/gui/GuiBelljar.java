@@ -33,7 +33,7 @@ public class GuiBelljar extends GuiIEContainerBase
 	public void drawScreen(int mx, int my, float partial)
 	{
 		super.drawScreen(mx, my, partial);
-		ArrayList<String> tooltip = new ArrayList<String>();
+		ArrayList<String> tooltip = new ArrayList<>();
 		ClientUtils.handleGuiTank(tile.tank, guiLeft+8,guiTop+8, 16,47, 176,30,20,51, mx,my, "immersiveengineering:textures/gui/belljar.png", tooltip);
 		if(mx>guiLeft+30&&mx<guiLeft+37 && my>guiTop+22&&my<guiTop+68)
 		{

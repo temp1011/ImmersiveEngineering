@@ -40,7 +40,7 @@ public class RefineryRecipe extends MultiblockRecipe
 		this.fluidOutputList = Lists.newArrayList(this.output);
 	}
 
-	public static ArrayList<RefineryRecipe> recipeList = new ArrayList();
+	public static ArrayList<RefineryRecipe> recipeList = new ArrayList<>();
 	public static RefineryRecipe addRecipe(FluidStack output, FluidStack input0, FluidStack input1, int energy)
 	{
 		RefineryRecipe r = new RefineryRecipe(output, input0, input1, energy);

@@ -191,7 +191,7 @@ public abstract class ManualPages implements IManualPage
 			for(int i = 0; i < resources.length; i++)
 				if(resources[i]!=null&&!resources[i].isEmpty())
 				{
-					if(resources[i]!=lastResource)
+					if(!resources[i].equals(lastResource))
 						ManualUtils.bindTexture(resources[i]);
 					int xOff = 60-sizing[i][2]/2;
 					ManualUtils.drawTexturedRect(x+xOff, y+yOff, sizing[i][2], sizing[i][3], (sizing[i][0])/256f, (sizing[i][0]+sizing[i][2])/256f, (sizing[i][1])/256f, (sizing[i][1]+sizing[i][3])/256f);
@@ -218,7 +218,7 @@ public abstract class ManualPages implements IManualPage
 		int textHeight;
 		int[] bars;
 		//		int[] barsH;
-		boolean horizontalBars = false;
+		boolean horizontalBars;
 
 		public Table(ManualInstance manual, String text, String[][] table, boolean horizontalBars)
 		{
@@ -298,30 +298,30 @@ public abstract class ManualPages implements IManualPage
 				}
 
 				int yOff = 0;
-				for(int i = 0; i < localizedTable.length; i++)
-					if(localizedTable[i]!=null)
-						for(int j = 0; j < localizedTable[i].length; j++)
-							if(localizedTable[i][j]!=null)
-							{
-								int xx = textOff.length > 0&&j > 0?textOff[j-1]: x;
-								int w = Math.max(10, 120-(j > 0?textOff[j-1]-x: 0));
-								ManualUtils.drawSplitString(manual.fontRenderer, localizedTable[i][j], xx, y+textHeight+yOff, w, manual.getTextColour());
+				for (String[] aLocalizedTable : localizedTable) {
+					if (aLocalizedTable != null) {
+						for (int j = 0; j < aLocalizedTable.length; j++) {
+							if (aLocalizedTable[j] != null) {
+								int xx = textOff.length > 0 && j > 0 ? textOff[j - 1] : x;
+								int w = Math.max(10, 120 - (j > 0 ? textOff[j - 1] - x : 0));
+								ManualUtils.drawSplitString(manual.fontRenderer, aLocalizedTable[j], xx, y + textHeight + yOff, w, manual.getTextColour());
 								//							manual.fontRenderer.drawSplitString(localizedTable[i][j], xx,y+textHeight+yOff, w, manual.getTextColour());
-								if(j!=0)
-								{
-									int l = manual.fontRenderer.listFormattedStringToWidth(localizedTable[i][j], w).size();
+								if (j != 0) {
+									int l = manual.fontRenderer.listFormattedStringToWidth(aLocalizedTable[j], w).size();
 
-									if(horizontalBars)
-									{
+									if (horizontalBars) {
 										float scale = .5f;
 										GL11.glScalef(1, scale, 1);
-										gui.drawGradientRect(x, (int)((y+textHeight+yOff+l*manual.fontRenderer.FONT_HEIGHT)/scale), x+120, (int)((y+textHeight+yOff+l*manual.fontRenderer.FONT_HEIGHT)/scale+1), manual.getTextColour()|0xff000000, manual.getTextColour()|0xff000000);
-										GL11.glScalef(1, 1/scale, 1);
+										gui.drawGradientRect(x, (int) ((y + textHeight + yOff + l * manual.fontRenderer.FONT_HEIGHT) / scale), x + 120, (int) ((y + textHeight + yOff + l * manual.fontRenderer.FONT_HEIGHT) / scale + 1), manual.getTextColour() | 0xff000000, manual.getTextColour() | 0xff000000);
+										GL11.glScalef(1, 1 / scale, 1);
 									}
 
-									yOff += l*(manual.fontRenderer.FONT_HEIGHT+1);
+									yOff += l * (manual.fontRenderer.FONT_HEIGHT + 1);
 								}
 							}
+						}
+					}
+				}
 
 				if(bars!=null)
 					for(int i = 0; i < bars.length; i++)
@@ -374,7 +374,6 @@ public abstract class ManualPages implements IManualPage
 				float equalPerLine = length/(float)lines;
 				line1 = (int)Math.floor(equalPerLine);
 				line0 = (int)Math.ceil(equalPerLine);
-				lineSum = line0+line1;
 				yOffset = lines*(int)(18*scale);
 			}
 			super.initPage(gui, x, y+yOffset, pageButtons);
@@ -468,15 +467,12 @@ public abstract class ManualPages implements IManualPage
 		public void recalculateCraftingRecipes()
 		{
 			this.recipes.clear();
-			Iterator<IRecipe> itRecipes = CraftingManager.REGISTRY.iterator();
-			while(itRecipes.hasNext())
+			for (IRecipe recipe : CraftingManager.REGISTRY)
 			{
-				IRecipe recipe = itRecipes.next();
-				for(int iStack = 0; iStack < stacks.length; iStack++)
-				{
+				for (int iStack = 0; iStack < stacks.length; iStack++) {
 					Object stack = stacks[iStack];
-					if(stack instanceof ItemStack[])
-						for(ItemStack subStack : (ItemStack[])stack)
+					if (stack instanceof ItemStack[])
+						for (ItemStack subStack : (ItemStack[]) stack)
 							checkRecipe(recipe, stack, subStack, iStack);
 					else
 						checkRecipe(recipe, stack, stack, iStack);
@@ -709,12 +705,10 @@ public abstract class ManualPages implements IManualPage
 				}
 			if(!searchCrafting.isEmpty())
 			{
-				Iterator<IRecipe> itRecipes = CraftingManager.REGISTRY.iterator();
-				while(itRecipes.hasNext())
+				for (IRecipe recipe : CraftingManager.REGISTRY)
 				{
-					IRecipe recipe = itRecipes.next();
-					for(int iStack : searchCrafting)
-						if(!recipe.getRecipeOutput().isEmpty()&&ManualUtils.stackMatchesObject(recipe.getRecipeOutput(), stacks[iStack]))
+					for (int iStack : searchCrafting)
+						if (!recipe.getRecipeOutput().isEmpty() && ManualUtils.stackMatchesObject(recipe.getRecipeOutput(), stacks[iStack]))
 							handleRecipe(recipe, iStack);
 				}
 			}
@@ -874,7 +868,7 @@ public abstract class ManualPages implements IManualPage
 
 	public static String addLinks(ManualInstance helper, GuiManual gui, String text, int x, int y, int width, List<GuiButton> pageButtons)
 	{
-		List<String[]> repList = new ArrayList<String[]>();
+		List<String[]> repList = new ArrayList<>();
 		int start;
 		int overflow = 0;
 		while((start = text.indexOf("<link")) >= 0&&overflow < 50)
@@ -887,43 +881,38 @@ public abstract class ManualPages implements IManualPage
 				break;
 			String page = segment.length > 3?segment[3]: "0";
 			String[] resultParts = segment[2].split(" ");
-			String result = "";
+			StringBuilder result = new StringBuilder();
 			for(int iPart=0; iPart<resultParts.length; iPart++)
 			{
 				//prefixing replacements with MC's formatting character and an unused char to keep them unique, but not counted for size
 				String part = '\u00a7'+String.valueOf((char)(128+repList.size()))+resultParts[iPart];
 				repList.add(new String[]{part, segment[1], page});
-				result += (iPart>0?" ":"")+part;
+				result.append(iPart > 0 ? " " : "").append(part);
 			}
-			text = text.replaceFirst(rep, result);
+			text = text.replaceFirst(rep, result.toString());
 		}
 
 
 		List<String> list = helper.fontRenderer.listFormattedStringToWidth(text, width);
 
-		Iterator<String[]> itRep = repList.iterator();
-		while(itRep.hasNext())
+		for (String[] rep : repList)
 		{
-			String[] rep = itRep.next();
-			for(int yOff = 0; yOff < list.size(); yOff++)
+			for (int yOff = 0; yOff < list.size(); yOff++)
 			{
 				String s = list.get(yOff);
-				if((start = s.indexOf(rep[0])) >= 0)
-				{
-					String formatIdent = rep[0].substring(0,2);
+				if ((start = s.indexOf(rep[0])) >= 0) {
+					String formatIdent = rep[0].substring(0, 2);
 					rep[0] = rep[0].substring(2);
 					int bx = helper.fontRenderer.getStringWidth(s.substring(0, start));
-					int by = yOff*helper.fontRenderer.FONT_HEIGHT;
+					int by = yOff * helper.fontRenderer.FONT_HEIGHT;
 					String bkey = rep[1];
 					int bw = helper.fontRenderer.getStringWidth(rep[0]);
 					int bpage = 0;
-					try
-					{
+					try {
 						bpage = Integer.parseInt(rep[2]);
-					} catch(Exception e)
-					{
+					} catch (Exception e) {
 					}
-					pageButtons.add(new GuiButtonManualLink(gui, 900+overflow, x+bx, y+by, bw, (int)(helper.fontRenderer.FONT_HEIGHT*1.5), new ManualLink(bkey, bpage), rep[0]));
+					pageButtons.add(new GuiButtonManualLink(gui, 900 + overflow, x + bx, y + by, bw, (int) (helper.fontRenderer.FONT_HEIGHT * 1.5), new ManualLink(bkey, bpage), rep[0]));
 					text = text.replaceFirst(formatIdent, "");
 					break;
 				}
@@ -951,7 +940,7 @@ public abstract class ManualPages implements IManualPage
 		{
 			if(displayList==null)
 			{
-				displayList = new ArrayList<ItemStack>();
+				displayList = new ArrayList<>();
 				if(stack instanceof ItemStack)
 				{
 					if(((ItemStack)stack).getItemDamage()==OreDictionary.WILDCARD_VALUE)

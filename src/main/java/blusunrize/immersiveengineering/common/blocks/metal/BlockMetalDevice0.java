@@ -75,7 +75,7 @@ public class BlockMetalDevice0 extends BlockIETileProvider<BlockTypes_MetalDevic
 	{
 		TileEntity te = world.getTileEntity(pos);
 		if(te instanceof TileEntityFluidPump)
-			return ((TileEntityFluidPump)te).dummy == false || side == EnumFacing.UP;
+			return !((TileEntityFluidPump) te).dummy || side == EnumFacing.UP;
 		return true;
 	}
 

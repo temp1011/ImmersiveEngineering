@@ -174,10 +174,10 @@ public class TileEntitySorter extends TileEntityIEBase implements IGuiTile
 	{
 		if(stack.isEmpty())
 			return new Integer[][]{{}, {}, {}, {}};
-		ArrayList<Integer> validFilteredInvOuts = new ArrayList<Integer>(6);
-		ArrayList<Integer> validFilteredEntityOuts = new ArrayList<Integer>(6);
-		ArrayList<Integer> validUnfilteredInvOuts = new ArrayList<Integer>(6);
-		ArrayList<Integer> validUnfilteredEntityOuts = new ArrayList<Integer>(6);
+		ArrayList<Integer> validFilteredInvOuts = new ArrayList<>(6);
+		ArrayList<Integer> validFilteredEntityOuts = new ArrayList<>(6);
+		ArrayList<Integer> validUnfilteredInvOuts = new ArrayList<>(6);
+		ArrayList<Integer> validUnfilteredEntityOuts = new ArrayList<>(6);
 		for(EnumFacing side : EnumFacing.values())
 			if(side!=inputSide)
 			{

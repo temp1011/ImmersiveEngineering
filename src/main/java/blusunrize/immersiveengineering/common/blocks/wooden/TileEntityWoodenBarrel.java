@@ -82,7 +82,7 @@ public class TileEntityWoodenBarrel extends TileEntityIEBase implements ITickabl
 	{
 		if(Utils.isFluidRelatedItemStack(player.getHeldItem(EnumHand.MAIN_HAND)))
 		{
-			String s = null;
+			String s;
 			if(tank.getFluid()!=null)
 				s = tank.getFluid().getLocalizedName()+": "+tank.getFluidAmount()+"mB";
 			else

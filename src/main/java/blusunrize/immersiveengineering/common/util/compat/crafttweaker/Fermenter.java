@@ -75,7 +75,7 @@ public class Fermenter
 	private static class RemoveFluid implements IAction
 	{
 		private final FluidStack output;
-		ArrayList<FermenterRecipe> removedRecipes = new ArrayList<FermenterRecipe>();
+		ArrayList<FermenterRecipe> removedRecipes = new ArrayList<>();
 
 		public RemoveFluid(FluidStack output)
 		{
@@ -115,7 +115,7 @@ public class Fermenter
 	private static class RemoveStack implements IAction
 	{
 		private final ItemStack output;
-		ArrayList<FermenterRecipe> removedRecipes = new ArrayList<FermenterRecipe>();
+		ArrayList<FermenterRecipe> removedRecipes = new ArrayList<>();
 
 		public RemoveStack(ItemStack output)
 		{
@@ -155,7 +155,7 @@ public class Fermenter
 	private static class RemoveByInput implements IAction
 	{
 		private final ItemStack input;
-		ArrayList<FermenterRecipe> removedRecipes = new ArrayList<FermenterRecipe>();
+		ArrayList<FermenterRecipe> removedRecipes = new ArrayList<>();
 
 		public RemoveByInput(ItemStack input)
 		{

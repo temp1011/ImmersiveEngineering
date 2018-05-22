@@ -109,9 +109,9 @@ public class GuiModWorkbench extends GuiIEContainerBase
 				if(recipe!=null && !recipe.output.isEmpty())
 					if(isPointInRegion(s.xPos,s.yPos, 16,16, mx,my))
 					{
-						ArrayList<String> tooltip = new ArrayList<String>();
+						ArrayList<String> tooltip = new ArrayList<>();
 						tooltip.add(recipe.output.getRarity().rarityColor+recipe.output.getDisplayName());
-						ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
+						ArrayList<ItemStack> inputs = new ArrayList<>();
 						for(IngredientStack stack : recipe.inputs)
 						{
 							ItemStack toAdd = Utils.copyStackWithAmount(stack.getRandomizedExampleStack(this.mc.player.ticksExisted), stack.inputSize);
@@ -152,11 +152,11 @@ public class GuiModWorkbench extends GuiIEContainerBase
 			Slot s = inventorySlots.getSlot(i);
 
 			ClientUtils.drawColouredRect(guiLeft+ s.xPos-1, guiTop+ s.yPos-1, 17,1, 0x77222222);
-			ClientUtils.drawColouredRect(guiLeft+ s.xPos-1, guiTop+ s.yPos+0, 1,16, 0x77222222);
-			ClientUtils.drawColouredRect(guiLeft+ s.xPos+16, guiTop+ s.yPos+0, 1,17, 0x77999999);
-			ClientUtils.drawColouredRect(guiLeft+ s.xPos+0, guiTop+ s.yPos+16, 16,1, 0x77999999);
+			ClientUtils.drawColouredRect(guiLeft+ s.xPos-1, guiTop + s.yPos, 1,16, 0x77222222);
+			ClientUtils.drawColouredRect(guiLeft+ s.xPos+16, guiTop + s.yPos, 1,17, 0x77999999);
+			ClientUtils.drawColouredRect(guiLeft + s.xPos, guiTop+ s.yPos+16, 16,1, 0x77999999);
 			if( !(s instanceof IESlot.BlueprintOutput) || s.getHasStack() || ((IESlot.BlueprintOutput)s).recipe.output.isEmpty())
-				ClientUtils.drawColouredRect(guiLeft+ s.xPos+0, guiTop+ s.yPos+0, 16,16, 0x77444444);
+				ClientUtils.drawColouredRect(guiLeft + s.xPos, guiTop + s.yPos, 16,16, 0x77444444);
 		}
 
 		for(int i=0; i<((ContainerModWorkbench)inventorySlots).slotCount; i++)
@@ -178,7 +178,7 @@ public class GuiModWorkbench extends GuiIEContainerBase
 
 					GlStateManager.disableLighting();
 					GlStateManager.disableDepth();
-					ClientUtils.drawColouredRect(guiLeft+ s.xPos+0, guiTop+ s.yPos+0, 16,16, 0x77444444);
+					ClientUtils.drawColouredRect(guiLeft + s.xPos, guiTop + s.yPos, 16,16, 0x77444444);
 					GlStateManager.enableLighting();
 					GlStateManager.enableDepth();
 				}

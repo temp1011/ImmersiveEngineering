@@ -36,7 +36,7 @@ public class AlloyRecipe
 		this.time=time;
 	}
 
-	public static ArrayList<AlloyRecipe> recipeList = new ArrayList<AlloyRecipe>();
+	public static ArrayList<AlloyRecipe> recipeList = new ArrayList<>();
 	public static void addRecipe(ItemStack output, Object input0, Object input1, int time)
 	{
 		AlloyRecipe recipe = new AlloyRecipe(output, input0, input1, time);
@@ -52,7 +52,7 @@ public class AlloyRecipe
 	}
 	public static List<AlloyRecipe> removeRecipes(ItemStack stack)
 	{
-		List<AlloyRecipe> list = new ArrayList();
+		List<AlloyRecipe> list = new ArrayList<>();
 		Iterator<AlloyRecipe> it = recipeList.iterator();
 		while(it.hasNext())
 		{

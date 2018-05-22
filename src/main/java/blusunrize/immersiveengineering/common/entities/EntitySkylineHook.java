@@ -67,7 +67,6 @@ public class EntitySkylineHook extends Entity
 		float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 		this.rotationYaw = (float)(Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) + 90.0F;
 
-		for (this.rotationPitch = (float)(Math.atan2((double)f1, this.motionY) * 180.0D / Math.PI) - 90.0F; this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F);
 
 		while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
 			this.prevRotationPitch += 360.0F;
@@ -167,7 +166,6 @@ public class EntitySkylineHook extends Entity
 		float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 		this.rotationYaw = (float)(Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) + 90.0F;
 
-		for (this.rotationPitch = (float)(Math.atan2((double)f1, this.motionY) * 180.0D / Math.PI) - 90.0F; this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F);
 
 		while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
 			this.prevRotationPitch += 360.0F;

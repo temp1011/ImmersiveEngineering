@@ -30,7 +30,7 @@ import java.util.Locale;
 public class ManualPageBlueprint extends ManualPages
 {
 	ItemStack[] stacks;
-	ArrayList<PositionedItemStack[]> recipes = new ArrayList();
+	ArrayList<PositionedItemStack[]> recipes = new ArrayList<>();
 	int recipePage;
 	int yOff;
 

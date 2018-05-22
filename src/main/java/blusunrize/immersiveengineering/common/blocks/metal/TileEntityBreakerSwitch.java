@@ -40,7 +40,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import static blusunrize.immersiveengineering.api.energy.wires.WireType.HV_CATEGORY;
-import static blusunrize.immersiveengineering.api.energy.wires.WireType.REDSTONE;
 import static blusunrize.immersiveengineering.api.energy.wires.WireType.REDSTONE_CATEGORY;
 
 public class TileEntityBreakerSwitch extends TileEntityImmersiveConnectable implements IBlockBounds, IAdvancedDirectionalTile, IActiveState, IHammerInteraction, IPlayerInteraction, IRedstoneOutput, IOBJModelCallback<IBlockState>

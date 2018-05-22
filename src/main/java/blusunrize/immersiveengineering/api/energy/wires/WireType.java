@@ -20,9 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.Set;
 
 import static blusunrize.immersiveengineering.ImmersiveEngineering.MODID;
 import static blusunrize.immersiveengineering.api.energy.wires.WireApi.registerFeedthroughForWiretype;
@@ -41,7 +39,7 @@ public abstract class WireType
 	public static final String HV_CATEGORY = "HV";
 	public static final String STRUCTURE_CATEGORY = "STRUCTURE";
 	public static final String REDSTONE_CATEGORY = "REDSTONE";
-	private static LinkedHashSet<WireType> values = new LinkedHashSet<WireType>();
+	private static LinkedHashSet<WireType> values = new LinkedHashSet<>();
 	public static LinkedHashSet<WireType> getValues()
 	{
 		return values;

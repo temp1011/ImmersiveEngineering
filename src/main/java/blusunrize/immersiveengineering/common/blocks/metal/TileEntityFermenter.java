@@ -89,14 +89,7 @@ public class TileEntityFermenter extends TileEntityMultiblockMetal<TileEntityFer
 							usedInvSlots[i]++;
 
 				Integer[] preferredSlots = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7};
-				Arrays.sort(preferredSlots, 0, 8, new Comparator<Integer>()
-				{
-					@Override
-					public int compare(Integer arg0, Integer arg1)
-					{
-						return Integer.compare(usedInvSlots[arg0], usedInvSlots[arg1]);
-					}
-				});
+				Arrays.sort(preferredSlots, 0, 8, Comparator.comparingInt(arg0 -> usedInvSlots[arg0]));
 				for(int slot : preferredSlots)
 				{
 					ItemStack stack = this.getInventory().get(slot);
@@ -110,7 +103,7 @@ public class TileEntityFermenter extends TileEntityMultiblockMetal<TileEntityFer
 						FermenterRecipe recipe = this.findRecipeForInsertion(stack);
 						if(recipe!=null)
 						{
-							MultiblockProcessInMachine<FermenterRecipe> process = new MultiblockProcessInMachine(recipe, slot);
+							MultiblockProcessInMachine<FermenterRecipe> process = new MultiblockProcessInMachine<>(recipe, slot);
 							if(this.addProcessToQueue(process, true))
 							{
 								this.addProcessToQueue(process, false);
@@ -254,7 +247,7 @@ public class TileEntityFermenter extends TileEntityMultiblockMetal<TileEntityFer
 		}
 		if((pos==12||pos==13||pos==15||pos==16)||(pos==21||pos==22||pos==24||pos==25))
 		{
-			List<AxisAlignedBB> list = new ArrayList<AxisAlignedBB>(2);
+			List<AxisAlignedBB> list = new ArrayList<>(2);
 			if(pos%9 > 5)
 				fl = fl.getOpposite();
 			if(pos%3==1)

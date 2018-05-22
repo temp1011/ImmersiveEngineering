@@ -261,7 +261,7 @@ public class FeedthroughModel implements IBakedModel
 		{
 			IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes()
 					.getModelForState(k.baseState);
-			Function<Integer, Integer> colorMultiplier = null;
+			Function<Integer, Integer> colorMultiplier;
 			if (world!=null&&pos!=null)
 			{
 				BlockColors colors = Minecraft.getMinecraft().getBlockColors();

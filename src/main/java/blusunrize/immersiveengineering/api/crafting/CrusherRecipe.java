@@ -71,8 +71,8 @@ public class CrusherRecipe extends MultiblockRecipe
 	{
 		if(outputs.length%2!=0)
 			return this;
-		ArrayList<ItemStack> newSecondaryOutput = new ArrayList<ItemStack>();
-		ArrayList<Float> newSecondaryChance = new ArrayList<Float>();
+		ArrayList<ItemStack> newSecondaryOutput = new ArrayList<>();
+		ArrayList<Float> newSecondaryChance = new ArrayList<>();
 		if(secondaryOutput!=null)
 			for(int i=0; i<secondaryOutput.length; i++)
 			{
@@ -105,7 +105,7 @@ public class CrusherRecipe extends MultiblockRecipe
 		return this;
 	}
 
-	public static ArrayList<CrusherRecipe> recipeList = new ArrayList<CrusherRecipe>();
+	public static ArrayList<CrusherRecipe> recipeList = new ArrayList<>();
 	public static CrusherRecipe addRecipe(ItemStack output, Object input, int energy)
 	{
 		CrusherRecipe r = new CrusherRecipe(output, input, energy);
@@ -122,7 +122,7 @@ public class CrusherRecipe extends MultiblockRecipe
 	}
 	public static List<CrusherRecipe> removeRecipesForOutput(ItemStack stack)
 	{
-		List<CrusherRecipe> list = new ArrayList();
+		List<CrusherRecipe> list = new ArrayList<>();
 		Iterator<CrusherRecipe> it = recipeList.iterator();
 		while(it.hasNext())
 		{
@@ -137,7 +137,7 @@ public class CrusherRecipe extends MultiblockRecipe
 	}
 	public static List<CrusherRecipe> removeRecipesForInput(ItemStack stack)
 	{
-		List<CrusherRecipe> list = new ArrayList();
+		List<CrusherRecipe> list = new ArrayList<>();
 		Iterator<CrusherRecipe> it = recipeList.iterator();
 		while(it.hasNext())
 		{

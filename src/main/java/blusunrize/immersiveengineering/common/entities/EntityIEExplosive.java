@@ -77,7 +77,7 @@ public class EntityIEExplosive extends EntityTNTPrimed
 	{
 		super.entityInit();
 		this.dataManager.register(dataMarker_block, Optional.absent());
-		this.dataManager.register(dataMarker_fuse, Integer.valueOf(0));
+		this.dataManager.register(dataMarker_fuse, 0);
 	}
 
 	public void setBlockSynced()
@@ -153,7 +153,7 @@ public class EntityIEExplosive extends EntityTNTPrimed
 		}
 		int newFuse = this.getFuse()-1;
 		this.setFuse(newFuse);
-		if(newFuse--<=0)
+		if(newFuse<=0)
 		{
 			this.setDead();
 

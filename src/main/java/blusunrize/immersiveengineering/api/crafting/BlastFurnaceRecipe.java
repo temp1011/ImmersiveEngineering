@@ -38,7 +38,7 @@ public class BlastFurnaceRecipe
 		this.slag=slag;
 	}
 
-	public static ArrayList<BlastFurnaceRecipe> recipeList = new ArrayList<BlastFurnaceRecipe>();
+	public static ArrayList<BlastFurnaceRecipe> recipeList = new ArrayList<>();
 	public static void addRecipe(ItemStack output, Object input, int time, @Nonnull ItemStack slag)
 	{
 		BlastFurnaceRecipe recipe = new BlastFurnaceRecipe(output, input, time, slag);
@@ -56,7 +56,7 @@ public class BlastFurnaceRecipe
 	}
 	public static List<BlastFurnaceRecipe> removeRecipes(ItemStack stack)
 	{
-		List<BlastFurnaceRecipe> list = new ArrayList();
+		List<BlastFurnaceRecipe> list = new ArrayList<>();
 		Iterator<BlastFurnaceRecipe> it = recipeList.iterator();
 		while(it.hasNext())
 		{
@@ -70,7 +70,7 @@ public class BlastFurnaceRecipe
 		return list;
 	}
 
-	public static ArrayList<BlastFurnaceFuel> blastFuels = new ArrayList();
+	public static ArrayList<BlastFurnaceFuel> blastFuels = new ArrayList<>();
 	public static class BlastFurnaceFuel
 	{
 		public final IngredientStack input;

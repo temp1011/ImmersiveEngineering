@@ -111,8 +111,8 @@ import java.util.*;
 @Mod.EventBusSubscriber
 public class IEContent
 {
-	public static ArrayList<Block> registeredIEBlocks = new ArrayList<Block>();
-	public static ArrayList<Item> registeredIEItems = new ArrayList<Item>();
+	public static ArrayList<Block> registeredIEBlocks = new ArrayList<>();
+	public static ArrayList<Item> registeredIEItems = new ArrayList<>();
 
 	public static BlockIEBase<BlockTypes_MetalsIE> blockOre;
 	public static BlockIEBase<BlockTypes_MetalsIE> blockStorage;
@@ -436,9 +436,7 @@ public class IEContent
 			NBTTagCompound data = entity.getEntityData();
 			if(!data.getBoolean(Lib.MAGNET_PREVENT_NBT))
 				data.setBoolean(Lib.MAGNET_PREVENT_NBT, true);
-		}, (entity, iConveyorTile) -> {
-			entity.getEntityData().removeTag(Lib.MAGNET_PREVENT_NBT);
-		});
+		}, (entity, iConveyorTile) -> entity.getEntityData().removeTag(Lib.MAGNET_PREVENT_NBT));
 		ConveyorHandler.registerConveyorHandler(new ResourceLocation(ImmersiveEngineering.MODID, "conveyor"), ConveyorBasic.class, (tileEntity) -> new ConveyorBasic());
 		ConveyorHandler.registerConveyorHandler(new ResourceLocation(ImmersiveEngineering.MODID, "uncontrolled"), ConveyorUncontrolled.class, (tileEntity) -> new ConveyorUncontrolled());
 		ConveyorHandler.registerConveyorHandler(new ResourceLocation(ImmersiveEngineering.MODID, "dropper"), ConveyorDrop.class, (tileEntity) -> new ConveyorDrop());
@@ -674,7 +672,7 @@ public class IEContent
 		EntityRegistry.registerModEntity(new ResourceLocation(ImmersiveEngineering.MODID, "railgunShot"), EntityRailgunShot.class, "railgunShot", i++, ImmersiveEngineering.instance, 64, 5, true);
 		EntityRegistry.registerModEntity(new ResourceLocation(ImmersiveEngineering.MODID, "revolverShotFlare"), EntityRevolvershotFlare.class, "revolverShotFlare", i++, ImmersiveEngineering.instance, 64, 1, true);
 		EntityRegistry.registerModEntity(new ResourceLocation(ImmersiveEngineering.MODID, "explosive"), EntityIEExplosive.class, "explosive", i++, ImmersiveEngineering.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(ImmersiveEngineering.MODID, "fluorescentTube"), EntityFluorescentTube.class, "fluorescentTube", i++, ImmersiveEngineering.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(ImmersiveEngineering.MODID, "fluorescentTube"), EntityFluorescentTube.class, "fluorescentTube", i, ImmersiveEngineering.instance, 64, 1, true);
 		CapabilityShader.register();
 		ShaderRegistry.itemShader = IEContent.itemShader;
 		ShaderRegistry.itemShaderBag = IEContent.itemShaderBag;
@@ -708,76 +706,46 @@ public class IEContent
 		AssemblerHandler.registerSpecialQueryConverters((o)->
 				o instanceof IngredientFluidStack? new RecipeQuery(((IngredientFluidStack)o).getFluid(), ((IngredientFluidStack)o).getFluid().amount): null);
 		//Shaped
-		AssemblerHandler.registerRecipeAdapter(ShapedRecipes.class, new IRecipeAdapter<ShapedRecipes>()
-		{
-			@Override
-			public RecipeQuery[] getQueriedInputs(ShapedRecipes recipe)
-			{
-				AssemblerHandler.RecipeQuery[] query = new AssemblerHandler.RecipeQuery[recipe.recipeItems.size()];
-				for(int i = 0; i < query.length; i++)
-					query[i] = AssemblerHandler.createQuery(recipe.recipeItems.get(i));
-				return query;
-			}
+		AssemblerHandler.registerRecipeAdapter(ShapedRecipes.class, (IRecipeAdapter<ShapedRecipes>) recipe -> {
+			RecipeQuery[] query = new RecipeQuery[recipe.recipeItems.size()];
+			for(int i16 = 0; i16 < query.length; i16++)
+				query[i16] = AssemblerHandler.createQuery(recipe.recipeItems.get(i16));
+			return query;
 		});
 		//Shapeless
-		AssemblerHandler.registerRecipeAdapter(ShapelessRecipes.class, new IRecipeAdapter<ShapelessRecipes>()
-		{
-			@Override
-			public RecipeQuery[] getQueriedInputs(ShapelessRecipes recipe)
-			{
-				AssemblerHandler.RecipeQuery[] query = new AssemblerHandler.RecipeQuery[recipe.recipeItems.size()];
-				for(int i = 0; i < query.length; i++)
-					query[i] = AssemblerHandler.createQuery(recipe.recipeItems.get(i));
-				return query;
-			}
+		AssemblerHandler.registerRecipeAdapter(ShapelessRecipes.class, (IRecipeAdapter<ShapelessRecipes>) recipe -> {
+			RecipeQuery[] query = new RecipeQuery[recipe.recipeItems.size()];
+			for(int i15 = 0; i15 < query.length; i15++)
+				query[i15] = AssemblerHandler.createQuery(recipe.recipeItems.get(i15));
+			return query;
 		});
 		//ShapedOre
-		AssemblerHandler.registerRecipeAdapter(ShapedOreRecipe.class, new IRecipeAdapter<ShapedOreRecipe>()
-		{
-			@Override
-			public RecipeQuery[] getQueriedInputs(ShapedOreRecipe recipe)
-			{
-				AssemblerHandler.RecipeQuery[] query = new AssemblerHandler.RecipeQuery[recipe.getIngredients().size()];
-				for(int i = 0; i < query.length; i++)
-					query[i] = AssemblerHandler.createQuery(recipe.getIngredients().get(i));
-				return query;
-			}
+		AssemblerHandler.registerRecipeAdapter(ShapedOreRecipe.class, (IRecipeAdapter<ShapedOreRecipe>) recipe -> {
+			RecipeQuery[] query = new RecipeQuery[recipe.getIngredients().size()];
+			for(int i14 = 0; i14 < query.length; i14++)
+				query[i14] = AssemblerHandler.createQuery(recipe.getIngredients().get(i14));
+			return query;
 		});
 		//ShapelessOre
-		AssemblerHandler.registerRecipeAdapter(ShapelessOreRecipe.class, new IRecipeAdapter<ShapelessOreRecipe>()
-		{
-			@Override
-			public RecipeQuery[] getQueriedInputs(ShapelessOreRecipe recipe)
-			{
-				AssemblerHandler.RecipeQuery[] query = new AssemblerHandler.RecipeQuery[recipe.getIngredients().size()];
-				for(int i = 0; i < query.length; i++)
-					query[i] = AssemblerHandler.createQuery(recipe.getIngredients().get(i));
-				return query;
-			}
+		AssemblerHandler.registerRecipeAdapter(ShapelessOreRecipe.class, (IRecipeAdapter<ShapelessOreRecipe>) recipe -> {
+			RecipeQuery[] query = new RecipeQuery[recipe.getIngredients().size()];
+			for(int i13 = 0; i13 < query.length; i13++)
+				query[i13] = AssemblerHandler.createQuery(recipe.getIngredients().get(i13));
+			return query;
 		});
 		//ShapedIngredient
-		AssemblerHandler.registerRecipeAdapter(RecipeShapedIngredient.class, new IRecipeAdapter<RecipeShapedIngredient>()
-		{
-			@Override
-			public RecipeQuery[] getQueriedInputs(RecipeShapedIngredient recipe)
-			{
-				AssemblerHandler.RecipeQuery[] query = new AssemblerHandler.RecipeQuery[recipe.getIngredients().size()];
-				for(int i = 0; i < query.length; i++)
-					query[i] = AssemblerHandler.createQuery(recipe.getIngredients().get(i));
-				return query;
-			}
+		AssemblerHandler.registerRecipeAdapter(RecipeShapedIngredient.class, (IRecipeAdapter<RecipeShapedIngredient>) recipe -> {
+			RecipeQuery[] query = new RecipeQuery[recipe.getIngredients().size()];
+			for(int i12 = 0; i12 < query.length; i12++)
+				query[i12] = AssemblerHandler.createQuery(recipe.getIngredients().get(i12));
+			return query;
 		});
 		//ShapelessIngredient
-		AssemblerHandler.registerRecipeAdapter(RecipeShapelessIngredient.class, new IRecipeAdapter<RecipeShapelessIngredient>()
-		{
-			@Override
-			public RecipeQuery[] getQueriedInputs(RecipeShapelessIngredient recipe)
-			{
-				AssemblerHandler.RecipeQuery[] query = new AssemblerHandler.RecipeQuery[recipe.getIngredients().size()];
-				for(int i = 0; i < query.length; i++)
-					query[i] = AssemblerHandler.createQuery(recipe.getIngredients().get(i));
-				return query;
-			}
+		AssemblerHandler.registerRecipeAdapter(RecipeShapelessIngredient.class, (IRecipeAdapter<RecipeShapelessIngredient>) recipe -> {
+			RecipeQuery[] query = new RecipeQuery[recipe.getIngredients().size()];
+			for(int i1 = 0; i1 < query.length; i1++)
+				query[i1] = AssemblerHandler.createQuery(recipe.getIngredients().get(i1));
+			return query;
 		});
 
 		DieselHandler.registerFuel(fluidBiodiesel, 125);

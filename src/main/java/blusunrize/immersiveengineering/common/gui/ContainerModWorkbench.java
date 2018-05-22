@@ -133,8 +133,6 @@ public class ContainerModWorkbench extends ContainerIEBase<TileEntityModWorkbenc
 								b = false;
 								break;
 							}
-							else
-								continue;
 					}
 					if(b)
 						return ItemStack.EMPTY;

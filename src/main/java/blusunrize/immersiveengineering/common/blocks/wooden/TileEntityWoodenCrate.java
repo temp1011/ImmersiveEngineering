@@ -140,14 +140,14 @@ public class TileEntityWoodenCrate extends TileEntityIEBase implements IIEInvent
 			List<Integer> listSlots = Lists.newArrayList();
 			for(int i=0; i<inventory.size(); i++)
 				if(inventory.get(i).isEmpty())
-					listSlots.add(Integer.valueOf(i));
+					listSlots.add(i);
 			Collections.shuffle(listSlots, rand);
 			if(listSlots.isEmpty())
 				return;
 			Utils.shuffleLootItems(list, listSlots.size(), rand);
 			for(ItemStack itemstack : list)
 			{
-				int slot = listSlots.remove(listSlots.size() - 1).intValue();
+				int slot = listSlots.remove(listSlots.size() - 1);
 				inventory.set(slot, itemstack);
 			}
 			this.markDirty();

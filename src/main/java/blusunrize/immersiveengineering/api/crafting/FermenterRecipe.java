@@ -53,7 +53,7 @@ public class FermenterRecipe extends MultiblockRecipe
 		return this;
 	}
 	
-	public static ArrayList<FermenterRecipe> recipeList = new ArrayList();
+	public static ArrayList<FermenterRecipe> recipeList = new ArrayList<>();
 	public static FermenterRecipe addRecipe(FluidStack fluidOutput, @Nonnull ItemStack itemOutput, Object input, int energy)
 	{
 		FermenterRecipe r = new FermenterRecipe(fluidOutput, itemOutput, input, energy);
@@ -110,7 +110,7 @@ public class FermenterRecipe extends MultiblockRecipe
 	}
 	public static Map<String, Integer> getFluidValuesSorted(Fluid f, boolean inverse)
 	{
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Integer> map = new HashMap<>();
 		for(FermenterRecipe recipe : recipeList)
 			if(recipe.fluidOutput!=null && recipe.fluidOutput.getFluid()==f)
 			{

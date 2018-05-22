@@ -25,8 +25,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -181,7 +179,7 @@ public class BlockConnector extends BlockIETileProvider<BlockTypes_Connector>
 			TileEntity te = world.getTileEntity(pos);
 			if(te instanceof TileEntityImmersiveConnectable)
 			{
-				TargetingInfo subTarget = null;
+				TargetingInfo subTarget;
 				if(target.hitVec!=null)
 					subTarget = new TargetingInfo(target.sideHit, (float)target.hitVec.x-pos.getX(), (float)target.hitVec.y-pos.getY(), (float)target.hitVec.z-pos.getZ());
 				else

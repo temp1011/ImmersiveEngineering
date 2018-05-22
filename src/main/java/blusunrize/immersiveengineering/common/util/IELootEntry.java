@@ -25,6 +25,7 @@ import net.minecraft.world.storage.loot.functions.SetNBT;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -57,9 +58,8 @@ public class IELootEntry extends LootEntryItem
 
 	static LootFunction[] buildFunctions(ItemStack stack, LootFunction[] functions)
 	{
-		List<LootFunction> totalFunctions = new ArrayList();
-		for(LootFunction f : functions)
-			totalFunctions.add(f);
+		List<LootFunction> totalFunctions = new ArrayList<>();
+		Collections.addAll(totalFunctions, functions);
 		if(stack.getMetadata()!=0)
 			totalFunctions.add(new SetMetadata(new LootCondition[0], new RandomValueRange(stack.getMetadata(),stack.getMetadata())));
 		if(stack.getCount() > 1)
@@ -73,7 +73,7 @@ public class IELootEntry extends LootEntryItem
 	public void addLoot(Collection<ItemStack> stacks, Random rand, LootContext context)
 	{
 		ItemStack itemstack = stack.copy();
-		int i = 0;
+		int i;
 		if(itemstack.getCount() > 0)
 		{
 			if(itemstack.getCount() < this.stack.getItem().getItemStackLimit(itemstack))

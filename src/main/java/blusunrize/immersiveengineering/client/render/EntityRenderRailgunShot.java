@@ -75,8 +75,9 @@ public class EntityRenderRailgunShot extends Render
 		float halfWidth = height/2;
 		float length = 2;
 		int colWidth = colourMap[0].length;
-		for(int i=0; i<colourMap.length; i++)
+		for(int i=0; i<colourMap.length; i++) {
 			colWidth = Math.min(colWidth, colourMap[i].length);
+		}
 		int colLength = colourMap.length;
 		float widthStep = height/colWidth;
 		float lengthStep = length/colLength;

@@ -106,8 +106,8 @@ public class ModelItemDynamicOverride implements IBakedModel
 		return Pair.of(this, itemModel.handlePerspective(cameraTransformType).getRight());
 	}
 
-	public static final HashMap<String, IBakedModel> modelCache = new HashMap();
-	static ItemOverrideList dynamicOverrides = new ItemOverrideList(new ArrayList())
+	public static final HashMap<String, IBakedModel> modelCache = new HashMap<>();
+	static ItemOverrideList dynamicOverrides = new ItemOverrideList(new ArrayList<>())
 	{
 
 		@Override
